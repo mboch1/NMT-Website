@@ -1,4 +1,4 @@
-<?php	
+<?php
 	require_once('php/db.php');
 	session_start();
 
@@ -19,28 +19,41 @@
 
     <title>NMT Project Login Page</title>
 
-    <!-- jquery core CSS -->
-    <link rel="stylesheet" href="jquery/jquery-ui.min.css">
-	<script src="jquery/external/jquery/jquery.js"></script>
-	<script src="jquery/jquery-ui.min.js"></script>
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="js/ie-emulation-modes-warning.js"></script>
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Custom styles for this template -->
+
 </head>
 <body>
-	<input type="text" name="date" id="date">
-
+    <div>
+        banner side <br>
+    </div>
+    <!-- top section  -->
+    <div>
+        <form action="php/login.php" method="post">
+            <fieldset>
+                <legend>Login Details:</legend>
+                Your registered email:<br>
+                <input type="email" name="login"><br>
+                Password:<br>
+                <input type="password" name="password"><br>
+                <input type="submit" value="Submit"><br>
+            </fieldset>
+        </form>
+    </div>
+    <!-- middle section -->
+    <div></div>
+   <!--  //bottom section -->
+    <div></div>
 </body>
+
+<footer>
+    copyright none
+</footer>
 <script> 
-	$( "#date" ).datepicker(); 
+
 </script>
 </html> 
