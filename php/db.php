@@ -3,7 +3,7 @@
 //This script creates a connection to the database, usable over all other scripts
 	$servername = "localhost";
 	$username = "root";
-	$password = "";
+	$password = "1234";
 	$dbName = "nmtdb";
 
 	// Connect to DB $con is going to be used as a global variable!

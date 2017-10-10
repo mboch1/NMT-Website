@@ -1,11 +1,6 @@
 <?php
 	require_once('php/db.php');
 	session_start();
-
-	if(isset($_SESSION['username'])!="")
-	{
-		header("Location: home.php");
-	}
 ?>
 <html lang="en">
 <head>
@@ -35,39 +30,127 @@
     <!-- banner space -->
     <div class="container-fluid">
         <div class="row">
-            <div class="col">banner space</div>
+            <div class="col-2"></div>
+            <div class="col">
+                <a href="https://placeholder.com"><img style='height: 100%; width: 100%; object-fit: contain' src="http://via.placeholder.com/800x150"></a><br>
+            </div>
+            <div class="col-2"></div>
         </div>
     </div>
-    <!-- top section  -->
+    <!-- navbar -->
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col" >
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="navbar-brand" href="#"> Menu </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                   <li class="nav-item active">
+                        <a class="nav-link" href="#">Main Page <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <?php 
+                        if(isset($_SESSION['username'])!=""){
+                        echo"                     
+                         <li class='nav-item dropdown'>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>"."<span class='glyphicon glyphicon-user'><b>Welcome: ".$_SESSION["username"]."</b></span>"."</a>
+                            <div class='dropdown-menu'>
+                              <a class='dropdown-item' href='#'>
+                                <form action='php/logout.php' method='post'>
+                                <label for='logoutBtn'>Safe logout</label>
+                                    <button id='logoutBtn' type='submit' class='btn btn-primary' name='logout'>Logout</button>  
+                                </form></a>
+                            </div>
+                          </li>";
+                        }
+                        else{
+                        echo"
+                        <li class='nav-item dropdown'>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>Register/Login</a>
+                            <div class='dropdown-menu'>
+                              <a class='dropdown-item' href='#'>
+                                <form action='php/login.php' method='post'>
+                                  <div class='form-group'>
+                                    <label for='inputEmail'>Email address</label>
+                                    <input type='email' class='form-control' name='login' id='inputEmail' aria-describedby='emailHelp' placeholder='Enter email'>
+                                  </div>
+                                  <div class='form-group'>
+                                    <label for='inputPassword'>Password</label>
+                                    <input name='password' type='password' class='form-control' id='inputPassword' placeholder='Password'>
+                                  </div>
+                                  <button type='submit' class='btn btn-primary' name='submit'>Login</button>
+                                </form></a>
+                              <a class='dropdown-item' href='#'>
+                                <form action='register.php' method='post'>
+                                  <div class='form-group'>
+                                    <label for='submit'>Go to registration page.</label><br>
+                                    <button id='submit' type='submit' class='btn btn-primary' name='register'>Register</button>
+                                  </div>
+                                </form></a>
+                            </div>
+                        </li>";
+                        }
+                    ?>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <!-- end of navbar section  -->
+    <!-- carousel section  -->
     <div class="container">
         <div class="row">
+            <div class="col-2"></div>
             <div class="col">
-                <form action="php/login.php" method="post">
-                    <fieldset>
-                        <h2 class="form-signin-heading" >Login Form</h2>
-                        <h3 class="form-signin-heading" >Please enter required details</h3>
-                        <label for="emailInput" class="sr-only">Your registered email:</label>
-                        <input id="emailInput" type="email" name="login" class="form-control" placeholder="Username" autofocus required><br>
-                        <label for="passInput" class="sr-only">Your password:</label>
-                        <input id="passInput" type="password" name="password" class="form-control" required><br>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Login</button>
-                    </fieldset>
-                </form>
+                <a href="https://placeholder.com"><img style='height: 100%; width: 100%; object-fit: contain' src="http://via.placeholder.com/800x100"></a><br>
             </div>
-        </div>
-        <div class="row">
-            <!-- middle section -->
-        </div>
-        <div class="row">
-            <!--  //bottom section -->
+            <div class="col-2"></div>
         </div>
     </div>
+    <!-- end of carousel section  -->
+    <!-- middle section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col">
+            <a href="https://placeholder.com"><img style='height: 100%; width: 100%; object-fit: contain' src="http://via.placeholder.com/800x800"></a><br>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+    <!--  end of midle section --> 
+    <!--  footer section -->
+    <div class="container-fluid"> 
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col">
+                <footer>
+                    <center>copyright none</center>
+                </footer>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+    <!--  end of footer section -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
-
-<footer>
-    copyright none
-</footer>
-<script> 
-
-</script>
 </html> 

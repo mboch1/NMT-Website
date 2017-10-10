@@ -39,9 +39,7 @@
             {
                 $_SESSION['username'] = $username; // Start Session
                 $_SESSION['password'] = $password2;
-                echo "password correct";
-                header("refresh:6; url=http://localhost/NMT-website/home.php");
-
+                header('Location: '.$_SERVER['HTTP_REFERER']);
             }
             //Check if we have a data into the array
             else if(is_array($row))
