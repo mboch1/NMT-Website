@@ -1,11 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Ripley
+ * User: MB
  * Date: 10/10/2017
  * Time: 13:58
  */
-
 //this is login script which chooses interface for the user depending on the credentials and compares given password with encrypted one inside database
 	require_once('db.php');
 	session_start(['cookie_lifetime' => 86400]); // Starting Session, cookie set to 1 day
@@ -36,6 +34,14 @@
             $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
             //super admin account for testing purposes
             if($username=="admin@email.com"&&$password2=="1234")
+            {
+                $_SESSION['username'] = $username; // Start Session
+                $_SESSION['password'] = $password2;
+                echo "Welcome Admin, redirecting you to the admin panel";
+                header("refresh:6, url=http://localhost/NMT-Website/adminIndex.php");
+            }
+            //test account
+            else if($username=="admin2@email.com"&&$password2=="1234")
             {
                 $_SESSION['username'] = $username; // Start Session
                 $_SESSION['password'] = $password2;

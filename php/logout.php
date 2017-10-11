@@ -5,6 +5,6 @@
 	session_start();
 
 	unset($_SESSION['username'], $_SESSION['password']);
-	header('Location: '.$_SERVER['HTTP_REFERER']);
+	header("refresh:1, url=http://localhost/NMT-Website/index.php ");
 	exit();
 ?>
