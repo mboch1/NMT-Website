@@ -103,7 +103,10 @@
             <div class="col-2"></div>
             <div class="col">
                 Registered Courses:<br>
-                <?php getCourses($con);
+                <?php 
+                if(isset($_SESSION['username'])!=""){
+                    getCourses($con);
+                }
                 ob_end_flush();?><br>
                 Register New Course <br>
                 </form>
