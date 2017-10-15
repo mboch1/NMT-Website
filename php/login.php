@@ -32,31 +32,21 @@
             $sql="SELECT * FROM users WHERE email='$username'";
             $result=mysqli_query($con,$sql);
             $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-            //super admin account for testing purposes
-            if($username=="admin@email.com"&&$password2=="1234")
+            
+            if(is_array($row))
             {
-                $_SESSION['username'] = $username; // Start Session
-                $_SESSION['password'] = $password2;
-                echo "Welcome Admin, redirecting you to the admin panel";
-                header("refresh:6, url=http://localhost/NMT-Website/adminIndex.php");
-            }
-            //test account
-            else if($username=="admin2@email.com"&&$password2=="1234")
-            {
-                $_SESSION['username'] = $username; // Start Session
-                $_SESSION['password'] = $password2;
-                header('Location: '.$_SERVER['HTTP_REFERER']);
-            }
-            //Check if we have a data into the array
-            else if(is_array($row))
-            {
-                //If we have data inside the array do this:
+                //temp solution, no password hashing yet:
+                if($row["email"]==$username && $row["password"]==$password2){
+                    $_SESSION['username'] = $username; // Start Session
+                    $_SESSION['password'] = $password2;
+                    header("refresh:1, url=http://localhost/NMT-Website/index.php");
+                }
+                /*If we have data inside the array do this:
                 $salt = $row['salt'];
                 $encrypted_password = $row['password'];
                 $hashed_password = crypt($password2, $salt);
                 //Compare the 'Encrypted Password' saved into the DB with the hash of the 'Password' entered by the user
-                if($encrypted_password == $hashed_password)
-                {
+                if($encrypted_password == $hashed_password){
                     //If username and password exist in our database then create a session.
                     //Otherwise echo an error.
                     //Redirects user to the proper interface
@@ -79,7 +69,7 @@
                         $_SESSION['username'] = $username;
                         $_SESSION['password'] = $password2;
 
-                    }
+                    }*/
                 }
                 else
                 {
