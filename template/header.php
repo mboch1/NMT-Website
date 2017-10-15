@@ -1,9 +1,11 @@
+<?php
+echo '
 <!-- banner space -->
 <div class="container-fluid">
     <div class="row">
         <div class="col-2"></div>
         <div class="col">
-            <a href="https://placeholder.com"><img style='width: 100%; object-fit: contain' src="http://via.placeholder.com/800x150"></a><br>
+            <a href="https://placeholder.com"><img style="width: 100%; object-fit: contain" src="http://via.placeholder.com/800x150"></a><br>
         </div>
         <div class="col-2"></div>
     </div>
@@ -20,10 +22,9 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Main Page <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href= __DIR__ . "/index.php">Main Page <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item">
-                <?php
+              <li class="nav-item">';
                     if(isset($_SESSION['username'])!=""){
                     echo"
                      <li class='nav-item dropdown'>
@@ -64,7 +65,7 @@
                         </div>
                     </li>";
                     }
-                ?>
+                    echo '
               </li>
 
               <li class="nav-item">
@@ -79,4 +80,5 @@
     </div>
     <div class="col-2"></div>
 </div>
-<!-- end of navbar section  -->
+<!-- end of navbar section  -->';
+?>
