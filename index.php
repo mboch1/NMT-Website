@@ -177,9 +177,21 @@
                         <div class="form-group">
                             <label for="course">Choose Course: </label>
                             <select name="course" id="course" class="form-control input-sm">
-                              <option value="PRINCE2">PRINCE2</option>
-                              <option value="Magic Tricks">Magic Tricks</option>
-                              <option value="Sleeping">Sleeping</option>
+								<?php
+
+									// Get venues from db
+									$sql = "SELECT * FROM courses_categories";
+									$res = mysqli_query($con, $sql);
+
+									// Loop through venues
+									while ($row = mysqli_fetch_assoc($res)) {
+
+										// Display venue
+										echo '<option value="' . $row["category_name"] . '">' . $row["category_name"] . '</option>';
+
+									}
+
+								 ?>
                             </select>
                         </div>
                         <div class="form-group">
