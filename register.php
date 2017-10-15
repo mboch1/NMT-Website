@@ -1,4 +1,4 @@
-<?php 
+<?php
 	require_once('php/db.php');
 ?>
 <html lang="en">
@@ -26,16 +26,7 @@
 
 </head>
 <body>
-    <!-- banner space -->
-    <div class="container">
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col">
-                <a href="https://placeholder.com"><img style='height: 100%; width: 100%; object-fit: contain' src="http://via.placeholder.com/800x150"></a><br>
-            </div>
-            <div class="col-2"></div>
-        </div>
-    </div>
+    <?php include("template/header.php") ?>
     <!-- middle section -->
     <div class="container">
         <div class="row">
@@ -69,9 +60,9 @@
             <div class="col-2"></div>
         </div>
     </div>
-    <!--  end of midle section --> 
+    <!--  end of midle section -->
     <!--  footer section -->
-    <div class="container-fluid"> 
+    <div class="container-fluid">
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
@@ -92,4 +83,4 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
-</html> 
+</html>
