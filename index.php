@@ -20,6 +20,7 @@
     <!-- Bootstrap Date-Picker Plugin -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<link rel="stylesheet" href="css/style.css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -32,7 +33,7 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                <a href="https://placeholder.com"><img style='height: 100%; width: 100%; object-fit: contain' src="http://via.placeholder.com/800x150"></a><br>
+                <a href="https://placeholder.com"><img style='width: 100%; object-fit: contain' src="http://via.placeholder.com/800x150"></a><br>
             </div>
             <div class="col-2"></div>
         </div>
@@ -52,16 +53,16 @@
                         <a class="nav-link" href="index.php">Main Page <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                    <?php 
+                    <?php
                         if(isset($_SESSION['username'])!=""){
-                        echo"                     
+                        echo"
                          <li class='nav-item dropdown'>
                             <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>"."<span class='glyphicon glyphicon-user'><b>Welcome: ".$_SESSION["username"]."</b></span>"."</a>
                             <div class='dropdown-menu'>
                               <a class='dropdown-item' href='#'>
                                 <form action='php/logout.php' method='post'>
                                 <label for='logoutBtn'>Safe logout</label>
-                                    <button id='logoutBtn' type='submit' class='btn btn-primary' name='logout'>Logout</button>  
+                                    <button id='logoutBtn' type='submit' class='btn btn-primary' name='logout'>Logout</button>
                                 </form></a>
                             </div>
                           </li>";
@@ -110,7 +111,7 @@
     </div>
     <!-- end of navbar section  -->
     <!-- carousel section -->
-    <div class="container">
+    <div class="container" style="height: 200px;">
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
@@ -153,143 +154,95 @@
                 <div class="row">
                     <form class="form-inline" action="#" method="post">
                         <legend>Selection Filtering: </legend>
-                        <div class="form-group">
-                            <label for="city">Choose Site: </label>
-                            <select name="city" id="city" class="form-control input-sm">
-                              <option value="Glasgow">Glasgow</option>
-                              <option value="Edinburgh">Edinburgh</option>
-                              <option value="Aberdeen">Aberdeen</option>
+                        <div class="form-group filter-option">
+                            <label for="city" class="filter-label">Choose Location: </label>
+                            <select name="city" id="city" class="form-control input-sm filter-select">
+								<?php
+
+									// Get venues from db
+									$sql = "SELECT * FROM courses_venue";
+									$res = mysqli_query($con, $sql);
+
+									// Loop through venues
+									while ($row = mysqli_fetch_assoc($res)) {
+
+										// Display venue
+										echo '<option value="' . $row["venue_name"] . '">' . $row["venue_name"] . '</option>';
+
+									}
+
+								 ?>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="course">Choose Course: </label>
-                            <select name="course" id="course" class="form-control input-sm">
-                              <option value="PRINCE2">PRINCE2</option>
-                              <option value="Magic Tricks">Magic Tricks</option>
-                              <option value="Sleeping">Sleeping</option>
+                        <div class="form-group filter-option">
+                            <label for="course" class="filter-label">Choose Course: </label>
+                            <select name="course" id="course" class="form-control input-sm filter-select">
+								<?php
+
+									// Get venues from db
+									$sql = "SELECT * FROM courses_categories";
+									$res = mysqli_query($con, $sql);
+
+									// Loop through venues
+									while ($row = mysqli_fetch_assoc($res)) {
+
+										// Display venue
+										echo '<option value="' . $row["category_name"] . '">' . $row["category_name"] . '</option>';
+
+									}
+
+								 ?>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="date">Date</label>
+                        <div class="form-group filter-option">
+                            <label class="control-label filter-label" for="date">Date</label>
                             <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                         </div>
-                        <button type="submit" name="filter" class="btn btn-default">Filter Results</button>
+                        <button type="submit" name="filter" class="btn btn-default" style="margin-top: 18px;">Filter Results</button>
                     </form>
                 </div>
                 <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                          <h4 class="card-title">
-                            <a href="#">Item One</a>
-                          </h4>
-                          <h5>£24.99</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-                        </div>
-                    </div>
-                  </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                          <h4 class="card-title">
-                            <a href="#">Item One</a>
-                          </h4>
-                          <h5>£24.99</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-                        </div>
-                    </div>
-                  </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                          <h4 class="card-title">
-                            <a href="#">Item One</a>
-                          </h4>
-                          <h5>£24.99</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-                        </div>
-                    </div>
-                  </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                          <h4 class="card-title">
-                            <a href="#">Item One</a>
-                          </h4>
-                          <h5>£24.99</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-                        </div>
-                    </div>
-                  </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                          <h4 class="card-title">
-                            <a href="#">Item One</a>
-                          </h4>
-                          <h5>£24.99</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-                        </div>
-                    </div>
-                  </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                          <h4 class="card-title">
-                            <a href="#">Item One</a>
-                          </h4>
-                          <h5>£24.99</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-                        </div>
-                    </div>
-                  </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                          <h4 class="card-title">
-                            <a href="#">Item One</a>
-                          </h4>
-                          <h5>£24.99</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-                        </div>
-                    </div>
-                  </div>
+					<?php
+
+						// Fetch courses from database
+						$sql = "SELECT * FROM courses";
+						$res = mysqli_query($con, $sql);
+
+						// Display courses
+						while ($row = mysqli_fetch_assoc($res)) {
+
+							// If course doesn't have an image, give it a placeholder
+							if ($row["product_image"] == "") {
+								$row["product_image"] = "http://placehold.it/700xx400";
+							}
+
+							// Display course
+							echo '<div class="col-lg-4 col-md-6 mb-4">
+			                    <div class="card card-custom">
+			                        <a href="#"><img class="card-img-top" src="' . $row["product_image"] . '" alt=""></a>
+			                        <div class="card-body">
+			                          <h4 class="card-title">
+			                            <a href="#">' . $row["course_title"] . '</a>
+			                          </h4>
+			                          <h5>£' . $row["course_price"] . '</h5>
+			                          <p class="card-text">' . $row["course_description"] . '</p>
+			                        </div>
+			                        <div class="card-footer">
+			                          <small class="text-muted">★ ★ ★ ★ ☆</small>
+			                        </div>
+			                    </div>
+			                  </div>';
+						}
+
+					?>
                 </div>
             </div>
             <div class="col-2"></div>
         </div>
     </div>
-    <!--  end of midle section --> 
+    <!--  end of midle section -->
     <!--  footer section -->
-    <div class="container-fluid"> 
+    <div class="container-fluid">
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
@@ -323,4 +276,4 @@
     })
     </script>
 </body>
-</html> 
+</html>
