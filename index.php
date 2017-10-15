@@ -155,11 +155,23 @@
                     <form class="form-inline" action="#" method="post">
                         <legend>Selection Filtering: </legend>
                         <div class="form-group">
-                            <label for="city">Choose Site: </label>
+                            <label for="city">Choose Location: </label>
                             <select name="city" id="city" class="form-control input-sm">
-                              <option value="Glasgow">Glasgow</option>
-                              <option value="Edinburgh">Edinburgh</option>
-                              <option value="Aberdeen">Aberdeen</option>
+								<?php
+
+									// Get venues from db
+									$sql = "SELECT * FROM courses_venue";
+									$res = mysqli_query($con, $sql);
+
+									// Loop through venues
+									while ($row = mysqli_fetch_assoc($res)) {
+
+										// Display venue
+										echo '<option value="' . $row["venue_name"] . '">' . $row["venue_name"] . '</option>';
+
+									}
+
+								 ?>
                             </select>
                         </div>
                         <div class="form-group">
