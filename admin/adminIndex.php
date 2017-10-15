@@ -70,7 +70,7 @@
                         else{
                         echo"
                         <li class='nav-item dropdown'>
-                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>Register/Login</a>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>Login</a>
                             <div class='dropdown-menu'>
                               <a class='dropdown-item' href='#'>
                                 <form action='php/adminLogin.php' method='post'>
@@ -102,14 +102,38 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                Registered Courses:<br>
-                <?php 
+            <?php 
                 if(isset($_SESSION['username'])!=""){
-                    getCourses($con);
-                }
-                ob_end_flush();?><br>
-                Register New Course <br>
-                </form>
+                //load courses from db:
+                getCourses($con);
+                //register new course to db:
+                echo" <h3>Register New Course:</h3><br>
+                <form action='".addNewCourse($con)."' method='post'> 
+                    <div class='form-group'>
+                        <label for='category'>Category(numeric identifier):</label>
+                        <input type='value' class='form-control' name='category' id='category' placeholder='1234567890' required>
+                    </div>
+                    <div class='form-group'>
+                        <label for='venue'>Venue unique id:</label>
+                        <input type='value' class='form-control' name='venue' id='venue' placeholder='1234567890' required>
+                    </div>
+                    <div class='form-group'>
+                        <label for='title'>Title:</label>
+                        <input type='text' class='form-control' name='title' id='title' placeholder='Course name' required>
+                    </div>
+                    <div class='form-group'>
+                        <label for='description'>Description:</label>
+                        <input type='text' class='form-control' name='description' id='description' placeholder='Course long description' required>
+                    </div>
+                    <div class='form-group'>
+                        <label for='price'>Price(value only):</label>
+                        <input type='value' class='form-control' name='price' id='price' placeholder='9999' required>
+                    </div>
+                  <button type='submit' name='addCourse' class='btn btn-default'>Add Course</button>
+                </form> 
+               ";
+            }
+               ob_end_flush();?>
             </div>
             <div class="col-2"></div>
         </div>
