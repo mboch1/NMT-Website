@@ -5,7 +5,8 @@ function getCourses(mysqli $con){
   
   $result = mysqli_query($con,"SELECT * FROM courses");
 
-     echo"<div class='table-responsive'>          
+     echo"<h3>Registered Courses: </h3><br>
+          <div class='table-responsive'>          
             <table class='table table-bordered'>
               <thead>
                 <tr>
@@ -40,14 +41,30 @@ function getCourses(mysqli $con){
         echo" 
           </tbody>
         </table>
-      </div>";
+      </div>
+      <br>";
 }
 
-function deleteCourse(mysqli $con, $id){
-    
-    if(isset($_POST[$id])){
-      mysqli_query($con, "DELETE FROM courses where id=$id");
-      header("refresh:0, url=http://localhost/NMT-Website/admin/adminIndex.php");
-    }
+function deleteCourse(mysqli $con, $id){  
+  if(isset($_POST[$id])){
+    mysqli_query($con, "DELETE FROM courses where id=$id");
+    header("refresh:0, url=http://localhost/NMT-Website/admin/adminIndex.php");
   }
-  ?>
+}
+
+function addNewCourse(mysqli $con){
+  if(isset($_POST['addCourse'])){
+    $category = $_POST['category'];
+    $venue = $_POST['venue'];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+
+    $insert_data = "INSERT INTO courses (course_category_id, course_venue_id, course_title, course_description, course_price) VALUES ('$category','$venue', '$title', '$description', '$price')";
+          
+    $insert_data_query = mysqli_query($con, $insert_data);
+
+    header("refresh:0, url=http://localhost/NMT-Website/admin/adminIndex.php");
+  }
+}
+?>
