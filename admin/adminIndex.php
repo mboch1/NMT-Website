@@ -72,19 +72,7 @@
         </div>
     </div>
     <!--  end of middle section -->
-    <!--  footer section -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col">
-                <footer>
-                    <center>copyright none</center>
-                </footer>
-            </div>
-            <div class="col-2"></div>
-        </div>
-    </div>
-    <!--  end of footer section -->
+    <?php include(__DIR__ . "/../template/footer.php") ?>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
