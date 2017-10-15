@@ -1,6 +1,6 @@
 <?php
     ob_start();
-	require_once('php/db.php');
+	require_once __DIR__ . '/../php/db.php';
     include('php/scripts.php');
 	session_start();
     global $con;
@@ -53,16 +53,16 @@
                         <a class="nav-link" href="#">Main Page <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                    <?php 
+                    <?php
                         if(isset($_SESSION['username'])!=""){
-                        echo"                     
+                        echo"
                          <li class='nav-item dropdown'>
                             <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>"."<span class='glyphicon glyphicon-user'><b>Welcome: ".$_SESSION["username"]."</b></span>"."</a>
                             <div class='dropdown-menu'>
                               <a class='dropdown-item' href='#'>
                                 <form action='php/logout.php' method='post'>
                                 <label for='logoutBtn'>Safe logout</label>
-                                    <button id='logoutBtn' type='submit' class='btn btn-primary' name='logout'>Logout</button>  
+                                    <button id='logoutBtn' type='submit' class='btn btn-primary' name='logout'>Logout</button>
                                 </form></a>
                             </div>
                           </li>";
@@ -102,13 +102,13 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-            <?php 
+            <?php
                 if(isset($_SESSION['username'])!=""){
                 //load courses from db:
                 getCourses($con);
                 //register new course to db:
                 echo" <h3>Register New Course:</h3><br>
-                <form action='".addNewCourse($con)."' method='post'> 
+                <form action='".addNewCourse($con)."' method='post'>
                     <div class='form-group'>
                         <label for='category'>Category(numeric identifier):</label>
                         <input type='value' class='form-control' name='category' id='category' placeholder='1234567890' required>
@@ -130,7 +130,7 @@
                         <input type='value' class='form-control' name='price' id='price' placeholder='9999' required>
                     </div>
                   <button type='submit' name='addCourse' class='btn btn-default'>Add Course</button>
-                </form> 
+                </form>
                ";
             }
                ob_end_flush();?>
@@ -140,7 +140,7 @@
     </div>
     <!--  end of middle section -->
     <!--  footer section -->
-    <div class="container-fluid"> 
+    <div class="container-fluid">
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
