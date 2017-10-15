@@ -34,7 +34,7 @@
                 $_SESSION['username'] = $username; // Start Session
                 $_SESSION['password'] = $password2;
                 echo "Welcome Admin, redirecting you to the admin panel";
-                header("refresh:6, url=http://localhost/NMT-Website/admin/adminIndex.php");
+                header('Location: '.$_SERVER['HTTP_REFERER']);
             }
             //test account
             else if($username=="admin2@email.com"&&$password2=="1234")
