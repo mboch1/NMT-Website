@@ -178,111 +178,39 @@
                     </form>
                 </div>
                 <div class="row">
-	                <div class="col-lg-4 col-md-6 mb-4">
-	                    <div class="card card-custom">
-	                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-	                        <div class="card-body">
-	                          <h4 class="card-title">
-	                            <a href="#">Item One</a>
-	                          </h4>
-	                          <h5>£24.99</h5>
-	                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-	                        </div>
-	                        <div class="card-footer">
-	                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-	                        </div>
-	                    </div>
-	                  </div>
-	                <div class="col-lg-4 col-md-6 mb-4">
-	                    <div class="card card-custom">
-	                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-	                        <div class="card-body">
-	                          <h4 class="card-title">
-	                            <a href="#">Item One</a>
-	                          </h4>
-	                          <h5>£24.99</h5>
-	                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-	                        </div>
-	                        <div class="card-footer">
-	                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-	                        </div>
-	                    </div>
-	                  </div>
-	                <div class="col-lg-4 col-md-6 mb-4">
-	                    <div class="card card-custom">
-	                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-	                        <div class="card-body">
-	                          <h4 class="card-title">
-	                            <a href="#">Item One</a>
-	                          </h4>
-	                          <h5>£24.99</h5>
-	                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-	                        </div>
-	                        <div class="card-footer">
-	                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-	                        </div>
-	                    </div>
-	                  </div>
-	                <div class="col-lg-4 col-md-6 mb-4">
-	                    <div class="card card-custom">
-	                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-	                        <div class="card-body">
-	                          <h4 class="card-title">
-	                            <a href="#">Item One</a>
-	                          </h4>
-	                          <h5>£24.99</h5>
-	                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-	                        </div>
-	                        <div class="card-footer">
-	                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-	                        </div>
-	                    </div>
-	                  </div>
-	                <div class="col-lg-4 col-md-6 mb-4">
-	                    <div class="card card-custom">
-	                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-	                        <div class="card-body">
-	                          <h4 class="card-title">
-	                            <a href="#">Item One</a>
-	                          </h4>
-	                          <h5>£24.99</h5>
-	                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-	                        </div>
-	                        <div class="card-footer">
-	                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-	                        </div>
-	                    </div>
-	                  </div>
-	                <div class="col-lg-4 col-md-6 mb-4">
-	                    <div class="card card-custom">
-	                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-	                        <div class="card-body">
-	                          <h4 class="card-title">
-	                            <a href="#">Item One</a>
-	                          </h4>
-	                          <h5>£24.99</h5>
-	                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-	                        </div>
-	                        <div class="card-footer">
-	                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-	                        </div>
-	                    </div>
-	                  </div>
-	                <div class="col-lg-4 col-md-6 mb-4">
-	                    <div class="card card-custom">
-	                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-	                        <div class="card-body">
-	                          <h4 class="card-title">
-	                            <a href="#">Item One</a>
-	                          </h4>
-	                          <h5>£24.99</h5>
-	                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-	                        </div>
-	                        <div class="card-footer">
-	                          <small class="text-muted">★ ★ ★ ★ ☆</small>
-	                        </div>
-	                    </div>
-	                </div>
+					<?php
+
+						// Fetch courses from database
+						$sql = "SELECT * FROM courses";
+						$res = mysqli_query($con, $sql);
+
+						// Display courses
+						while ($row = mysqli_fetch_assoc($res)) {
+
+							// If course doesn't have an image, give it a placeholder
+							if ($row["product_image"] == "") {
+								$row["product_image"] = "http://placehold.it/700xx400";
+							}
+
+							// Display course
+							echo '<div class="col-lg-4 col-md-6 mb-4">
+			                    <div class="card card-custom">
+			                        <a href="#"><img class="card-img-top" src="' . $row["product_image"] . '" alt=""></a>
+			                        <div class="card-body">
+			                          <h4 class="card-title">
+			                            <a href="#">' . $row["course_title"] . '</a>
+			                          </h4>
+			                          <h5>£' . $row["course_price"] . '</h5>
+			                          <p class="card-text">' . $row["course_description"] . '</p>
+			                        </div>
+			                        <div class="card-footer">
+			                          <small class="text-muted">★ ★ ★ ★ ☆</small>
+			                        </div>
+			                    </div>
+			                  </div>';
+						}
+
+					?>
                 </div>
             </div>
             <div class="col-2"></div>
