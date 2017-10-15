@@ -5,3 +5,16 @@
 .carousel-indicators {
     bottom: 25px!important;
 }
+
+.filter-option {
+    margin-right: 8px;
+}
+
+.filter-select {
+    height: 34px!important;
+    min-width: 140px;
+}
+
+.filter-label {
+    justify-content: left!important;
+}

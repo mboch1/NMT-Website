@@ -154,9 +154,9 @@
                 <div class="row">
                     <form class="form-inline" action="#" method="post">
                         <legend>Selection Filtering: </legend>
-                        <div class="form-group">
-                            <label for="city">Choose Location: </label>
-                            <select name="city" id="city" class="form-control input-sm">
+                        <div class="form-group filter-option">
+                            <label for="city" class="filter-label">Choose Location: </label>
+                            <select name="city" id="city" class="form-control input-sm filter-select">
 								<?php
 
 									// Get venues from db
@@ -174,9 +174,9 @@
 								 ?>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="course">Choose Course: </label>
-                            <select name="course" id="course" class="form-control input-sm">
+                        <div class="form-group filter-option">
+                            <label for="course" class="filter-label">Choose Course: </label>
+                            <select name="course" id="course" class="form-control input-sm filter-select">
 								<?php
 
 									// Get venues from db
@@ -194,11 +194,11 @@
 								 ?>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="date">Date</label>
+                        <div class="form-group filter-option">
+                            <label class="control-label filter-label" for="date">Date</label>
                             <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                         </div>
-                        <button type="submit" name="filter" class="btn btn-default">Filter Results</button>
+                        <button type="submit" name="filter" class="btn btn-default" style="margin-top: 18px;">Filter Results</button>
                     </form>
                 </div>
                 <div class="row">
