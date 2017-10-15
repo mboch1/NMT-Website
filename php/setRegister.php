@@ -24,19 +24,19 @@
 		{
 			print "Record was created!<br>";
 			print "Redirecting...<br>";
-			header("refresh:6, url=http://localhost/NMT-Website/index.php ");
+			header("refresh:3, url=http://localhost/NMT-Website/index.php ");
 		}
 		else
 		{
 			print "An error has occured!<br>";
 			print "Redirecting...<br>";
-			header("refresh:6, url=http://localhost/NMT-Website/index.php ");
+			header("refresh:3, url=http://localhost/NMT-Website/index.php ");
 		}
 	}
 	else
 	{
 		print "Record for this member already exists, please use different email instead!<br>";
 		print "Redirecting...<br>";
-		header("refresh:6, url=http://localhost/NMT-Website/index.php ");
+		header("refresh:3, url=http://localhost/NMT-Website/index.php ");
 	}
 ?>
