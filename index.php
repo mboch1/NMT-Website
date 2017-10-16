@@ -79,14 +79,14 @@
 								<?php
 
 									// Get venues from db
-									$sql = "SELECT * FROM courses_venue";
+									$sql = "SELECT * FROM Venue";
 									$res = mysqli_query($con, $sql);
 
 									// Loop through venues
 									while ($row = mysqli_fetch_assoc($res)) {
 
 										// Display venue
-										echo '<option value="' . $row["venue_name"] . '">' . $row["venue_name"] . '</option>';
+										echo '<option value="' . $row["city"] . '">' . $row["city"] . '</option>';
 
 									}
 
@@ -99,14 +99,14 @@
 								<?php
 
 									// Get venues from db
-									$sql = "SELECT * FROM courses_categories";
+									$sql = "SELECT * FROM Category";
 									$res = mysqli_query($con, $sql);
 
 									// Loop through venues
 									while ($row = mysqli_fetch_assoc($res)) {
 
 										// Display venue
-										echo '<option value="' . $row["category_name"] . '">' . $row["category_name"] . '</option>';
+										echo '<option value="' . $row["title"] . '">' . $row["title"] . '</option>';
 
 									}
 
@@ -124,27 +124,27 @@
 					<?php
 
 						// Fetch courses from database
-						$sql = "SELECT * FROM courses";
+						$sql = "SELECT * FROM Course";
 						$res = mysqli_query($con, $sql);
 
 						// Display courses
 						while ($row = mysqli_fetch_assoc($res)) {
 
 							// If course doesn't have an image, give it a placeholder
-							if ($row["product_image"] == "") {
-								$row["product_image"] = "http://placehold.it/700xx400";
+							if ($row["image"] == "") {
+								$row["image"] = "http://placehold.it/700xx400";
 							}
 
 							// Display course
 							echo '<div class="col-lg-4 col-md-6 mb-4">
 			                    <div class="card card-custom">
-			                        <a href="#"><img class="card-img-top" src="' . $row["product_image"] . '" alt=""></a>
+			                        <a href="#"><img class="card-img-top" src="' . $row["image"] . '" alt=""></a>
 			                        <div class="card-body">
 			                          <h4 class="card-title">
-			                            <a href="#">' . $row["course_title"] . '</a>
+			                            <a href="#">' . $row["title"] . '</a>
 			                          </h4>
-			                          <h5>£' . $row["course_price"] . '</h5>
-			                          <p class="card-text">' . $row["course_description"] . '</p>
+			                          <h5>£' . $row["price"] . '</h5>
+			                          <p class="card-text">' . $row["description"] . '</p>
 			                        </div>
 			                        <div class="card-footer">
 			                          <small class="text-muted">★ ★ ★ ★ ☆</small>
