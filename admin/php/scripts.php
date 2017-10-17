@@ -7,8 +7,7 @@
 
 //COURSE EDITOR
 function getCourses(mysqli $con){
-
-  $result = mysqli_query($con,"SELECT * FROM Course");
+    $result = mysqli_query($con,"SELECT * FROM Course");
     while($row = mysqli_fetch_array($result)) {
       $id = $row['id'];
       $title = $row['title'];
@@ -21,26 +20,20 @@ function getCourses(mysqli $con){
 
       echo '<form class="form-horizontal" action="'.updateCourses($con, $id).'" method="post">
               <div class="form-group filter-option">
-                <label class="control-label col-sm-2" for="id">ID:</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" name="cid" id="cid" value="'.$id.'"readonly>
-                </div>
+                <label class="filter-label" for="cid">Course ID:</label>
+                  <input type="value"  class="form-control" name="cid" id="cid" value="'.$id.'" readonly>
               </div>
               <div class="form-group filter-option">
-                <label class="control-label col-sm-2" for="title">Title:</label>
-                <div class="col-sm-10">
+                <label class="filter-label" for="title">Title:</label>
                   <input type="text" class="form-control" id="title" name="title" value="'.$title.'" required>
-                </div>
               </div>
               <div class="form-group filter-option">
-                <label class="control-label col-sm-2" for="desc">Description:</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control" rows="4" name="description" id="desc">'.$description.'</textarea>
-                </div>
+                <label class="filter-label" for="description">Description:</label>
+                  <textarea class="form-control" rows="4" name="description" id="description">'.$description.'</textarea>
               </div>
               <div class="form-group filter-option">
-                <label for="city">Select city:</label>
-                <select class="form-control input-sm filter-select" name="venue_id" id="city">';
+                <label class="filter-label" for="venue_id">City:</label>
+                  <select class="form-control input-sm filter-select" name="venue_id" id="venue_id">';
                   // Get cities from db
                   $sql = "SELECT * FROM Venue";
                   $res = mysqli_query($con, $sql);
@@ -49,29 +42,23 @@ function getCourses(mysqli $con){
                   // Display city option
                     echo '<option value="' . $row["id"] . '">' . $row["city"] . '</option>';
                   }
-               echo '</select>
+            echo '</select>
               </div>
               <div class="form-group filter-option">
-                <label class="control-label col-sm-2" for="start_date">Start Date:</label>
-                <div class="col-sm-10">
-                  <input class="datepicker" name="start_date" value='.$start_date.' data-date-format="yyyy-mm-dd" required>
-                </div>
+                <label class="filter-label" for="start_date">Start Date:</label>
+                  <input class="datepicker" name="start_date" id="start_date" value="'.$start_date.'" data-date-format="yyyy-mm-dd" required>
               </div>
               <div class="form-group filter-option">
-                <label class="control-label col-sm-2" for="image">Image:</label>
-                <div class="col-sm-10">
-                  <input class="text" name="image" value="'.$image.'" id="image" required>
-                </div>
+                <label class="filter-label" for="image">Image:</label>
+                  <input class="form-control" type="text" name="image" value="'.$image.'" id="image" required>
               </div>
               <div class="form-group filter-option">
-                <label class="control-label col-sm-2" for="price">Price:</label>
-                <div class="col-sm-10">
-                  <input class="value" name="price" value="'.$price.'" id="price" required>
-                </div>
-              </div>              
+                <label class="filter-label" for="price">Price:</label>
+                  <input class="form-control" type="value" name="price" value="'.$price.'" id="price" required>
+              </div>
               <div class="form-group filter-option">
-                <label for="titles">Select Category Title:</label>
-                <select class="form-control input-sm filter-select" id="titles" name="category_id">';                 
+                <label class="filter-label" for="category_id">Category:</label>
+                  <select class="form-control input-sm filter-select" name="category_id" id="category_id">';
                   // Get titles from db
                   $sql = "SELECT * FROM Category";
                   $res = mysqli_query($con, $sql);
@@ -80,27 +67,38 @@ function getCourses(mysqli $con){
                   // Display title option
                     echo '<option value="' . $row["id"] . '">' . $row["title"] . '</option>';
                   }
-                echo '</select>
+            echo '</select>
               </div>
-              <div class="form-group filter-option">
-                <div class="col-sm-offset-2 col-sm-4">
-                  <button type="submit" class="btn btn-default">Submit</button>
-                </div>
-                <div class="col-sm-offset-1 col-sm-4">
+                <div class="form-group filter-option">
+                  <div class="col-sm-offset-2 col-sm-4">
+                    <button type="submit" name="'.$id.'"class="btn btn-default">Submit</button>
+                  </div>
+                  <div class="col-sm-offset-1 col-sm-4">
                   <form action="'.deleteCourse($con, $id).'" method="post">
-                    <button type="submit" name="'.$id.'" class="btn btn-default">Delete</button>
+                    <input type="hidden" name="venueID" value="'.$id.'">
+                    <button type="submit" name="Delete" class="btn btn-default">Delete</button>
                   </form>
-                </div>
-              </div>    
-            </form>';
+                  </div>
+                </div>    
+              </form>';
     }
 }
 
 //DELETE COURSE
 function deleteCourse(mysqli $con, $id){
-  if(isset($_POST[$id])){
-    mysqli_query($con, "DELETE FROM courses where id=$id");
-    header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
+  if(isset($_POST['Delete'])){
+
+    $cid = $_POST['courseID'];
+
+    $sql = "DELETE FROM Course WHERE id = $vid";
+
+    if (mysqli_query($con, $sql)){
+      header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
+      exit; 
+    } 
+    else{
+      echo "Error updating record: " . mysqli_error($con);
+    }
   }
 }
 
@@ -116,11 +114,16 @@ function updateCourses(mysqli $con, $id){
       $price = $_POST['price'];
       $category_id = $_POST['category_id'];
 
-    $sql = "UPDATE Course SET title='$title', description='$description', venue_id='$venue_id', start_date='$start_date', image='$image', price='$price', category_id='$category_id' WHERE id='$cid'";
+      $sql = "UPDATE Course SET title = '$title', description ='$description', venue_id ='$venue_id', start_date='$start_date', image = '$image', price = '$price', category_id = '$category_id' WHERE id = $cid";
 
-    mysqli_query($con, $sql);
-    header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
-  }
+      if (mysqli_query($con, $sql)) {
+        header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
+        exit; 
+      } 
+      else{
+        echo "Error updating record: " . mysqli_error($con);
+      }
+    }
 }
 
 //ADD NEW COURSE
@@ -158,41 +161,32 @@ function getVenues(mysqli $con){
       echo '<form class="form-horizontal" action="'.updateVenues($con, $id).'" method="post">
               <div class="form-group filter-option">
                 <label class="filter-label" for="vid">ID:</label>
-                <div class="col-sm-10">
-                  <input type="value" value="'.$id.'" class="form-control" name="vid" id="vid" readonly>
-                </div>
+                  <input type="value"  class="form-control" name="vid" id="vid" value="'.$id.'" readonly>
               </div>
               <div class="form-group filter-option">
                 <label class="filter-label" for="city">City:</label>
-                <div class="col-sm-10">
                   <input type="text" class="form-control" id="city" name="city" value="'.$city.'" required>
-                </div>
               </div>
               <div class="form-group filter-option">
                 <label class="filter-label" for="add1">Address 1:</label>
-                <div class="col-sm-10">
                   <input type="text" class="form-control" id="add1" name="add1" value="'.$add1.'" required>
-                </div>
               </div>
               <div class="form-group filter-option">
                 <label class="filter-label" for="add2">Address 2:</label>
-                <div class="col-sm-10">
                   <input type="text" class="form-control" id="add2" name="add2" value="'.$add2.'"required>
-                </div>
               </div>
               <div class="form-group filter-option">
                 <label class="filter-label" for="pcode">Postcode:</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="pcode" name="pcode" value="'.$postcode.'"required>
-                </div>
+                  <input type="text" class="form-control" id="pcode" name="postcode" value="'.$postcode.'"required>
               </div>
               <div class="form-group filter-option">
                 <div class="col-sm-offset-2 col-sm-4">
-                  <button type="submit" class="btn btn-default">Submit</button>
+                  <button type="submit" name="'.$id.'"class="btn btn-default">Submit</button>
                 </div>
                 <div class="col-sm-offset-1 col-sm-4">
                 <form action="'.deleteVenue($con, $id).'" method="post">
-                  <button type="submit" name="'.$id.'" class="btn btn-default">Delete</button>
+                  <input type="hidden" name="venueID" value="'.$id.'">
+                  <button type="submit" name="Delete" class="btn btn-default">Delete</button>
                 </form>
                 </div>
               </div>    
@@ -202,9 +196,19 @@ function getVenues(mysqli $con){
 
 //DELETE VENUE
 function deleteVenue(mysqli $con, $id){
-  if(isset($_POST[$id])){
-    mysqli_query($con, "DELETE * FROM Venue where id='$id'");
-    header("refresh:0, url=http://localhost/NMT-Website/admin/adminVenueEdit.php");
+  if(isset($_POST['Delete'])){
+
+    $vid = $_POST['venueID'];
+
+    $sql = "DELETE FROM Venue WHERE id = $vid";
+
+    if (mysqli_query($con, $sql)){
+      header("refresh:0, url=http://localhost/NMT-Website/admin/adminVenueEdit.php");
+      exit; 
+    } 
+    else{
+      echo "Error updating record: " . mysqli_error($con);
+    }
   }
 }
 
@@ -212,15 +216,20 @@ function deleteVenue(mysqli $con, $id){
 function updateVenues(mysqli $con, $id){
   if(isset($_POST[$id])){
     $vid = $_POST['vid'];
-    $city = $_POST['vn'];
+    $city = $_POST['city'];
     $add1 = $_POST['add1'];
     $add2 = $_POST['add2'];
     $postcode = $_POST['postcode'];
 
-    $sql = "UPDATE Venue SET city='$city', address1='$add1', address2='$add2', postcode='$postcode' WHERE id='$vid'";
+    $sql = "UPDATE Venue SET city ='$city', address1 ='$add1', address2 ='$add2', postcode ='$postcode' WHERE id = $vid";
 
-    mysqli_query($con, $sql);
-    header("refresh:0, url=http://localhost/NMT-Website/admin/adminVenueEdit.php");
+    if (mysqli_query($con, $sql)) {
+      header("refresh:0, url=http://localhost/NMT-Website/admin/adminVenueEdit.php");
+      exit; 
+    } 
+    else{
+      echo "Error updating record: " . mysqli_error($con);
+    }
   }
 }
 

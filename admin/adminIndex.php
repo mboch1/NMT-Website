@@ -39,8 +39,11 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                <a href="adminCourseAdd.php">link</a><br>
-                <a href="adminCourseEdit.php">link2</a><br>
+                <h2>login first to view:</h2>
+                <a href="adminCourseAdd.php">adminCourseAdd</a><br>
+                <a href="adminCourseEdit.php">adminCourseEdit</a><br>
+                <a href="adminVenueAdd.php">adminVenueAdd</a><br>
+                <a href="adminVenueEdit.php">adminVenueEdit</a><br>
             </div>
             <div class="col-2"></div>
         </div>
