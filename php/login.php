@@ -4,7 +4,6 @@
  * Date: 10/10/2017
  * Time: 13:58
  */
-//this is login script which chooses interface for the user depending on the credentials and compares given password with encrypted one inside database
 	require_once('db.php');
 	session_start(['cookie_lifetime' => 86400]); // Starting Session, cookie set to 1 day
 

@@ -15,7 +15,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>NMT Admin Main Page</title>
+    <title>NMT Admin Venue Editor</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -39,8 +39,32 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                <a href="adminCourseAdd.php">link</a><br>
-                <a href="adminCourseEdit.php">link2</a><br>
+            <?php
+                if(isset($_SESSION['username'])!=""){
+                //register new course to db:
+                echo" <h3>Create New Venue:</h3><br>
+                <form action='".addNewVenue($con)."' method='post'>
+                    <div class='form-group'>
+                        <label for='vn'>City Name:</label>
+                        <input type='text' class='form-control' name='vn' id='vn' placeholder='Edinburgh' required>
+                    </div>
+                    <div class='form-group'>
+                        <label for='add1'>Address 1:</label>
+                        <input type='text' class='form-control' name='add1' id='add1' placeholder='1 Princess Street' required>
+                    </div>
+                    <div class='form-group'>
+                        <label for='add2'>Address 2:</label>
+                        <input type='text' class='form-control' name='add2' id='add2' placeholder='Edinburgh' required>
+                    </div>
+                    <div class='form-group'>
+                        <label for='postcode'>Postcode:</label>
+                        <input type='text' class='form-control' name='postcode' id='postcode' placeholder='EH1 1AC' required>
+                    </div>
+                  <button type='submit' name='addVenue' class='btn btn-default'>Add Venue</button>
+                </form>
+               ";
+            }
+               ob_end_flush();?>
             </div>
             <div class="col-2"></div>
         </div>
