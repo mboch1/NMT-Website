@@ -4,6 +4,19 @@
     include('php/scripts.php');
 	session_start();
     global $con;
+
+/*$admin = "0";
+
+if($admin=="0")
+{
+    header("Location: http://localhost/NMT-Website/index.php ");
+}*///to redirect non admins once admin login is finished
+
+
+
+
+
+
 ?>
 <html lang="en">
 <head>
@@ -32,18 +45,22 @@
     <![endif]-->
 </head>
 <body>
-    <?php include(__DIR__ . "/../template/header.php") ?>
+    <?php include(__DIR__ . "/../template/header.php");
+    ?>
 
     <!-- middle section -->
     <div class="container">
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                <h2>login first to view:</h2>
-                <a href="adminCourseAdd.php">adminCourseAdd</a><br>
-                <a href="adminCourseEdit.php">adminCourseEdit</a><br>
-                <a href="adminVenueAdd.php">adminVenueAdd</a><br>
-                <a href="adminVenueEdit.php">adminVenueEdit</a><br>
+                <h2>Admin Functions:</h2>
+                <br>
+                <a href="adminCourseAdd.php" class="btn btn-default" role="button">Add New Course</a>
+                <a href="adminCourseEdit.php" class="btn btn-default" role="button">Edit or Remove Existing Courses</a>
+                <a href="adminVenueAdd.php" class="btn btn-default" role="button">Add New Venue</a>
+                <a href="adminVenueEdit.php" class="btn btn-default" role="button">Edit or Remove Existing Venues</a>
+                <br>
+                <br>
             </div>
             <div class="col-2"></div>
         </div>
