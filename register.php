@@ -51,8 +51,8 @@
 				    <input type="name" class="form-control" name="surname" id="surnameInput" placeholder="Smith" required>
 				  </div>
 				  <div class="form-group">
-				    <label for="phoneInput">Surname:</label>
-				    <input type="text" class="form-control" name="phone" id="phoneInput" placeholder="Smith" required>
+				    <label for="phoneInput">Phone Number:</label>
+				    <input type="text" class="form-control" name="phone" id="phoneInput" placeholder="01315551234" required>
 				  </div>
 				  <button type="submit" name="register" class="btn btn-primary">Submit</button>
 				</form>

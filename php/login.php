@@ -28,7 +28,7 @@
             $password2 = mysqli_real_escape_string($con, $password2);
 
             //Check for active username in database
-            $sql="SELECT * FROM users WHERE email='$username'";
+            $sql="SELECT * FROM Users WHERE email='$username'";
             $result=mysqli_query($con,$sql);
             $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
             
@@ -84,5 +84,5 @@
                 header("refresh:6; url=http://localhost/NMT-website/index.php");
             }
         }
-    }
+
 ?>

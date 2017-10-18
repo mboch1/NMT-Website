@@ -11,11 +11,11 @@
 	$phone = $_POST['phone'];
 	
 	//check if the record already exists!
-	$result = mysqli_query($con,"SELECT * FROM users WHERE email='$login' LIMIT 1");
+	$result = mysqli_query($con,"SELECT * FROM Users WHERE email='$login' LIMIT 1");
 
     if(mysqli_fetch_array($result) == 0)
 	{
-		$createAccount = "INSERT INTO users (email, password, name, surname, contactNumber) 
+		$createAccount = "INSERT INTO Users (email, password, name, surname, contactNumber) 
 		VALUES ('$login', '$password', '$name', '$surname', '$phone')";
 	
 		$insertData = mysqli_query($con, $createAccount);
