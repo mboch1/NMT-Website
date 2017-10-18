@@ -15,7 +15,7 @@
 
     if(mysqli_fetch_array($result) == 0)
 	{
-		$createAccount = "INSERT INTO Users (email, password, name, surname, contactNumber) 
+		$createAccount = "INSERT INTO Users (email, password, firstname, surname, teleno) 
 		VALUES ('$login', '$password', '$name', '$surname', '$phone')";
 	
 		$insertData = mysqli_query($con, $createAccount);
