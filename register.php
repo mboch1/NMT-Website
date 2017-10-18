@@ -33,28 +33,43 @@
             <div class="col-2"></div>
             <div class="col">
 				<form method="post" action="php/setRegister.php">
-				  <div class="form-group">
-				    <label for="inputEmail">Email address:</label>
-				    <input type="email" class="form-control" name="login" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" required autofocus>
-				    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-				  </div>
-				  <div class="form-group">
-				    <label for="passwordInput">Password:</label>
-				    <input type="password" class="form-control" name="password" id="passwordInput" placeholder="Password" required>
-				  </div>
-				  <div class="form-group">
-				    <label for="nameInput">Name:</label>
-				    <input type="name" class="form-control" name="name" id="nameInput" placeholder="John" required>
-				  </div>
-				  <div class="form-group">
-				    <label for="surnameInput">Surname:</label>
-				    <input type="name" class="form-control" name="surname" id="surnameInput" placeholder="Smith" required>
-				  </div>
-				  <div class="form-group">
-				    <label for="phoneInput">Phone Number:</label>
-				    <input type="text" class="form-control" name="phone" id="phoneInput" placeholder="01315551234" required>
-				  </div>
-				  <button type="submit" name="register" class="btn btn-primary">Submit</button>
+                    <div class="form-group">
+                        <label for="inputEmail">Email Address:</label>
+                        <input type="email" class="form-control" name="login" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" required autofocus>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordInput">Password:</label>
+                        <input type="password" class="form-control" name="password" id="passwordInput" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nameInput">Forename:</label>
+                        <input type="name" class="form-control" name="name" id="nameInput" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="surnameInput">Surname:</label>
+                        <input type="name" class="form-control" name="surname" id="surnameInput" placeholder="Smith" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addInput">Address:</label>
+                        <input type="name" class="form-control" name="add1" id="addInput" placeholder="Address line 1" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="name" class="form-control" name="add2" id="add2Input" placeholder="Address line 2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cityInput">City:</label>
+                        <input type="name" class="form-control" name="city" id="cityInput" placeholder="Edinburgh" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postcodeInput">Postcode:</label>
+                        <input type="name" class="form-control" name="postcode" id="postcodeInput" placeholder="EH1 1BC" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneInput">Phone Number:</label>
+                        <input type="text" class="form-control" name="phone" id="phoneInput" placeholder="01315551234" required>
+                    </div>
+                    <button type="submit" name="register" class="btn btn-primary">Submit</button>
 				</form>
             </div>
             <div class="col-2"></div>
