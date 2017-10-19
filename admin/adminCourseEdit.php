@@ -39,11 +39,9 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
+                
             <?php
-                if(isset($_SESSION['username'])!=""){
-                    getCourses($con);
-                }
-                ob_end_flush();?>
+                getCourseList($con);?>
             </div>
             <div class="col-2"></div>
         </div>
@@ -58,5 +56,22 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'yyyy-mm-dd',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+
+    $(".card-text").each(function() {
+        $clamp(this, {clamp: 3});
+    });
+</script>
 </body>
 </html>
