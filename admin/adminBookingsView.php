@@ -15,7 +15,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>NMT Admin Page</title>
+    <title>NMT Bookings Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -39,11 +39,33 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-            <?php
-                if(isset($_SESSION['username'])!=""){
-                    getCourseList($con);
-                }
-                    ob_end_flush();?>
+                <table class='table table-bordered'>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Booked Users</th>
+                    </tr>
+                    <?php
+                        if(isset($_SESSION['username'])!=""){
+                        //load bookings from db:
+                        getBookings($con);
+                    ?>
+                    
+                    </tbody>
+                </table><br>
+                <table class='table table-bordered'>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Title</th>
+                        <th>Start Date</th>
+                        <th>City</th>
+                        <th>Start Date</th>
+                    </tr>
+                    <?php 
+                        getCourseNames($con);
+                        }
+                        ob_end_flush();?>                    
+                    </tbody>
+                </table><br>
             </div>
             <div class="col-2"></div>
         </div>
