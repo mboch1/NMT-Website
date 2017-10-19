@@ -55,7 +55,7 @@
                         <input type="name" class="form-control" name="add1" id="addInput" placeholder="Address line 1" required>
                     </div>
                     <div class="form-group">
-                        <input type="name" class="form-control" name="add2" id="add2Input" placeholder="Address line 2" required>
+                        <input type="name" class="form-control" name="add2" id="add2Input" placeholder="Address line 2">
                     </div>
                     <div class="form-group">
                         <label for="cityInput">City:</label>
