@@ -188,7 +188,6 @@ function addNewCourse(mysqli $con){
   }
 }
 
-
 //VENUE EDITOR (update 1 venue at a time)
 function getVenues(mysqli $con){
 
@@ -276,19 +275,41 @@ function updateVenues(mysqli $con, $id){
   }
 }
 
-//ADD NEW VENUE
-function addNewVenue(mysqli $con){
-  if(isset($_POST['addVenue'])){
-    $city = $_POST['vn'];
-    $add1 = $_POST['add1'];
-    $add2 = $_POST['add2'];
-    $postcode = $_POST['postcode'];
+//VIEW BOOKINGS
+function getBookings(mysqli $con){
 
-    $insert_data = "INSERT INTO Venue (city, address1, address2, postcode) VALUES ('$city','$add1', '$add2', '$postcode')";
+  $sql = "SELECT Booking, COUNT(*) FROM id GROUP BY course_id";
+  $result = mysqli_query($con, $sql);
 
-    $insert_data_query = mysqli_query($con, $insert_data);
 
-    header("refresh:0, url=http://localhost/NMT-Website/admin/adminVenueAdd.php");
+    foreach($con->query('SELECT user_id,course_id, COUNT(*) FROM Booking GROUP BY course_id') as $row){
+
+      echo "<tr>
+              <td>" . $row['course_id'] . "</td>
+              <td>" . $row['COUNT(*)'] . "</td>
+            </tr>";
+    }
+}
+//GET COURSE NAMES
+function getCourseNames(mysqli $con){
+
+  $sql = "SELECT Course.id, Course.venue_id, Course.title, Course.start_date, b.id, b.city, b.postcode FROM Course INNER JOIN Venue b ON Course.venue_id = b.id";
+  $result = mysqli_query($con, $sql);
+
+  while($row = mysqli_fetch_array($result)) {
+    $id = $row['id'];
+    $title = $row['title'];
+    $start_date = $row['start_date'];
+    $city = $row['city'];
+    $postcode = $row['postcode'];
+
+    echo "<tr>
+            <td>" . $id . "</td>
+            <td>" . $title . "</td>
+            <td>" . $start_date . "</td>
+            <td>" . $city . "</td>
+            <td>" . $postcode . "</td>
+          </tr>";
   }
 }
 ?>
