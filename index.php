@@ -131,7 +131,8 @@
 						// Display courses
 						while ($row = mysqli_fetch_assoc($res)) {
 
-							// If course doesn't have an image, give it a placeholder
+							$date_formated = date('d-m-Y', strtotime( $row['start_date'] ));
+						    // If course doesn't have an image, give it a placeholder
 							if ($row["image"] == "") {
 								$row["image"] = "http://placehold.it/700xx400";
 							}
@@ -144,11 +145,20 @@
 			                          <h4 class="card-title">
 			                            <a href="#">' . $row["title"] . '</a>
 			                          </h4>
-			                          <h5>£' . $row["price"] . '</h5>
+			                          <h5>Price: £' . $row["price"] . '</h5>
+			                          <h5>Start Date:' . $date_formated . '</h5>
 			                          <p class="card-text">' . $row["description"] . '</p>
 			                        </div>
-			                        <div class="card-footer">
-			                          <small class="text-muted">★ ★ ★ ★ ☆</small>
+			                        <div class="card-footer">';
+                                if(isset($_SESSION['username'])!=""){
+                                   echo' <div class="text-center">
+			                        <a href="php/setBooking.php?course_id=' . $row["id"]. '" class="btn btn-default" role="button">Book Course</a>
+			                        </div>';
+                                }
+                                else{
+                                    echo'Please login to register for course.';
+                                }
+                            echo'
 			                        </div>
 			                    </div>
 			                  </div>';
@@ -160,7 +170,7 @@
             <div class="col-2"></div>
         </div>
     </div>
-    <!--  end of midle section -->
+    <!--  end of middle section -->
 	<?php include("template/footer.php") ?>
     <!-- Bootstrap core JavaScript
     ================================================== -->

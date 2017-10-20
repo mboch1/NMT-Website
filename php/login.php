@@ -38,6 +38,7 @@
                 if($row["email"]==$username && $row["password"]==$password2){
                     $_SESSION['username'] = $username; // Start Session
                     $_SESSION['password'] = $password2;
+                    $_SESSION['user_id'] = $row["id"];
                     header("refresh:1, url=http://localhost/NMT-Website/index.php");
                 }
                 /*If we have data inside the array do this:
