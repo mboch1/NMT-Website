@@ -5,7 +5,7 @@
     $display = "";
     $loc = ($_GET["loc"] != "" ? (int)$_GET["loc"] : "%");
     $course = ($_GET["course"] != "" ? (int)$_GET["course"] : "%");
-    $date = ($_GET["date"] != "" ? (int)$_GET["date"] : "%");
+    $date = ($_GET["date"] != "" ? date('Y-m-d', $_GET["date"]) : "%");
 
     // Fetch courses from database
     $sql = "SELECT * FROM Course WHERE venue_id LIKE '" . $loc . "' AND category_id LIKE '" . $course . "' AND start_date LIKE '" . $date . "'";
