@@ -327,7 +327,6 @@ function getCourseNames(mysqli $con){
   date_default_timezone_set('Europe/London');
   $current_date = date_create(date('Y-m-d'));
   $warningsID = array();
-  $warningsID2 = array();
 
   echo'<table class="table table-bordered">
         <tr>
@@ -338,6 +337,7 @@ function getCourseNames(mysqli $con){
             <th>Bookings</th>
             <th>Starts</th>
             <th>Is Advertised</th>
+            <th>Cancel</th>
         </tr>';
 
   while($row = mysqli_fetch_array($result)) {
@@ -350,8 +350,6 @@ function getCourseNames(mysqli $con){
     $setText = "True";
     $start_date = date_create($row['start_date']); 
     $diff = $start_date->diff($current_date);
-
-
 
     if($isActive==0){
       $setText="False";
@@ -373,6 +371,10 @@ function getCourseNames(mysqli $con){
             <td>" . $bookings . "</td>
             <td>" . $diff->format("%R%a days") . "</td>
             <td>" . $setText . "</td>
+            <td><form action='".cancelCourse($con)."' method='post'>
+                <input type='hidden' name='courseID' value='".$id."'>
+                  <button type='submit' name='Cancel' class='btn btn-default'>Cancel</button>
+                </form></td>
           </tr>";
   }
     echo ' </tbody>
@@ -385,50 +387,53 @@ function getCourseNames(mysqli $con){
 }
 
 //if course is cancelled send message to all users subscribed to it
-function cancelCourseEmail(mysqli $con){
-
-    if(isset($_POST['Cancel'])){
-      
+function cancelCourse(mysqli $con){
+    if(isset($_POST['Cancel'])){ 
       $id = $_POST['courseID'];
-
-      //select all bookings matching the cancelled course ID 
-      $sql = "SELECT * FROM Booking WHERE course_id = $id";
-      $result = mysqli_query($con, $sql);
-        //start iteration:
-      while($row = mysqli_fetch_array($result)) {
-        $userID = $row['user_id'];
-        $bookingID = $row['id'];
-        //get user email address for booking user_id
-        $sql2 = "SELECT * FROM Users WHERE user_id = $userID";
-        $result2 = mysqli_query($con, $sql2);
-        
-        while($row = mysqli_fetch_array($result2)) {
-            $email = $row['email'];
-            //send email to the user and remove the booking
-            removeBooking($con, $bookingID, $id);
-        }
-      }
+      removeAllBookings($con, $id);   
     }
 }
 
-//remove booking WORK IN PROGRESS
-function removeBooking(mysqli $con, $bookingID, $courseID){
+//remove booking 
+function removeAllBookings(mysqli $con, $courseID){
   
-  $sql = "DELETE FROM Booking WHERE id='$bookingID'";
+  $sql = "SELECT Booking.user_id, Booking.course_id, user.email FROM Booking INNER JOIN Users user ON Booking.user_id = user.id";
 
-  if (mysqli_query($con, $sql)){
-    
-    $sql = "UPDATE Course SET bookings='bookings'-1 WHERE id='$courseID'";
-    if (mysqli_query($con, $sql)) {
-      header("refresh:0, url=http://localhost/NMT-Website/admin/adminBookingEditor.php");
-      exit; 
-    } 
-    else{
-      echo "Error updating record: " . mysqli_error($con);
+  $result = mysqli_query($con,$sql);
+
+  while($row = mysqli_fetch_array($result)) {
+    //send emails to the users here:
+    $email = $row['email'];
+    $userID = $row['user_id'];
+    $course = $row['course_id'];
+
+    if($courseID==$course){
+      // the message
+      $msg = "Due to the low interest, the course You have booked was cancelled. Please contact administration";
+      // use wordwrap() if lines are longer than 70 characters
+      $msg = wordwrap($msg,70);
+      // send email
+      $headers = "From: webmaster@example.com" . "\r\n" . "CC: somebodyelse@example.com";
+      mail($email,"Course Cancelled",$msg,$headers);
+      
+      //once email was sent remove the booking from database
+      $sql2 = "DELETE FROM Booking WHERE user_id='$userID' AND course_id='$courseID'";    
+      if (mysqli_query($con, $sql2)) {  
+      } 
+      else{
+        echo "Error updating record: " . mysqli_error($con);
+      } 
     }
+  }
+  //set course inactive so that no user can book it again
+  $deactiv = 0;
+  $sql3 = "UPDATE Course SET isActive ='$deactiv', bookings='$deactiv' WHERE id=$courseID";
+  if (mysqli_query($con, $sql3)) {
+    header("refresh:5, url=http://localhost/NMT-Website/admin/adminBookingsView.php");
+    exit(); 
   } 
   else{
-    echo "Error deleting record: " . mysqli_error($con);
+    echo "Error updating record: " . mysqli_error($con);
   }
 }
 ?>

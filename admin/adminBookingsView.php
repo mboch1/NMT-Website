@@ -40,7 +40,6 @@
                         getCourseNames($con);
                     }
                     ob_end_flush();?>
-
             </div>
             <div class="col-2"></div>
         </div>
