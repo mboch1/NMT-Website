@@ -18,6 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 	<script src="jquery/clamp.js"></script>
+	<script src="jquery/moment.min.js"></script>
     <!-- Bootstrap Date-Picker Plugin -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
@@ -77,7 +78,7 @@
                         <div class="form-group filter-option">
                             <label for="city" class="filter-label">Choose Location: </label>
                             <select name="city" id="city" class="form-control input-sm filter-select">
-								<option hidden disabled selected value> -- Select an option -- </option>
+								<option value="" selected>All Locations</option>
 								<?php
 
 									// Get venues from db
@@ -98,7 +99,7 @@
                         <div class="form-group filter-option">
                             <label for="course" class="filter-label">Choose Course: </label>
                             <select name="course" id="course" class="form-control input-sm filter-select">
-								<option hidden disabled selected value> -- Select an option -- </option>
+								<option value="" selected>All Courses</option>
 								<?php
 
 									// Get venues from db
@@ -118,7 +119,7 @@
                         </div>
                         <div class="form-group filter-option">
                             <label class="control-label filter-label" for="date">Date</label>
-                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYY" type="text"/>
                         </div>
                         <button id="filterSubmit" type="button" name="filter" class="btn btn-default" style="margin-top: 18px;">Filter Results</button>
                     </form>
@@ -144,7 +145,7 @@
 			var date_input=$('input[name="date"]'); //our date input has the name "date"
 			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 			var options={
-				format: 'mm/dd/yyyy',
+				format: 'dd/mm/yyyy',
 				container: container,
 				todayHighlight: true,
 				autoclose: true,
@@ -163,10 +164,19 @@
 	  	});
 
 		function loadCourses() {
+
+			var date = null;
+
+			if ($("#date").datepicker('getDate') != null) {
+				var momentDate = moment($("#date").datepicker('getDate'));
+				momentDate = momentDate.format("X");
+				date = momentDate.toString();
+			}
+
 			$("#courseDisplay").load("template/getEvents.php?" + $.param({
 				loc: $("#city").val(),
 				course: $("#course").val(),
-				date: $("#date").val()}));
+				date: date}));
 		}
 
     </script>
