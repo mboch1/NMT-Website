@@ -13,8 +13,8 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>NMT Project Login Page</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 	<script src="jquery/clamp.js"></script>
@@ -77,6 +77,7 @@
                         <div class="form-group filter-option">
                             <label for="city" class="filter-label">Choose Location: </label>
                             <select name="city" id="city" class="form-control input-sm filter-select">
+								<option hidden disabled selected value> -- Select an option -- </option>
 								<?php
 
 									// Get venues from db
@@ -87,7 +88,7 @@
 									while ($row = mysqli_fetch_assoc($res)) {
 
 										// Display venue
-										echo '<option value="' . $row["city"] . '">' . $row["city"] . '</option>';
+										echo '<option value="' . $row["id"] . '">' . $row["city"] . '</option>';
 
 									}
 
@@ -97,6 +98,7 @@
                         <div class="form-group filter-option">
                             <label for="course" class="filter-label">Choose Course: </label>
                             <select name="course" id="course" class="form-control input-sm filter-select">
+								<option hidden disabled selected value> -- Select an option -- </option>
 								<?php
 
 									// Get venues from db
@@ -107,7 +109,7 @@
 									while ($row = mysqli_fetch_assoc($res)) {
 
 										// Display venue
-										echo '<option value="' . $row["title"] . '">' . $row["title"] . '</option>';
+										echo '<option value="' . $row["id"] . '">' . $row["title"] . '</option>';
 
 									}
 
@@ -118,54 +120,10 @@
                             <label class="control-label filter-label" for="date">Date</label>
                             <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                         </div>
-                        <button type="submit" name="filter" class="btn btn-default" style="margin-top: 18px;">Filter Results</button>
+                        <button id="filterSubmit" type="button" name="filter" class="btn btn-default" style="margin-top: 18px;">Filter Results</button>
                     </form>
                 </div>
-                <div class="row">
-					<?php
-
-						// Fetch courses from database
-						$sql = "SELECT * FROM Course";
-						$res = mysqli_query($con, $sql);
-
-						// Display courses
-						while ($row = mysqli_fetch_assoc($res)) {
-
-							$date_formated = date('d-m-Y', strtotime( $row['start_date'] ));
-						    // If course doesn't have an image, give it a placeholder
-							if ($row["image"] == "") {
-								$row["image"] = "http://placehold.it/700xx400";
-							}
-
-							// Display course
-							echo '<div class="col-lg-4 col-md-6 mb-4">
-			                    <div class="card">
-			                        <a href="#"><img class="card-img-top" src="' . $row["image"] . '" alt=""></a>
-			                        <div class="card-body">
-			                          <h4 class="card-title">
-			                            <a href="#">' . $row["title"] . '</a>
-			                          </h4>
-			                          <h5>Price: £' . $row["price"] . '</h5>
-			                          <h5>Start Date:' . $date_formated . '</h5>
-			                          <p class="card-text">' . $row["description"] . '</p>
-			                        </div>
-			                        <div class="card-footer">';
-                                if(isset($_SESSION['username'])!=""){
-                                   echo' <div class="text-center">
-			                        <a href="php/setBooking.php?course_id=' . $row["id"]. '" class="btn btn-default" role="button">Book Course</a>
-			                        </div>';
-                                }
-                                else{
-                                    echo'Please login to register for course.';
-                                }
-                            echo'
-			                        </div>
-			                    </div>
-			                  </div>';
-						}
-
-					?>
-                </div>
+            	<div id="courseDisplay" class="row"></div>
             </div>
             <div class="col-2"></div>
         </div>
@@ -180,22 +138,36 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script>
-	    $(document).ready(function(){
-	      var date_input=$('input[name="date"]'); //our date input has the name "date"
-	      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-	      var options={
-	        format: 'mm/dd/yyyy',
-	        container: container,
-	        todayHighlight: true,
-	        autoclose: true,
-	      };
-	      date_input.datepicker(options);
-	    })
+    <script type="text/javascript">
 
-		$(".card-text").each(function() {
-			$clamp(this, {clamp: 3});
-		});
+	    $(document).ready(function(){
+			var date_input=$('input[name="date"]'); //our date input has the name "date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			var options={
+				format: 'mm/dd/yyyy',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			};
+			date_input.datepicker(options);
+
+	  		loadCourses();
+
+			$(".card-text").each(function() {
+				$clamp(this, {clamp: 3});
+			});
+
+			$("#filterSubmit").click(function() {
+				loadCourses();
+			});
+	  	});
+
+		function loadCourses() {
+			$("#courseDisplay").load("template/getEvents.php?" + $.param({
+				loc: $("#city").val(),
+				course: $("#course").val(),
+				date: $("#date").val()}));
+		}
 
     </script>
 </body>
