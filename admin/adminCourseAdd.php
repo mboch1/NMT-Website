@@ -53,7 +53,7 @@
                           </div>
                           <div class="form-group">
                             <label for="venue_id">Select city:</label>
-                            <select class="form-control" name="venue_id" id="venue_id">';
+                            <select class="form-control input-sm filter-select" name="venue_id" id="venue_id">';
                               // Get cities from db
                               $sql = "SELECT * FROM Venue";
                               $res = mysqli_query($con, $sql);
@@ -67,20 +67,20 @@
                            echo '</select>
                           </div>
                           <div class="form-group">
-                            <label for="start_date">Start Date:</label>
+                            <label class="filter-label" for="start_date">Start Date:</label>
                             <input data-provide="datepicker" class="datepicker" id="start_date" name="start_date" data-date-format="yyyy-mm-dd" required>
                           </div>
                           <div class="form-group">
-                            <label for="image">Image:</label>
-                            <input type="text" name="image" placeholder="image_name" id="image" required>
+                            <label class="filter-label" for="image">Image:</label>
+                            <input class="form-control" type="text" name="image" placeholder="image_name" id="image" required>
                           </div>
                           <div class="form-group">
-                            <label for="price">Price:</label>
-                            <input type="value" name="price" placeholder="100" id="price" required>
+                            <label class="filter-label" for="price">Price:</label>
+                            <input class="form-control" type="value" name="price" placeholder="100" id="price" required>
                           </div>              
                           <div class="form-group">
-                            <label for="category_id">Select Category Title:</label>
-                            <select class="form-control" id="category_id" name="category_id">';                 
+                            <label class="filter-label" for="category_id">Select Category Title:</label>
+                            <select class="form-control input-sm filter-select" id="category_id" name="category_id">';                 
                               // Get titles from db
                               $sql = "SELECT * FROM Category";
                               $res = mysqli_query($con, $sql);

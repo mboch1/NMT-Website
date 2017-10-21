@@ -20,14 +20,20 @@ function getCourseList(mysqli $con){
                 $id = $row['id'];
                 $title = $row['title'];
                 $start_date = $row['start_date'];
-                echo '<option value="'.$id.'">'.$title.' '.$start_date.'</option>';
+                $isActive = $row['isActive'];
+                
+                if($isActive==0){
+                  echo '<option value="'.$id.'">INACTIVE'.$title.' '.$start_date.'</option>';
+                }
+                else{
+                  echo '<option value="'.$id.'">'.$title.' '.$start_date.'</option>';
+                }
+                
               }
             echo '</select>
           </div>
-          <div class="form-group filter-option">
-            <div class="col-sm-offset-2 col-sm-4">
+          <div class="form-group filter-option"> 
               <button type="submit" name="Selected" class="btn btn-default">Select</button>
-            </div>
           </div>
         </form><br><br>';
 }
@@ -51,6 +57,7 @@ function getSelectedCourse(mysqli $con){
       $image = $row['image'];
       $price = $row['price'];
       $category_id = $row['category_id'];
+      $isActive = $row['isActive'];
 
       echo '<form action="'.updateCourses($con).'" method="post">
               <div class="form-group filter-option">
@@ -108,31 +115,49 @@ function getSelectedCourse(mysqli $con){
             echo '</select>
               </div>
                 <div class="form-group filter-option">
-                  <div class="col-sm-offset-2 col-sm-4">
-                    <button type="submit" name="UpdateCourse" class="btn btn-default">Submit</button>
-                  </div>
-                  <div class="col-sm-offset-1 col-sm-4">
-                  <form action="'.deleteCourse($con).'" method="post">
-                    <input type="hidden" name="courseID" value="'.$id.'">
-                    <button type="submit" name="Delete" class="btn btn-default">Delete</button>
+                  <button type="submit" name="UpdateCourse" class="btn btn-default">Update</button>
+                </div>
+                <div>
+                  <form action="'.deactivateCourse($con).'" method="post">
+                    <div class="form-group filter-option">
+                      <input type="hidden" name="courseID" value="'.$id.'">
+                  ';
+                  if($isActive == 1){
+                      echo '<button type="submit" name="Deactivate" class="btn btn-default">Deactivate</button>';
+                  }
+                  else{
+                    echo '<button type="submit" name="Reactvate" class="btn btn-default">Reactivate</button>';
+                  }  
+                    echo'
+                    </div>   
                   </form>
                   </div>
-                </div>    
               </form>';
   }
 }
 
 //DELETE COURSE
-function deleteCourse(mysqli $con){
-  if(isset($_POST['Delete'])){
+function deactivateCourse(mysqli $con){
+  if(isset($_POST['Deactivate'])){
 
     $did = $_POST['courseID'];
+    $deactiv = 0;
 
-    $sql = "DELETE FROM Course WHERE id = $did";
+    $sql = "UPDATE Course SET isActive ='$deactiv' WHERE id=$did";
 
     if (mysqli_query($con, $sql)){
       header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
-      exit; 
+    } 
+  }
+    if(isset($_POST['Reactivate'])){
+
+    $did = $_POST['courseID'];
+    $deactiv = 1;
+
+    $sql = "UPDATE Course SET isActive ='$deactiv' WHERE id=$did";
+
+    if (mysqli_query($con, $sql)){
+      header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
     } 
   }
 }
@@ -274,42 +299,136 @@ function updateVenues(mysqli $con, $id){
     }
   }
 }
+//ADD NEW VENUE
+function addNewVenue(mysqli $con){
+  if(isset($_POST['addVenue'])){
+    $vn = $_POST['vn'];
+    $add1 = $_POST['add1'];
+    $add2 = $_POST['add2'];
+    $postcode = $_POST['postcode'];
 
-//VIEW BOOKINGS
-function getBookings(mysqli $con){
+    $sql = "INSERT INTO Venue (city, address1, address2, postcode) VALUES ('$vn','$add1', '$add2', '$postcode')";
 
-  $sql = "SELECT Booking, COUNT(*) FROM id GROUP BY course_id";
-  $result = mysqli_query($con, $sql);
-
-
-    foreach($con->query('SELECT user_id,course_id, COUNT(*) FROM Booking GROUP BY course_id') as $row){
-
-      echo "<tr>
-              <td>" . $row['course_id'] . "</td>
-              <td>" . $row['COUNT(*)'] . "</td>
-            </tr>";
+    if (mysqli_query($con, $sql)){
+      header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
+      exit; 
+    } 
+    else{
+      echo "Error updating record: " . mysqli_error($con);
     }
+  }
 }
 //GET COURSE NAMES
 function getCourseNames(mysqli $con){
 
-  $sql = "SELECT Course.id, Course.venue_id, Course.title, Course.start_date, b.id, b.city, b.postcode FROM Course INNER JOIN Venue b ON Course.venue_id = b.id";
+  $sql = "SELECT Course.isActive, Course.bookings, Course.id, Course.venue_id, Course.title, Course.start_date, b.city, b.postcode FROM Course INNER JOIN Venue b ON Course.venue_id = b.id";
   $result = mysqli_query($con, $sql);
+
+  date_default_timezone_set('Europe/London');
+  $current_date = date_create(date('Y-m-d'));
+  $warningsID = array();
+  $warningsID2 = array();
+
+  echo'<table class="table table-bordered">
+        <tr>
+            <th>Course ID</th>
+            <th>Course Title</th>
+            <th>City</th>
+            <th>Postcode</th>
+            <th>Bookings</th>
+            <th>Starts</th>
+            <th>Is Advertised</th>
+        </tr>';
 
   while($row = mysqli_fetch_array($result)) {
     $id = $row['id'];
     $title = $row['title'];
-    $start_date = $row['start_date'];
     $city = $row['city'];
     $postcode = $row['postcode'];
+    $bookings = $row['bookings'];
+    $isActive = $row['isActive'];
+    $setText = "True";
+    $start_date = date_create($row['start_date']); 
+    $diff = $start_date->diff($current_date);
+
+
+
+    if($isActive==0){
+      $setText="False";
+    }
+
+    if($isActive==1){
+      if($diff->days<=14 && $diff->days>0){
+        if($bookings<=15){
+          array_push($warningsID, $id);
+        }
+      }
+    }
 
     echo "<tr>
             <td>" . $id . "</td>
             <td>" . $title . "</td>
-            <td>" . $start_date . "</td>
             <td>" . $city . "</td>
             <td>" . $postcode . "</td>
+            <td>" . $bookings . "</td>
+            <td>" . $diff->format("%R%a days") . "</td>
+            <td>" . $setText . "</td>
           </tr>";
+  }
+    echo ' </tbody>
+        </table><br>';
+    if(sizeof($warningsID)!=0){
+      for($i=0; $i<sizeof($warningsID); $i++){
+        echo '<h4>WARNING Course ID: '.$warningsID[$i].' has not enough bookings consider taking action</h4><br>';
+      }
+    }
+}
+
+//if course is cancelled send message to all users subscribed to it
+function cancelCourseEmail(mysqli $con){
+
+    if(isset($_POST['Cancel'])){
+      
+      $id = $_POST['courseID'];
+
+      //select all bookings matching the cancelled course ID 
+      $sql = "SELECT * FROM Booking WHERE course_id = $id";
+      $result = mysqli_query($con, $sql);
+        //start iteration:
+      while($row = mysqli_fetch_array($result)) {
+        $userID = $row['user_id'];
+        $bookingID = $row['id'];
+        //get user email address for booking user_id
+        $sql2 = "SELECT * FROM Users WHERE user_id = $userID";
+        $result2 = mysqli_query($con, $sql2);
+        
+        while($row = mysqli_fetch_array($result2)) {
+            $email = $row['email'];
+            //send email to the user and remove the booking
+            removeBooking($con, $bookingID, $id);
+        }
+      }
+    }
+}
+
+//remove booking WORK IN PROGRESS
+function removeBooking(mysqli $con, $bookingID, $courseID){
+  
+  $sql = "DELETE FROM Booking WHERE id='$bookingID'";
+
+  if (mysqli_query($con, $sql)){
+    
+    $sql = "UPDATE Course SET bookings='bookings'-1 WHERE id='$courseID'";
+    if (mysqli_query($con, $sql)) {
+      header("refresh:0, url=http://localhost/NMT-Website/admin/adminBookingEditor.php");
+      exit; 
+    } 
+    else{
+      echo "Error updating record: " . mysqli_error($con);
+    }
+  } 
+  else{
+    echo "Error deleting record: " . mysqli_error($con);
   }
 }
 ?>
