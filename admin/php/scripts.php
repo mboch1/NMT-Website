@@ -117,6 +117,7 @@ function getSelectedCourse(mysqli $con){
                 <div class="form-group filter-option">
                   <button type="submit" name="UpdateCourse" class="btn btn-default">Update</button>
                 </div>
+              </form>
                 <div>
                   <form action="'.deactivateCourse($con).'" method="post">
                     <div class="form-group filter-option">
@@ -131,8 +132,7 @@ function getSelectedCourse(mysqli $con){
                     echo'
                     </div>   
                   </form>
-                  </div>
-              </form>';
+                  </div>';
   }
 }
 
@@ -174,17 +174,18 @@ function updateCourses(mysqli $con){
       $image = $_POST['image'];
       $price = $_POST['price'];
       $category_id = $_POST['category_id'];
-      
+     
       $sql = "UPDATE Course SET title='$title', description='$description', venue_id='$venue_id', start_date='$start_date', image='$image', price='$price', category_id='$category_id' WHERE id=$cid";
 
       if (mysqli_query($con, $sql)) {
-
         header("refresh:10, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
         exit;
       } 
+
       else{
         echo "Error updating record: " . mysqli_error($con);
       }
+
     }
 }
 
@@ -205,7 +206,6 @@ function addNewCourse(mysqli $con){
 
     if (mysqli_query($con, $sql)){
       header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
-      exit; 
     } 
     else{
       echo "Error updating record: " . mysqli_error($con);
