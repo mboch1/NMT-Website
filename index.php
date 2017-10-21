@@ -123,7 +123,7 @@
                         <button id="filterSubmit" type="button" name="filter" class="btn btn-default" style="margin-top: 18px;">Filter Results</button>
                     </form>
                 </div>
-                <div id="courseDisplay" class="row"></div>
+            	<div id="courseDisplay" class="row"></div>
             </div>
             <div class="col-2"></div>
         </div>

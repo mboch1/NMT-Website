@@ -18,6 +18,8 @@
 
     $insertData = mysqli_query($con, $createBooking);
 
+    $sql = "UPDATE Course SET bookings='bookings'+1 WHERE id='$courseID'";
+    $updateData = mysqli_query($con, $sql);
 
     print "Course booking accepted!<br>";
     print "Redirecting...<br>";

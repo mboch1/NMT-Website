@@ -21,10 +21,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script src="jquery/clamp.js"></script>
-    <!-- Bootstrap Date-Picker Plugin -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-    <link rel="stylesheet" href="css/style.css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -39,33 +35,11 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                <table class='table table-bordered'>
-                    <tr>
-                        <th>Course ID</th>
-                        <th>Booked Users</th>
-                    </tr>
-                    <?php
-                        if(isset($_SESSION['username'])!=""){
-                        //load bookings from db:
-                        getBookings($con);
-                    ?>
-                    
-                    </tbody>
-                </table><br>
-                <table class='table table-bordered'>
-                    <tr>
-                        <th>Course ID</th>
-                        <th>Course Title</th>
-                        <th>Start Date</th>
-                        <th>City</th>
-                        <th>Start Date</th>
-                    </tr>
-                    <?php 
+                <?php
+                    if(isset($_SESSION['username'])!=""){
                         getCourseNames($con);
-                        }
-                        ob_end_flush();?>                    
-                    </tbody>
-                </table><br>
+                    }
+                    ob_end_flush();?>
             </div>
             <div class="col-2"></div>
         </div>
@@ -80,22 +54,5 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script>
-    $(document).ready(function(){
-      var date_input=$('input[name="date"]'); //our date input has the name "date"
-      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-      var options={
-        format: 'yyyy-mm-dd',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })
-
-    $(".card-text").each(function() {
-        $clamp(this, {clamp: 3});
-    });
-</script>
 </body>
 </html>

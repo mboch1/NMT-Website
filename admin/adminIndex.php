@@ -53,14 +53,13 @@ if($admin=="0")
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                <h2>Admin Functions:</h2>
-                <br>
+
                 <a href="adminCourseAdd.php" class="btn btn-default" role="button">Add New Course</a>
                 <a href="adminCourseEdit.php" class="btn btn-default" role="button">Edit or Remove Existing Courses</a>
                 <a href="adminVenueAdd.php" class="btn btn-default" role="button">Add New Venue</a>
                 <a href="adminVenueEdit.php" class="btn btn-default" role="button">Edit or Remove Existing Venues</a>
-                <br>
-                <br>
+                <a href="adminBookingsView.php" class="btn btn-default" role="button"> Bookings </a>
+
             </div>
             <div class="col-2"></div>
         </div>
