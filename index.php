@@ -139,7 +139,7 @@
 
 							// Display course
 							echo '<div class="col-lg-4 col-md-6 mb-4">
-			                    <div class="card card-custom">
+			                    <div class="card">
 			                        <a href="#"><img class="card-img-top" src="' . $row["image"] . '" alt=""></a>
 			                        <div class="card-body">
 			                          <h4 class="card-title">
