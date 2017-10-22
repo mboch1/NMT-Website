@@ -21,6 +21,17 @@
     $sql = "UPDATE Course SET bookings='bookings'+1 WHERE id='$courseID'";
     $updateData = mysqli_query($con, $sql);
 
+<<<<<<< HEAD
     // print "Course booking accepted!<br>";
     // print "Redirecting...<br>";
     header("refresh:3, url=http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] . "/../../index.php ");
+=======
+    print "Course booking accepted!<br>";
+    print "Redirecting...<br>";
+    header("refresh:3, url=http://localhost/NMT-Website/index.php ");
+    exit();
+?>
+
+
+
+>>>>>>> master

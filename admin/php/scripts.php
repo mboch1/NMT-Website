@@ -45,7 +45,7 @@ function updateCourse(mysqli $con){
       $sql = "UPDATE Course SET title='$courseTitle',description='$courseDesc',venue_id='$venueSelect',start_date='$startDate',price='$coursePrice',category_id='$selectCategory',imageName='$image' WHERE id=$cid";
 
       if (mysqli_query($con, $sql)) {
-        header("refresh:10, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
+        header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
         exit;
       }
       else{
@@ -88,7 +88,6 @@ function addNewCourse(mysqli $con){
     }
     else{
       echo "Error updating record: " . mysqli_error($con);
-      header("refresh:10, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
     }
   }
 }
@@ -118,12 +117,10 @@ function uploadImage(mysqli $con){
         }
         else{
           echo "Error updating record: " . mysqli_error($con);
-          header("refresh:10, url=http://localhost/NMT-Website/admin/adminImageUpload.php");
         }
       }
       else{
         echo "Error updating record: " . mysqli_error($con);
-        header("refresh:10, url=http://localhost/NMT-Website/admin/adminImageUpload.php");
       }
     }
   }
@@ -342,7 +339,7 @@ function removeAllBookings(mysqli $con, $courseID){
       // use wordwrap() if lines are longer than 70 characters
       $msg = wordwrap($msg,70);
       // send email
-      $headers = "From: webmaster@example.com" . "\r\n" . "CC: somebodyelse@example.com";
+      $headers = "From: webmaster@example.com";
       mail($email,"Course Cancelled",$msg,$headers);
 
       //once email was sent remove the booking from database
