@@ -47,7 +47,7 @@
                 if(isset($_SESSION['username'])!=""){
                 //register new course to db:
                 echo" <h3>Create New Venue:</h3><br>
-                <form action='".addNewVenue($con)."' method='post'>
+                <form "."action='".addNewVenue($con)."' method='post'>
                     <div class='form-group'>
                         <label for='vn'>City Name:</label>
                         <input type='text' class='form-control' name='vn' id='vn' placeholder='Edinburgh' required>
