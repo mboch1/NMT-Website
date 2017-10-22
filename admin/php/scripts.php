@@ -1,6 +1,6 @@
 <?php
-/* 
-  Author: Michal Bochenek 
+/*
+  Author: Michal Bochenek
   Date: 17/10/2017
   version 1
 */
@@ -15,7 +15,7 @@ function deactivateCourse(mysqli $con){
 
     if (mysqli_query($con, $sql)){
       header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
-    } 
+    }
   }
     if(isset($_POST['Reactivate'])){
 
@@ -26,12 +26,12 @@ function deactivateCourse(mysqli $con){
 
     if (mysqli_query($con, $sql)){
       header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
-    } 
+    }
   }
 }
 //UPDATE COURSE
 function updateCourse(mysqli $con){
-  
+
   if(isset($_POST['Update'])){
       $cid = $_POST['courseID'];
       $courseTitle = $_POST['courseTitle'];
@@ -40,8 +40,9 @@ function updateCourse(mysqli $con){
       $startDate = $_POST['startDate'];
       $coursePrice = $_POST['coursePrice'];
       $selectCategory = $_POST['selectCategory'];
+      $image = $_POST['courseImageName'];
 
-      $sql = "UPDATE Course SET title='$courseTitle',description='$courseDesc',venue_id='$venueSelect',start_date='$startDate',price='$coursePrice',category_id='$selectCategory' WHERE id=$cid";
+      $sql = "UPDATE Course SET title='$courseTitle',description='$courseDesc',venue_id='$venueSelect',start_date='$startDate',price='$coursePrice',category_id='$selectCategory',imageName='$image' WHERE id=$cid";
 
       if (mysqli_query($con, $sql)) {
         header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
@@ -61,9 +62,9 @@ function addNewCourse(mysqli $con){
     $venue_id = $_POST['venue_id'];
     $start_date = $_POST['start_date'];
     $price = $_POST['price'];
-    $category_id = $_POST['category_id'];    
-    $name = $_FILES['file']['name'];
-    $imageName = $name;
+    $category_id = $_POST['category_id'];
+    // $name = $_FILES['file']['name'];
+    $imageName = $_POST["imageFile"];
 
     $target_dir = "../uploaded/";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -80,11 +81,11 @@ function addNewCourse(mysqli $con){
       // Upload file
       move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
     }
-    
+
     $sql = "INSERT INTO Course (title, description, venue_id, start_date, price, category_id, imageName) VALUES ('$title','$description', '$venue_id', '$start_date', '$price', '$category_id', '$imageName')";
     if (mysqli_query($con, $sql)){
       header("refresh:10, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
-    } 
+    }
     else{
       echo "Error updating record: " . mysqli_error($con);
     }
@@ -107,13 +108,13 @@ function uploadImage(mysqli $con){
       // Insert record
       $sql = "DELETE * FROM images WHERE courseName=$courseName";
       if (mysqli_query($con, $sql)){
-        
+
         $query = "INSERT INTO images(name, courseName) VALUES('".$name."', '".$courseName."')";
         if (mysqli_query($con, $query)){
           // Upload file
           move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
           header("refresh:10, url=http://localhost/NMT-Website/admin/adminImageUpload.php");
-        } 
+        }
         else{
           echo "Error updating record: " . mysqli_error($con);
         }
@@ -181,7 +182,7 @@ function getVenues(mysqli $con){
                   <button type="submit" name="Delete" class="btn btn-default">Delete</button>
                 </form>
                 </div>
-              </div>    
+              </div>
             </form>';
     }
 }
@@ -196,8 +197,8 @@ function deleteVenue(mysqli $con, $id){
 
     if (mysqli_query($con, $sql)){
       header("refresh:0, url=http://localhost/NMT-Website/admin/adminVenueEdit.php");
-      exit; 
-    } 
+      exit;
+    }
     else{
       echo "Error updating record: " . mysqli_error($con);
     }
@@ -217,8 +218,8 @@ function updateVenues(mysqli $con, $id){
 
     if (mysqli_query($con, $sql)) {
       header("refresh:0, url=http://localhost/NMT-Website/admin/adminVenueEdit.php");
-      exit; 
-    } 
+      exit;
+    }
     else{
       echo "Error updating record: " . mysqli_error($con);
     }
@@ -236,8 +237,8 @@ function addNewVenue(mysqli $con){
 
     if (mysqli_query($con, $sql)){
       header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
-      exit; 
-    } 
+      exit;
+    }
     else{
       echo "Error updating record: " . mysqli_error($con);
     }
@@ -273,7 +274,7 @@ function getCourseNames(mysqli $con){
     $bookings = $row['bookings'];
     $isActive = $row['isActive'];
     $setText = "True";
-    $start_date = date_create($row['start_date']); 
+    $start_date = date_create($row['start_date']);
     $diff = $start_date->diff($current_date);
 
     if($isActive==0){
@@ -313,15 +314,15 @@ function getCourseNames(mysqli $con){
 
 //if course is cancelled send message to all users subscribed to it
 function cancelCourse(mysqli $con){
-    if(isset($_POST['Cancel'])){ 
+    if(isset($_POST['Cancel'])){
       $id = $_POST['courseID'];
-      removeAllBookings($con, $id);   
+      removeAllBookings($con, $id);
     }
 }
 
-//remove booking 
+//remove booking
 function removeAllBookings(mysqli $con, $courseID){
-  
+
   $sql = "SELECT Booking.user_id, Booking.course_id, user.email FROM Booking INNER JOIN Users user ON Booking.user_id = user.id";
 
   $result = mysqli_query($con,$sql);
@@ -340,14 +341,14 @@ function removeAllBookings(mysqli $con, $courseID){
       // send email
       $headers = "From: webmaster@example.com";
       mail($email,"Course Cancelled",$msg,$headers);
-      
+
       //once email was sent remove the booking from database
-      $sql2 = "DELETE FROM Booking WHERE user_id='$userID' AND course_id='$courseID'";    
-      if (mysqli_query($con, $sql2)) {  
-      } 
+      $sql2 = "DELETE FROM Booking WHERE user_id='$userID' AND course_id='$courseID'";
+      if (mysqli_query($con, $sql2)) {
+      }
       else{
         echo "Error updating record: " . mysqli_error($con);
-      } 
+      }
     }
   }
   //set course inactive so that no user can book it again
@@ -355,8 +356,8 @@ function removeAllBookings(mysqli $con, $courseID){
   $sql3 = "UPDATE Course SET isActive ='$deactiv', bookings='$deactiv' WHERE id=$courseID";
   if (mysqli_query($con, $sql3)) {
     header("refresh:5, url=http://localhost/NMT-Website/admin/adminBookingsView.php");
-    exit(); 
-  } 
+    exit();
+  }
   else{
     echo "Error updating record: " . mysqli_error($con);
   }
