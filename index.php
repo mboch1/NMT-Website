@@ -45,13 +45,13 @@
                   </ol>
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <img class="d-block w-100" style='height: 100%; width: 100%; object-fit: contain' src="http://via.placeholder.com/800x150" alt="First slide">
+                      <img class="d-block w-100" style='height: 100%; width: 100%; object-fit: contain' src="http://eduncovered.com/wp-content/uploads/2014/01/aberdeen-skyline.jpg" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                      <img class="d-block w-100" style='height: 100%; width: 100%; object-fit: contain' src="http://via.placeholder.com/800x150" alt="First slide">
+                      <img class="d-block w-100" style='height: 100%; width: 100%; object-fit: contain' src="http://open.glasgow.gov.uk/content/uploads/2013/08/Glasgow.png" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                      <img class="d-block w-100" style='height: 100%; width: 100%; object-fit: contain' src="http://via.placeholder.com/800x150" alt="First slide">
+                      <img class="d-block w-100" style='height: 100%; width: 100%; object-fit: contain' src="https://c1.staticflickr.com/2/1203/1190479097_f2ed39e1e4_b.jpg" alt="First slide">
                     </div>
                   </div>
                   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -188,7 +188,7 @@
 						course: $("#course").val(),
 						date: date}));';
 				}
-				
+
 			 ?>
 		}
 
