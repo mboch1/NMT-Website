@@ -54,6 +54,24 @@ function updateCourse(mysqli $con){
   }
 }
 
+//DELETE COURSE
+function deleteCourse(mysqli $con, $id){
+    if(isset($_POST['Delete'])){
+
+        $cid = $_POST['courseID'];
+
+        $sql = "DELETE FROM Course WHERE id = $cid";
+
+        if (mysqli_query($con, $sql)){
+            header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseDelete.php");
+            exit;
+        }
+        else{
+            echo "Error updating record: " . mysqli_error($con);
+        }
+    }
+}
+
 //ADD NEW COURSE
 function addNewCourse(mysqli $con){
   if(isset($_POST['addNew'])){

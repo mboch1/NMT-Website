@@ -54,6 +54,9 @@ echo '
                               <a href="adminCourseEdit.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"> Edit Course</span></a>
                             </a>
                             <a class="dropdown-item" href="#">
+                              <a href="adminCourseDelete.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"> Delete Course</span></a>
+                            </a>
+                            <a class="dropdown-item" href="#">
                               <a href="adminImageUpload.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"> Change Image</span></a>
                             </a>
                           </div>
