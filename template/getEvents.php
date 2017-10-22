@@ -6,26 +6,25 @@
     $loc = ($_GET["loc"] != "" ? (int)$_GET["loc"] : "%");
     $course = ($_GET["course"] != "" ? (int)$_GET["course"] : "%");
     $date = ($_GET["date"] != "" ? date('Y-m-d', $_GET["date"]) : "%");
+    $loggedIn = ($_GET["loggedIn"] == 1 ? true : false);
 
     // Fetch courses from database
     $sql = "SELECT * FROM Course WHERE venue_id LIKE '" . $loc . "' AND category_id LIKE '" . $course . "' AND start_date LIKE '" . $date . "'";
     $res = mysqli_query($con, $sql);
-
-    echo mysqli_error($con);
 
     // Display courses
     while ($row = mysqli_fetch_assoc($res)) {
 
         $date_formated = date('d-m-Y', strtotime( $row['start_date'] ));
         // If course doesn't have an image, give it a placeholder
-        if ($row["image"] == "") {
-            $row["image"] = "http://placehold.it/700xx400";
+        if ($row["imageName"] == "") {
+            $row["imageName"] = "https://i.imgur.com/0ejY8kU.png";
         }
 
         // Display course
         $display .= '<div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
-                <a href="#"><img class="card-img-top" src="' . $row["image"] . '" alt=""></a>
+                <img class="card-img-top" src="' . $row["imageName"] . '" alt="">
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">' . $row["title"] . '</a>
@@ -35,7 +34,7 @@
                   <p class="card-text">' . $row["description"] . '</p>
                 </div>
                 <div class="card-footer">';
-            if(isset($_SESSION['username'])!=""){
+            if($loggedIn){
                 $display .= ' <div class="text-center">
                         <a href="php/setBooking.php?course_id=' . $row["id"]. '" class="btn btn-default" role="button">Book Course</a>
                     </div>';

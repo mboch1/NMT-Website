@@ -15,7 +15,7 @@ echo '
     <div class="row">
         <div class="col-2"></div>
         <div class="col">
-            <a href="https://placeholder.com"><img style="width: 100%; object-fit: contain" src="http://via.placeholder.com/800x150"></a><br>
+            <img style="margin-left: 15px; object-fit: contain" src="https://i.imgur.com/0ejY8kU.png"><br>
         </div>
         <div class="col-2"></div>
     </div>
