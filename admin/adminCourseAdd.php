@@ -48,7 +48,7 @@
                 //register new course to db:
                 echo '<form action="'.addNewCourse($con).'" method="post" enctype="multipart/form-data">
                           <div class="form-group">
-                            <label for="title">Title:</label>                            
+                            <label for="title">Title:</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="ex.PRINCE2" required>
                           </div>
                           <div class="form-group">
@@ -75,16 +75,16 @@
                             <input data-provide="datepicker" class="datepicker" id="start_date" name="start_date" data-date-format="yyyy-mm-dd" required>
                           </div>
                           <div class="form-group">
-                            <label class="filter-label" for="imageFile">Image:</label>
-                            <input id="imageFile" name="file" class="input-file" type="file" accept="image/*">
+                            <label class="filter-label" for="imageFile">Image URL:</label>
+                            <input type="text" class="form-control" id="imageFile" name="imageFile">
                           </div>
                           <div class="form-group">
                             <label class="filter-label" for="price">Price:</label>
                             <input class="form-control" type="value" name="price" placeholder="100" id="price" required>
-                          </div>              
+                          </div>
                           <div class="form-group">
                             <label class="filter-label" for="category_id">Select Category Title:</label>
-                            <select class="form-control input-sm filter-select" id="category_id" name="category_id">';     
+                            <select class="form-control input-sm filter-select" id="category_id" name="category_id">';
                               // Get titles from db
                               $sql = "SELECT * FROM Category";
                               $res = mysqli_query($con, $sql);
@@ -99,7 +99,7 @@
                           </div>
                           <div class="form-group">
                             <button type="submit" name="addNew" class="btn btn-default">Submit</button>
-                          </div>    
+                          </div>
                         </form>';
                         }
                ob_end_flush();?>

@@ -9,7 +9,7 @@
     if(isset($_POST['Selected'])){
 
         $sid = $_POST['courseList'];
-        $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");        
+        $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");
         $row = mysqli_fetch_array($result);
         $courseID = $row['id'];
         $courseTitle = $row['title'];
@@ -67,14 +67,14 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="control-label" for="courseTitle">Course Title:</label>  
+                      <label class="control-label" for="courseTitle">Course Title:</label>
                       <input id="courseTitle" <?php echo 'value="'.$courseTitle.'"';?> name="courseTitle" class="form-control input-md" required="" type="text">
-                      <span class="help-block">Name your course here. Use unique name for better recognition.</span>  
+                      <span class="help-block">Name your course here. Use unique name for better recognition.</span>
                     </div>
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="control-label" for="courseImageName">Course Image Name:</label>
-                      <input id="courseImageName" <?php echo 'value="'.$courseImageName.'"';?> name="courseImageName" class="form-control input-md" readonly="" type="text"> 
+                      <label class="control-label" for="courseImageName">Course Image URL:</label>
+                      <input id="courseImageName" <?php echo 'value="'.$courseImageName.'"';?> name="courseImageName" class="form-control input-md" type="text">
                     </div>
                     <!-- Textarea -->
                     <div class="form-group">
@@ -84,9 +84,9 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="control-label" for="coursePrice">Course Price</label>  
+                      <label class="control-label" for="coursePrice">Course Price</label>
                       <input id="coursePrice" <?php echo 'value="'.$coursePrice.'"';?> name="coursePrice" class="form-control input-md" required="" type="value">
-                      <span class="help-block">Use number only</span>  
+                      <span class="help-block">Use number only</span>
                     </div>
                     <!-- Date input-->
                     <div class="form-group">
