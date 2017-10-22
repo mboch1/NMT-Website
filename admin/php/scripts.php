@@ -41,7 +41,7 @@ function updateCourse(mysqli $con){
       $coursePrice = $_POST['coursePrice'];
       $selectCategory = $_POST['selectCategory'];
 
-      $sql = "UPDATE Course SET title='".$courseTitle."', description='".$courseDesc."', venue_id='".$venueSelect."', start_date='".$startDate."', price='".$coursePrice."', category_id='".$selectCategory."' WHERE id=".$cid."";
+      $sql = "UPDATE Course SET title='$courseTitle',description='$courseDesc',venue_id='$venueSelect',start_date='$startDate',price='$coursePrice',category_id='$selectCategory' WHERE id=$cid";
 
       if (mysqli_query($con, $sql)) {
         header("refresh:10, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
