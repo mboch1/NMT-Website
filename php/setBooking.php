@@ -24,7 +24,8 @@
     print "Course booking accepted!<br>";
     print "Redirecting...<br>";
     header("refresh:3, url=http://localhost/NMT-Website/index.php ");
-
+    exit();
+?>
 
 
 
