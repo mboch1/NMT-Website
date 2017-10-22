@@ -40,7 +40,7 @@
             <div class="col-2"></div>
             <div class="col">
                 <?php
-                    if(isset($_SESSION['username'])!=""){
+                    if(isset($_SESSION['isAdmin'])==1){
                         getCourseNames($con);
                     }
                     ob_end_flush();?>

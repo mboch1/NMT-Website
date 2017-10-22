@@ -8,7 +8,6 @@
     if(isset($_SESSION['username'])=="" || $_SESSION['isAdmin']==0){
         header("Location: adminLogin.php");
     }
-
 ?>
 <html lang="en">
 <head>

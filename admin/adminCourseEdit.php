@@ -44,7 +44,8 @@
             <div class="col-2"></div>
             <div class="col">
         <?php
-        echo '<form action="adminCourseEditor.php" method="post">
+        if(isset($_SESSION['isAdmin'])==1){
+          echo '<form action="adminCourseEditor.php" method="post">
               <div class="form-group filter-option">
               <label class="filter-label" for="courseList">Select Course To Edit:</label>
                 <select class="form-control input-sm filter-select" name="courseList" id="courseList">';
@@ -72,6 +73,7 @@
                   <button type="submit" name="Selected" class="btn btn-default">Select</button>
               </div>
             </form>'; 
+          }
         ob_end_flush();?>
             </div>
             <div class="col-2"></div>

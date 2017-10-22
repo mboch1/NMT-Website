@@ -44,7 +44,7 @@
             <div class="col-2"></div>
             <div class="col">
             <?php
-                if(isset($_SESSION['username'])!=""){
+                if(isset($_SESSION['isAdmin'])==1){
                 //register new course to db:
                 echo" <h3>Create New Venue:</h3><br>
                 <form "."action='".addNewVenue($con)."' method='post'>

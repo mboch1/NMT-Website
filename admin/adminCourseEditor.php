@@ -1,29 +1,28 @@
 <?php
     ob_start();
 	require_once __DIR__ . '/../php/db.php';
-    include('php/scripts.php');
+  include('php/scripts.php');
 	session_start();
     global $con;
 
+    if(isset($_SESSION['username'])=="" || $_SESSION['isAdmin']==0){
+        header("Location: adminLogin.php");
+    }
     //load data to be placed in form:
     if(isset($_POST['Selected'])){
 
-        $sid = $_POST['courseList'];
-        $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");        
-        $row = mysqli_fetch_array($result);
-        $courseID = $row['id'];
-        $courseTitle = $row['title'];
-        $coursedDesc = $row['description'];
-        $courseVenue = $row['venue_id'];
-        $courseStart = $row['start_date'];
-        $coursePrice = $row['price'];
-        $courseCategoryID = $row['category_id'];
-        $courseImageName = $row['imageName'];
-        $isActive = $row['isActive'];
-    }
-
-    if(isset($_SESSION['username'])=="" || $_SESSION['isAdmin']==0){
-        header("Location: adminLogin.php");
+      $sid = $_POST['courseList'];
+      $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");        
+      $row = mysqli_fetch_array($result);
+      $courseID = $row['id'];
+      $courseTitle = $row['title'];
+      $coursedDesc = $row['description'];
+      $courseVenue = $row['venue_id'];
+      $courseStart = $row['start_date'];
+      $coursePrice = $row['price'];
+      $courseCategoryID = $row['category_id'];
+      $courseImageName = $row['imageName'];
+      $isActive = $row['isActive'];
     }
 ?>
 <html lang="en">
@@ -60,7 +59,10 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                <form class="form-horizontal" action=<?php echo '"'.updateCourse($con).'"';?> method="post">
+              <?php 
+              if(isset($_SESSION['isAdmin'])==1){
+                echo'
+                  <form class="form-horizontal" action=<?php echo '"'.updateCourse($con).'"';?> method="post">
                     <fieldset>
                     <!-- Form Name -->
                     <legend>Course Editor</legend>
@@ -132,7 +134,8 @@
                         <button type="submit" name="Update" class="btn btn-default">Update</button>
                     </div>
                     </fieldset>
-                </form>
+                </form>'
+                ;}?>
             </div>
             <div class="col-2"></div>
         </div>

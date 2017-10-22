@@ -42,7 +42,10 @@
     <div class="container">
         <div class="row">
             <div class="col-2"></div>
-            <div class="col">              
+            <div class="col">
+            <?php 
+            if(isset($_SESSION['isAdmin'])==1){
+                echo '              
                 <form class="form-horizontal" action=<?php echo uploadImage($con);?> method="post" enctype="multipart/form-data">
                   <legend>Update Course Image</legend>  
                      <div class="form-group filter-option">
@@ -70,6 +73,7 @@
                         </div>
                       </div>   
                   </form>
+                  '};?>
             </div>
             <div class="col-2"></div>
         </div>
