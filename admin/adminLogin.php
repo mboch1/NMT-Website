@@ -1,7 +1,6 @@
 <?php
     ob_start();
 	require_once __DIR__ . '/../php/db.php';
-	session_start();
     global $con;
 
     if(isset($_SESSION['username'])!=""){
