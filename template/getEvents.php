@@ -17,14 +17,14 @@
 
         $date_formated = date('d-m-Y', strtotime( $row['start_date'] ));
         // If course doesn't have an image, give it a placeholder
-        if ($row["image"] == "") {
-            $row["image"] = "http://placehold.it/700xx400";
+        if ($row["imageName"] == "") {
+            $row["imageName"] = "https://i.imgur.com/0ejY8kU.png";
         }
 
         // Display course
         $display .= '<div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
-                <a href="#"><img class="card-img-top" src="' . $row["image"] . '" alt=""></a>
+                <a href="#"><img class="card-img-top" src="' . $row["imageName"] . '" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">' . $row["title"] . '</a>
