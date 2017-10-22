@@ -1,4 +1,5 @@
 <?php
+
 	require_once('php/db.php');
 	session_start();
 ?>
