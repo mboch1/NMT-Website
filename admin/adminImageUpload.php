@@ -19,7 +19,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>NMT Admin Course to Edit Selection</title>
+    <title>NMT Admin  Image Uploader</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -42,43 +42,41 @@
     <div class="container">
         <div class="row">
             <div class="col-2"></div>
-            <div class="col">
-        <?php
-        echo '<form action="adminCourseEditor.php" method="post">
-              <div class="form-group filter-option">
-              <label class="filter-label" for="courseList">Select Course To Edit:</label>
-                <select class="form-control input-sm filter-select" name="courseList" id="courseList">';
-                  // Get cities from db
-                  $sql = "SELECT * FROM Course";
-                  $res = mysqli_query($con, $sql);
-                  // Loop through cities
-                  while ($row = mysqli_fetch_assoc($res)){
-                  // Display city option
-                    $id = $row['id'];
-                    $title = $row['title'];
-                    $start_date = $row['start_date'];
-                    $isActive = $row['isActive'];
-                    
-                    if($isActive==0){
-                      echo '<option value="'.$id.'">INACTIVE'.$title.' '.$start_date.'</option>';
-                    }
-                    else{
-                      echo '<option value="'.$id.'">'.$title.' '.$start_date.'</option>';
-                    }
-                  }
-                echo '</select>
-              </div>
-              <div class="form-group filter-option"> 
-                  <button type="submit" name="Selected" class="btn btn-default">Select</button>
-              </div>
-            </form>'; 
-        ob_end_flush();?>
+            <div class="col">              
+                <form class="form-horizontal" action=<?php echo uploadImage($con);?> method="post" enctype="multipart/form-data">
+                  <legend>Update Course Image</legend>  
+                     <div class="form-group filter-option">
+                        <input class="form-control filter-option" type="hidden" name="courseID" value="'.$id.'">
+                        <!-- File Button --> 
+                        <div class="form-group filter-select">
+                          <label class="filter-label" for="name">Select Image to Upload</label>
+                          <input id="name" name="name" type="file" accept="image/*">
+                        </div><br>
+                          <!-- Select -->
+                        <div class="form-group filter-option">
+                            <label class="filter-label" for="courseName">Select Course Title</label>
+                            <select id="courseName" name="courseName" class="input-sm filter-select">
+                              <?php // Get titles from db
+                                $sql = "SELECT * FROM Course";
+                                $res = mysqli_query($con, $sql);
+                                // Loop through titles
+                                while ($row = mysqli_fetch_assoc($res)){
+                                // Display title option
+                                  $title=$row['title'];
+                                  echo '<option value="'.$title.'">'.$title.'</option>';
+                                }?>
+                            </select>
+                            <button type="submit" name="UploadImage" class="btn btn-default">Upload</button>
+                        </div>
+                      </div>   
+                  </form>
             </div>
             <div class="col-2"></div>
         </div>
     </div>
     <!--  end of middle section -->
-    <?php include(__DIR__ . "/template/footer.php") ?>
+    <?php include(__DIR__ . "/template/footer.php");
+    ob_end_flush();?>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -87,5 +85,22 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'yyyy-mm-dd',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+
+    $(".card-text").each(function() {
+        $clamp(this, {clamp: 3});
+    });
+</script>
 </body>
 </html>

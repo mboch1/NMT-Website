@@ -4,138 +4,6 @@
   Date: 17/10/2017
   version 1
 */
-//GET COURSES LIST
-function getCourseList(mysqli $con){
-  
-  echo '<form action="'.getSelectedCourse($con).'" method="post">
-          <div class="form group filter-option">
-          <label class="filter-label" for="courseList">Select Course To Edit:</label>
-            <select class="form-control input-sm filter-select" name="courseList" id="courseList">';
-              // Get cities from db
-              $sql = "SELECT * FROM Course";
-              $res = mysqli_query($con, $sql);
-              // Loop through cities
-              while ($row = mysqli_fetch_assoc($res)){
-              // Display city option
-                $id = $row['id'];
-                $title = $row['title'];
-                $start_date = $row['start_date'];
-                $isActive = $row['isActive'];
-                
-                if($isActive==0){
-                  echo '<option value="'.$id.'">INACTIVE'.$title.' '.$start_date.'</option>';
-                }
-                else{
-                  echo '<option value="'.$id.'">'.$title.' '.$start_date.'</option>';
-                }
-                
-              }
-            echo '</select>
-          </div>
-          <div class="form-group filter-option"> 
-              <button type="submit" name="Selected" class="btn btn-default">Select</button>
-          </div>
-        </form><br><br>';
-}
-
-//COURSE EDITOR
-function getSelectedCourse(mysqli $con){
-    
-  if(isset($_POST['Selected'])){
-
-    $sid = $_POST['courseList'];
-
-    $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");
-
-    $row = mysqli_fetch_array($result);
-
-      $id = $row['id'];
-      $title = $row['title'];
-      $description = $row['description'];
-      $venue_id = $row['venue_id'];
-      $start_date = $row['start_date'];
-      $image = $row['image'];
-      $price = $row['price'];
-      $category_id = $row['category_id'];
-      $isActive = $row['isActive'];
-
-      echo '<form action="'.updateCourses($con).'" method="post">
-              <div class="form-group filter-option">
-                <label class="filter-label" for="cid">Course ID:</label>
-                  <input type="value"  class="form-control" name="cid" id="cid" value="'.$id.'" readonly>
-              </div>
-              <div class="form-group filter-option">
-                <label class="filter-label" for="title">Title:</label>
-                  <input type="text" class="form-control" id="title" name="title" value="'.$title.'" required>
-              </div>
-              <div class="form-group filter-option">
-                <label class="filter-label" for="description">Description:</label>
-                  <textarea class="form-control" rows="4" name="description" id="description">'.$description.'</textarea>
-              </div>
-              <div class="form-group filter-option">
-                <label class="filter-label" for="venue_id">City:</label>
-                  <select class="form-control input-sm filter-select" name="venue_id" id="venue_id">';
-                  // Get cities from db
-                  $sql = "SELECT * FROM Venue";
-                  $res = mysqli_query($con, $sql);
-                  // Loop through cities
-                  while ($row = mysqli_fetch_assoc($res)){
-                  // Display city option
-                    $id = $row['id'];
-                    $city = $row['city'];
-                    echo '<option value="'.$id.'">'.$city.'</option>';
-                  }
-            echo '</select>
-              </div>
-              <div class="form-group filter-option">
-                <label class="filter-label" for="start_date">Start Date:</label>
-                  <input data-provide="datepicker" class="datepicker" name="start_date" id="start_date" value="'.$start_date.'" data-date-format="yyyy-mm-dd" required>
-              </div>
-              <div class="form-group filter-option">
-                <label class="filter-label" for="image">Image:</label>
-                  <input class="form-control" type="text" name="image" value="'.$image.'" id="image" required>
-              </div>
-              <div class="form-group filter-option">
-                <label class="filter-label" for="price">Price:</label>
-                  <input class="form-control" type="value" name="price" value="'.$price.'" id="price" required>
-              </div>
-              <div class="form-group filter-option">
-                <label class="filter-label" for="category_id">Category:</label>
-                  <select class="form-control input-md filter-select" name="category_id" id="category_id">';
-                  // Get titles from db
-                  $sql = "SELECT * FROM Category";
-                  $res = mysqli_query($con, $sql);
-                  // Loop through titles
-                  while ($row = mysqli_fetch_assoc($res)){
-                  // Display title option
-                    $id=$row['id'];
-                    $title=$row['title'];
-                    echo '<option value="'.$id.'">'.$title.'</option>';
-                  }
-            echo '</select>
-              </div>
-                <div class="form-group filter-option">
-                  <button type="submit" name="UpdateCourse" class="btn btn-default">Update</button>
-                </div>
-              </form>
-                <div>
-                  <form action="'.deactivateCourse($con).'" method="post">
-                    <div class="form-group filter-option">
-                      <input type="hidden" name="courseID" value="'.$id.'">
-                  ';
-                  if($isActive == 1){
-                      echo '<button type="submit" name="Deactivate" class="btn btn-default">Deactivate</button>';
-                  }
-                  else{
-                    echo '<button type="submit" name="Reactvate" class="btn btn-default">Reactivate</button>';
-                  }  
-                    echo'
-                    </div>   
-                  </form>
-                  </div>';
-  }
-}
-
 //DELETE COURSE
 function deactivateCourse(mysqli $con){
   if(isset($_POST['Deactivate'])){
@@ -161,32 +29,28 @@ function deactivateCourse(mysqli $con){
     } 
   }
 }
-
 //UPDATE COURSE
-function updateCourses(mysqli $con){
+function updateCourse(mysqli $con){
   
-  if(isset($_POST['UpdateCourse'])){
-      $cid = $_POST['cid'];
-      $title = $_POST['title'];
-      $description = $_POST['description'];
-      $venue_id = $_POST['venue_id'];
-      $start_date = $_POST['start_date'];
-      $image = $_POST['image'];
-      $price = $_POST['price'];
-      $category_id = $_POST['category_id'];
-     
-      $sql = "UPDATE Course SET title='$title', description='$description', venue_id='$venue_id', start_date='$start_date', image='$image', price='$price', category_id='$category_id' WHERE id=$cid";
+  if(isset($_POST['Update'])){
+      $cid = $_POST['courseID'];
+      $courseTitle = $_POST['courseTitle'];
+      $courseDesc = $_POST['courseDesc'];
+      $venueSelect = $_POST['venueSelect'];
+      $startDate = $_POST['startDate'];
+      $coursePrice = $_POST['coursePrice'];
+      $selectCategory = $_POST['selectCategory'];
+
+      $sql = "UPDATE Course SET title='$courseTitle', description='$courseDesc', venue_id='$venueSelect', start_date='$startDate', price='$coursePrice', category_id='$selectCategory' WHERE id=$cid";
 
       if (mysqli_query($con, $sql)) {
         header("refresh:10, url=http://localhost/NMT-Website/admin/adminCourseEdit.php");
         exit;
-      } 
-
+      }
       else{
         echo "Error updating record: " . mysqli_error($con);
       }
-
-    }
+  }
 }
 
 //ADD NEW COURSE
@@ -196,23 +60,87 @@ function addNewCourse(mysqli $con){
     $description = $_POST['description'];
     $venue_id = $_POST['venue_id'];
     $start_date = $_POST['start_date'];
-    //convert date:
-    //$con_date = date('Y-m-d', strtotime($start_date));
-    $image = $_POST['image'];
     $price = $_POST['price'];
-    $category_id = $_POST['category_id'];
+    $category_id = $_POST['category_id'];    
+    $name = $_FILES['file']['name'];
+    $imageName = $name;
 
-    $sql = "INSERT INTO Course (title, description, venue_id, start_date, image, price, category_id) VALUES ('$title','$description', '$venue_id', '$start_date', '$image', '$price', '$category_id')";
-
+    $target_dir = "../uploaded/";
+    $target_file = $target_dir . basename($_FILES["file"]["name"]);
+    // Select file type
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    $price = $_POST['price'];
+    // Valid file extensions
+    $extensions_arr = array("jpg","jpeg","png","gif");
+    // Check extension
+    if( in_array($imageFileType,$extensions_arr) ){
+      // Insert record
+      $query = "INSERT INTO images(name, courseTitle) VALUES('".$name."', '".$title."')";
+      mysqli_query($con,$query);
+      // Upload file
+      move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
+    }
+    
+    $sql = "INSERT INTO Course (title, description, venue_id, start_date, price, category_id, imageName) VALUES ('$title','$description', '$venue_id', '$start_date', '$price', '$category_id', '$imageName')";
     if (mysqli_query($con, $sql)){
-      header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
+      header("refresh:10, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
     } 
     else{
       echo "Error updating record: " . mysqli_error($con);
+      header("refresh:10, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
     }
   }
 }
 
+function uploadImage(mysqli $con){
+  if(isset($_POST['UploadImage'])){
+    $courseName = $_POST['courseName'];
+    $name = $_FILES['file']['name'];
+    $imageName = $name;
+    $target_dir = "../uploaded/";
+    $target_file = $target_dir . basename($_FILES["file"]["name"]);
+    // Select file type
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    // Valid file extensions
+    $extensions_arr = array("jpg","jpeg","png","gif");
+    // Check extension
+    if( in_array($imageFileType,$extensions_arr) ){
+      // Insert record
+      $sql = "DELETE * FROM images WHERE courseName=$courseName";
+      if (mysqli_query($con, $sql)){
+        
+        $query = "INSERT INTO images(name, courseName) VALUES('".$name."', '".$courseName."')";
+        if (mysqli_query($con, $query)){
+          // Upload file
+          move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
+          header("refresh:10, url=http://localhost/NMT-Website/admin/adminImageUpload.php");
+        } 
+        else{
+          echo "Error updating record: " . mysqli_error($con);
+          header("refresh:10, url=http://localhost/NMT-Website/admin/adminImageUpload.php");
+        }
+      }
+      else{
+        echo "Error updating record: " . mysqli_error($con);
+        header("refresh:10, url=http://localhost/NMT-Website/admin/adminImageUpload.php");
+      }
+    }
+  }
+}
+//retrive image name
+function getImageNames(mysqli $con, $courseTitle){
+  $sql = "SELECT * FROM images WHERE courseTitle=$courseTitle";
+  $result = mysqli_query($con,$sql);
+  $row = mysqli_fetch_array($result);
+
+  return $row['name'];
+}
+//removes image first from db
+function removeImage(mysqli $con, $courseName){
+  $sql = "DELETE * FROM images WHERE courseName=$courseName";
+  $result = mysqli_query($con,$sql);
+  $row = mysqli_fetch_array($result);
+}
 //VENUE EDITOR (update 1 venue at a time)
 function getVenues(mysqli $con){
 

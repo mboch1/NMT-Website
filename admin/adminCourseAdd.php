@@ -46,7 +46,7 @@
             <?php
                 if(isset($_SESSION['username'])!=""){
                 //register new course to db:
-                echo '<form action="'.addNewCourse($con).'" method="post">
+                echo '<form action="'.addNewCourse($con).'" method="post" enctype="multipart/form-data">
                           <div class="form-group">
                             <label for="title">Title:</label>                            
                             <input type="text" class="form-control" id="title" name="title" placeholder="ex.PRINCE2" required>
@@ -75,8 +75,8 @@
                             <input data-provide="datepicker" class="datepicker" id="start_date" name="start_date" data-date-format="yyyy-mm-dd" required>
                           </div>
                           <div class="form-group">
-                            <label class="filter-label" for="image">Image:</label>
-                            <input class="form-control" type="text" name="image" placeholder="image_name" id="image" required>
+                            <label class="filter-label" for="imageFile">Image:</label>
+                            <input id="imageFile" name="file" class="input-file" type="file" accept="image/*">
                           </div>
                           <div class="form-group">
                             <label class="filter-label" for="price">Price:</label>
@@ -84,7 +84,7 @@
                           </div>              
                           <div class="form-group">
                             <label class="filter-label" for="category_id">Select Category Title:</label>
-                            <select class="form-control input-sm filter-select" id="category_id" name="category_id">';                 
+                            <select class="form-control input-sm filter-select" id="category_id" name="category_id">';     
                               // Get titles from db
                               $sql = "SELECT * FROM Category";
                               $res = mysqli_query($con, $sql);

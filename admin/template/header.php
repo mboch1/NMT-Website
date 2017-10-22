@@ -53,6 +53,9 @@ echo '
                             <a class="dropdown-item" href="#">
                               <a href="adminCourseEdit.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"> Edit Course</span></a>
                             </a>
+                            <a class="dropdown-item" href="#">
+                              <a href="adminImageUpload.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"> Change Image</span></a>
+                            </a>
                           </div>
                       </li>
                       <li class="nav-item dropdown">
@@ -67,10 +70,10 @@ echo '
                           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-inbox"> Venues</span></a>
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">
-                              <a href="adminCourseAdd.php" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-right"> Add Course</span></a>
+                              <a href="adminVenueAdd.php" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-right"> Add Venue</span></a>
                             </a>
                             <a class="dropdown-item" href="#">
-                              <a href="adminCourseEdit.php" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-right"> Edit Course</span></a>
+                              <a href="adminVenueEdit.php" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-right"> Edit Venue</span></a>
                             </a>
                           </div>
                       </li>
