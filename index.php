@@ -1,4 +1,5 @@
 <?php
+
 	require_once('php/db.php');
 	session_start();
 ?>
@@ -173,10 +174,22 @@
 				date = momentDate.toString();
 			}
 
-			$("#courseDisplay").load("template/getEvents.php?" + $.param({
-				loc: $("#city").val(),
-				course: $("#course").val(),
-				date: date}));
+			<?php
+
+				if (isset($_SESSION['username']) != "") {
+					echo '$("#courseDisplay").load("template/getEvents.php?" + $.param({
+						loc: $("#city").val(),
+						course: $("#course").val(),
+						date: date,
+						loggedIn: 1}));';
+				} else {
+					echo '$("#courseDisplay").load("template/getEvents.php?" + $.param({
+						loc: $("#city").val(),
+						course: $("#course").val(),
+						date: date}));';
+				}
+				
+			 ?>
 		}
 
     </script>

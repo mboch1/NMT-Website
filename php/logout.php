@@ -4,6 +4,6 @@
 	require_once('db.php');
 	session_start();
 	unset($_SESSION['username'], $_SESSION['password']);
-	header("refresh:0, url=http://localhost/NMT-Website/index.php ");
+	header("refresh:0, url=http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] . "/../../index.php ");
 	exit();
 ?>

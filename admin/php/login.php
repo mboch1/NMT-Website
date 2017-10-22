@@ -5,7 +5,9 @@
  * Time: 13:58
  */
 	require_once __DIR__ . '/../../php/db.php';
-	session_start(['cookie_lifetime' => 86400]); // Starting Session, cookie set to 1 day
+	session_set_cookie_params(86400, "/");
+	session_start(); // Starting Session, cookie set to 1 day
+	$baseURL = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 
 	global $con;
 
@@ -33,18 +35,18 @@
                 $_SESSION['username'] = $username; // Start Session
                 $_SESSION['password'] = $password;
                 $_SESSION['isAdmin'] = 1;
-                header("refresh:0; url=http://localhost/NMT-website/admin/adminIndex.php");
+                header("refresh:0; url=http://" . $baseURL . "/../../adminIndex.php");
             }
             else{
                 echo "Login not recognized.";
                 echo "Redirecting...";
-                header("refresh:6; url=http://localhost/NMT-website/adminLogin.php");
+                header("refresh:6; url=http://" . $baseURL . "/../../adminLogin.php");
             }
         }
         else{
             echo "Login/Password doesn't exist or unknown error has occured.";
             echo "Redirecting...";
-            header("refresh:6; url=http://localhost/NMT-website/adminLogin.php");
+            header("refresh:6; url=http://" . $baseURL . "/../../adminLogin.php");
         }
-    } 
+    }
 ?>
