@@ -32,6 +32,7 @@
             if($username==$row['email']&&$password==$row['password']&&$row['isAdmin']==1){
                 $_SESSION['username'] = $username; // Start Session
                 $_SESSION['password'] = $password;
+                $_SESSION['isAdmin'] = 1;
                 header("refresh:0; url=http://localhost/NMT-website/admin/adminIndex.php");
             }
             else{

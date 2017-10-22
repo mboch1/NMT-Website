@@ -4,6 +4,10 @@
     include('php/scripts.php');
 	session_start();
     global $con;
+
+    if(isset($_SESSION['username'])=="" || $_SESSION['isAdmin']==0){
+        header("Location: adminLogin.php");
+    }
 ?>
 <html lang="en">
 <head>
@@ -28,7 +32,7 @@
     <![endif]-->
 </head>
 <body>
-    <?php include(__DIR__ . "/../template/header.php") ?>
+    <?php include(__DIR__ . "/template/header.php") ?>
 
     <!-- middle section -->
     <div class="container">
@@ -45,7 +49,7 @@
         </div>
     </div>
     <!--  end of middle section -->
-    <?php include(__DIR__ . "/../template/footer.php") ?>
+    <?php include(__DIR__ . "/template/footer.php") ?>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

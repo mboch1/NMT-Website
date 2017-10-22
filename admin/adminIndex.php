@@ -4,18 +4,10 @@
     include('php/scripts.php');
 	session_start();
     global $con;
-
-/*$admin = "0";
-
-if($admin=="0")
-{
-    header("Location: http://localhost/NMT-Website/index.php ");
-}*///to redirect non admins once admin login is finished
-
-
-
-
-
+    
+    if(isset($_SESSION['username'])=="" || $_SESSION['isAdmin']==0){
+        header("Location: adminLogin.php");
+    }
 
 ?>
 <html lang="en">
@@ -45,7 +37,7 @@ if($admin=="0")
     <![endif]-->
 </head>
 <body>
-    <?php include(__DIR__ . "/../template/header.php");
+    <?php include(__DIR__ . "/template/header.php");
     ?>
 
     <!-- middle section -->
@@ -53,19 +45,13 @@ if($admin=="0")
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-
-                <a href="adminCourseAdd.php" class="btn btn-default" role="button">Add New Course</a>
-                <a href="adminCourseEdit.php" class="btn btn-default" role="button">Edit or Remove Existing Courses</a>
-                <a href="adminVenueAdd.php" class="btn btn-default" role="button">Add New Venue</a>
-                <a href="adminVenueEdit.php" class="btn btn-default" role="button">Edit or Remove Existing Venues</a>
-                <a href="adminBookingsView.php" class="btn btn-default" role="button"> Bookings </a>
-
+                <h3>admin main page... put some data here</h3>
             </div>
             <div class="col-2"></div>
         </div>
     </div>
     <!--  end of middle section -->
-    <?php include(__DIR__ . "/../template/footer.php") ?>
+    <?php include(__DIR__ . "/template/footer.php") ?>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

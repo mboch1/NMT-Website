@@ -1,15 +1,12 @@
 <?php
     ob_start();
 	require_once __DIR__ . '/../php/db.php';
-    include('php/scripts.php');
 	session_start();
     global $con;
-/*$admin = "0";
 
-if($admin=="0")
-{
-    header("Location: http://localhost/NMT-Website/index.php ");
-}*///to redirect non admins once admin login is finished
+    if(isset($_SESSION['username'])!=""){
+        header("Location: adminIndex.php");
+    }
 ?>
 <html lang="en">
 <head>

@@ -4,6 +4,10 @@
     include('php/scripts.php');
 	session_start();
     global $con;
+
+    if(isset($_SESSION['username'])=="" || $_SESSION['isAdmin']==0){
+        header("Location: adminLogin.php");
+    }
 ?>
 <html lang="en">
 <head>
@@ -15,7 +19,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>NMT Admin Page</title>
+    <title>NMT Admin Course Editor</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -32,7 +36,7 @@
     <![endif]-->
 </head>
 <body>
-    <?php include(__DIR__ . "/../template/header.php") ?>
+    <?php include(__DIR__ . "/template/header.php") ?>
 
     <!-- middle section -->
     <div class="container">
@@ -49,7 +53,7 @@
         </div>
     </div>
     <!--  end of middle section -->
-    <?php include(__DIR__ . "/../template/footer.php") ?>
+    <?php include(__DIR__ . "/template/footer.php") ?>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
