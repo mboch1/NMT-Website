@@ -5,7 +5,9 @@
  * Time: 13:58
  */
 	require_once('db.php');
-	session_start(['cookie_lifetime' => 86400]); // Starting Session, cookie set to 1 day
+	session_set_cookie_params(86400, "/");
+	session_start(); // Starting Session, cookie set to 1 day
+	$baseURL = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
 
 	global $con;
 
@@ -31,7 +33,7 @@
             $sql="SELECT * FROM Users WHERE email='$username'";
             $result=mysqli_query($con,$sql);
             $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-            
+
             if(is_array($row))
             {
                 //temp solution, no password hashing yet:
@@ -39,7 +41,7 @@
                     $_SESSION['username'] = $username; // Start Session
                     $_SESSION['password'] = $password2;
                     $_SESSION['user_id'] = $row["id"];
-                    header("refresh:1, url=http://localhost/NMT-Website/index.php");
+                    header("refresh:1, url=http://" . $baseURL . "/../../index.php");
                 }
                 /*If we have data inside the array do this:
                 $salt = $row['salt'];
@@ -75,14 +77,14 @@
                 {
                     echo "An unknown error has occurred while checking credentials, please contact administration.";
                     echo "Redirecting...";
-                    header("refresh:6; url=http://localhost/NMT-website/index.php");
+                    header("refresh:6; url=http://" . $baseURL . "/../../index.php");
                 }
             }
             else
             {
                 echo "Login/Password doesn't exist or unknown error has occured.";
                 echo "Redirecting...";
-                header("refresh:6; url=http://localhost/NMT-website/index.php");
+                header("refresh:6; url=http://" . $baseURL . "/../..//index.php");
             }
         }
 
