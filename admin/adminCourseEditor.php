@@ -11,6 +11,7 @@
     //load data to be placed in form:
     if(isset($_POST['Selected'])){
 
+<<<<<<< HEAD
       $sid = $_POST['courseList'];
       $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");        
       $row = mysqli_fetch_array($result);
@@ -23,6 +24,24 @@
       $courseCategoryID = $row['category_id'];
       $courseImageName = $row['imageName'];
       $isActive = $row['isActive'];
+=======
+        $sid = $_POST['courseList'];
+        $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");
+        $row = mysqli_fetch_array($result);
+        $courseID = $row['id'];
+        $courseTitle = $row['title'];
+        $coursedDesc = $row['description'];
+        $courseVenue = $row['venue_id'];
+        $courseStart = $row['start_date'];
+        $coursePrice = $row['price'];
+        $courseCategoryID = $row['category_id'];
+        $courseImageName = $row['imageName'];
+        $isActive = $row['isActive'];
+    }
+
+    if(isset($_SESSION['username'])=="" || $_SESSION['isAdmin']==0){
+        header("Location: adminLogin.php");
+>>>>>>> ad85f2da31623c202ebfea33526c98baf3a611d0
     }
 ?>
 <html lang="en">
@@ -69,14 +88,14 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="control-label" for="courseTitle">Course Title:</label>  
+                      <label class="control-label" for="courseTitle">Course Title:</label>
                       <input id="courseTitle" <?php echo 'value="'.$courseTitle.'"';?> name="courseTitle" class="form-control input-md" required="" type="text">
-                      <span class="help-block">Name your course here. Use unique name for better recognition.</span>  
+                      <span class="help-block">Name your course here. Use unique name for better recognition.</span>
                     </div>
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="control-label" for="courseImageName">Course Image Name:</label>
-                      <input id="courseImageName" <?php echo 'value="'.$courseImageName.'"';?> name="courseImageName" class="form-control input-md" readonly="" type="text"> 
+                      <label class="control-label" for="courseImageName">Course Image URL:</label>
+                      <input id="courseImageName" <?php echo 'value="'.$courseImageName.'"';?> name="courseImageName" class="form-control input-md" type="text">
                     </div>
                     <!-- Textarea -->
                     <div class="form-group">
@@ -86,9 +105,9 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="control-label" for="coursePrice">Course Price</label>  
+                      <label class="control-label" for="coursePrice">Course Price</label>
                       <input id="coursePrice" <?php echo 'value="'.$coursePrice.'"';?> name="coursePrice" class="form-control input-md" required="" type="value">
-                      <span class="help-block">Use number only</span>  
+                      <span class="help-block">Use number only</span>
                     </div>
                     <!-- Date input-->
                     <div class="form-group">
