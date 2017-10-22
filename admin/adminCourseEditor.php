@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                <form class="form-horizontal" action=<?php echo updateCourse($con);?> method="post">
+                <form class="form-horizontal" action=<?php echo '"'.updateCourse($con).'"';?> method="post">
                     <fieldset>
                     <!-- Form Name -->
                     <legend>Course Editor</legend>
@@ -68,13 +68,13 @@
                     <!-- Text input-->
                     <div class="form-group">
                       <label class="control-label" for="courseTitle">Course Title:</label>  
-                      <input id="courseTitle" <?php echo 'value="'.$courseTitle.'"';?> name="courseTitle" placeholder="ie. Prince 2" class="form-control input-md" required="" type="text">
+                      <input id="courseTitle" <?php echo 'value="'.$courseTitle.'"';?> name="courseTitle" class="form-control input-md" required="" type="text">
                       <span class="help-block">Name your course here. Use unique name for better recognition.</span>  
                     </div>
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="control-label" for="courseImgName">Course Image Name:</label>  
-                      <input id="courseImgName" <?php echo 'value="'.$courseImageName.'"';?> name="courseImgName" class="form-control input-md" readonly="" type="text"> 
+                      <label class="control-label" for="courseImageName">Course Image Name:</label>
+                      <input id="courseImageName" <?php echo 'value="'.$courseImageName.'"';?> name="courseImageName" class="form-control input-md" readonly="" type="text"> 
                     </div>
                     <!-- Textarea -->
                     <div class="form-group">
@@ -85,13 +85,13 @@
                     <!-- Text input-->
                     <div class="form-group">
                       <label class="control-label" for="coursePrice">Course Price</label>  
-                      <input id="coursePrice" <?php echo 'value="'.$coursePrice.'"';?> name="coursePrice" placeholder="1500" class="form-control input-md" required="" type="value">
+                      <input id="coursePrice" <?php echo 'value="'.$coursePrice.'"';?> name="coursePrice" class="form-control input-md" required="" type="value">
                       <span class="help-block">Use number only</span>  
                     </div>
                     <!-- Date input-->
                     <div class="form-group">
-                        <label class="control-label" for="courseDate">Start Date:</label>
-                        <input data-provide="datepicker" <?php echo 'value="'.$courseStart.'"';?> class="form-control input-md datepicker" id="courseDate" name="courseDate" data-date-format="yyyy-mm-dd" required>
+                        <label class="control-label" for="startDate">Start Date:</label>
+                        <input data-provide="datepicker" <?php echo 'value="'.$courseStart.'"';?> class="form-control input-md datepicker" id="startDate" name="startDate" data-date-format="yyyy-mm-dd" required>
                     </div>
 
                     <!-- Select -->
@@ -128,6 +128,7 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <input <?php echo 'value="'.$courseID.'"';?> name="courseID" type="hidden">
                         <button type="submit" name="Update" class="btn btn-default">Update</button>
                     </div>
                     </fieldset>
