@@ -3,6 +3,12 @@
 $uri = $_SERVER['REQUEST_URI'];
 $home = "adminIndex.php";
 
+/* link unused, place in courses section
+<a class="dropdown-item" href="#">
+  <a href="adminImageUpload.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"> Change Image</span></a>
+</a>
+*/
+
 echo '
 <!-- banner space -->
 <div class="container-fluid">
@@ -55,9 +61,6 @@ echo '
                             </a>
                             <a class="dropdown-item" href="#">
                               <a href="adminCourseDelete.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"> Delete Course</span></a>
-                            </a>
-                            <a class="dropdown-item" href="#">
-                              <a href="adminImageUpload.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"> Change Image</span></a>
                             </a>
                           </div>
                       </li>

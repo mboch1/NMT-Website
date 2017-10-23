@@ -52,7 +52,7 @@ if(isset($_SESSION['username'])=="" || $_SESSION['isAdmin']==0){
             <?php
             echo '<form method="post">
               <div class="form-group filter-option">
-              <label class="filter-label" for="courseList">Select Course To Edit:</label>
+              <label class="filter-label" for="courseList">Select Course To Remove:</label>
                 <select class="form-control input-sm filter-select" name="courseList" id="courseList">';
             // Get cities from db
             $sql = "SELECT * FROM Course";

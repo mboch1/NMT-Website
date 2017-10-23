@@ -10,10 +10,8 @@
     }
     //load data to be placed in form:
     if(isset($_POST['Selected'])){
-
-<<<<<<< HEAD
       $sid = $_POST['courseList'];
-      $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");        
+      $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");
       $row = mysqli_fetch_array($result);
       $courseID = $row['id'];
       $courseTitle = $row['title'];
@@ -24,24 +22,10 @@
       $courseCategoryID = $row['category_id'];
       $courseImageName = $row['imageName'];
       $isActive = $row['isActive'];
-=======
-        $sid = $_POST['courseList'];
-        $result = mysqli_query($con,"SELECT * FROM Course WHERE id = $sid");
-        $row = mysqli_fetch_array($result);
-        $courseID = $row['id'];
-        $courseTitle = $row['title'];
-        $coursedDesc = $row['description'];
-        $courseVenue = $row['venue_id'];
-        $courseStart = $row['start_date'];
-        $coursePrice = $row['price'];
-        $courseCategoryID = $row['category_id'];
-        $courseImageName = $row['imageName'];
-        $isActive = $row['isActive'];
     }
 
     if(isset($_SESSION['username'])=="" || $_SESSION['isAdmin']==0){
         header("Location: adminLogin.php");
->>>>>>> ad85f2da31623c202ebfea33526c98baf3a611d0
     }
 ?>
 <html lang="en">
@@ -81,7 +65,7 @@
               <?php 
               if(isset($_SESSION['isAdmin'])==1){
                 echo'
-                  <form class="form-horizontal" action=<?php echo '"'.updateCourse($con).'"';?> method="post">
+                <form class="form-horizontal" action="'.updateCourse($con).'" method="post">
                     <fieldset>
                     <!-- Form Name -->
                     <legend>Course Editor</legend>
@@ -89,36 +73,36 @@
                     <!-- Text input-->
                     <div class="form-group">
                       <label class="control-label" for="courseTitle">Course Title:</label>
-                      <input id="courseTitle" <?php echo 'value="'.$courseTitle.'"';?> name="courseTitle" class="form-control input-md" required="" type="text">
+                      <input id="courseTitle" value="'.$courseTitle.'" name="courseTitle" class="form-control input-md" required="" type="text">
                       <span class="help-block">Name your course here. Use unique name for better recognition.</span>
                     </div>
                     <!-- Text input-->
                     <div class="form-group">
                       <label class="control-label" for="courseImageName">Course Image URL:</label>
-                      <input id="courseImageName" <?php echo 'value="'.$courseImageName.'"';?> name="courseImageName" class="form-control input-md" type="text">
+                      <input id="courseImageName" value="'.$courseImageName.'" name="courseImageName" class="form-control input-md" type="text">
                     </div>
                     <!-- Textarea -->
                     <div class="form-group">
                       <label class="control-label" for="courseDesc">Course Description</label>
-                      <textarea class="form-control" id="courseDesc" name="courseDesc"><?php echo $coursedDesc; ?></textarea>
+                      <textarea class="form-control" id="courseDesc" name="courseDesc">'.$coursedDesc.'</textarea>
                     </div>
 
                     <!-- Text input-->
                     <div class="form-group">
                       <label class="control-label" for="coursePrice">Course Price</label>
-                      <input id="coursePrice" <?php echo 'value="'.$coursePrice.'"';?> name="coursePrice" class="form-control input-md" required="" type="value">
+                      <input id="coursePrice" value="'.$coursePrice.'" name="coursePrice" class="form-control input-md" required="" type="value">
                       <span class="help-block">Use number only</span>
                     </div>
                     <!-- Date input-->
                     <div class="form-group">
                         <label class="control-label" for="startDate">Start Date:</label>
-                        <input data-provide="datepicker" <?php echo 'value="'.$courseStart.'"';?> class="form-control input-md datepicker" id="startDate" name="startDate" data-date-format="yyyy-mm-dd" required>
+                        <input data-provide="datepicker" value="'.$courseStart.'" class="form-control input-md datepicker" id="startDate" name="startDate" data-date-format="yyyy-mm-dd" required>
                     </div>
 
                     <!-- Select -->
                     <div class="form-group">
                       <label class="control-label" for="selectCategory">Select Course Category</label>
-                        <select id="selectCategory" name="selectCategory" class="form-control input-sm filter-select">
+                        <select id="selectCategory" name="selectCategory" class="form-control input-sm filter-select">';}?>
                         <?php // Get titles from db
                           $sql = "SELECT * FROM Category";
                           $res = mysqli_query($con, $sql);
@@ -127,11 +111,9 @@
                           // Display title option
                             $id=$row['id'];
                             $title=$row['title'];
-                            echo '<option value="'.$id.'">'.$title.'</option>';
-                          }?>
-                        </select>
-                    </div>
-
+                            echo '<option value="'.$id.'">'.$title.'</option>';}?>
+                      <?php echo '</select>
+                    </div>';?>
                     <!-- Select Basic -->
                     <div class="form-group">
                       <label class="control-label" for="venueSelect">Select Venue</label>
@@ -145,7 +127,7 @@
                             $id = $row['id'];
                             $city = $row['city'];
                             echo '<option value="'.$id.'">'.$city.'</option>';
-                        } ?>
+                          }?>
                         </select>
                     </div>
                     <div class="form-group">
@@ -153,8 +135,7 @@
                         <button type="submit" name="Update" class="btn btn-default">Update</button>
                     </div>
                     </fieldset>
-                </form>'
-                ;}?>
+                </form>
             </div>
             <div class="col-2"></div>
         </div>

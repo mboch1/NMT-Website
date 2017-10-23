@@ -81,6 +81,8 @@ function addNewCourse(mysqli $con){
     $start_date = $_POST['start_date'];
     $price = $_POST['price'];
     $category_id = $_POST['category_id'];
+    $image = $_POST['imageFile'];
+    /* not used: 
     // $name = $_FILES['file']['name'];
     $imageName = $_POST["imageFile"];
 
@@ -99,10 +101,10 @@ function addNewCourse(mysqli $con){
       // Upload file
       move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
     }
-
-    $sql = "INSERT INTO Course (title, description, venue_id, start_date, price, category_id, imageName) VALUES ('$title','$description', '$venue_id', '$start_date', '$price', '$category_id', '$imageName')";
+    */
+    $sql = "INSERT INTO Course (title, description, venue_id, start_date, price, category_id, imageName) VALUES ('$title','$description', '$venue_id', '$start_date', '$price', '$category_id', '$image')";
     if (mysqli_query($con, $sql)){
-      header("refresh:10, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
+      header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
     }
     else{
       echo "Error updating record: " . mysqli_error($con);
