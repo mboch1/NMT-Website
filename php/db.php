@@ -1,8 +1,8 @@
 <?php
 //created on 23/04/2016 last rev. 23/04/2016
 //This script creates a connection to the database, usable over all other scripts
-	$servername = "sql2.freemysqlhosting.net";
-	$username = "sql2199767";
+	$servername = "nmt-group-3.ckjabz0gkhe4.us-west-2.rds.amazonaws.com";
+	$username = "nmtUser";
 	$password = "cJ6*aK4*";
 	$dbName = "sql2199767";
 
