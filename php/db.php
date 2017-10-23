@@ -4,7 +4,7 @@
 	$servername = "nmt-group-3.ckjabz0gkhe4.us-west-2.rds.amazonaws.com";
 	$username = "nmtUser";
 	$password = "cJ6*aK4*";
-	$dbName = "sql2199767";
+	$dbName = "NMT";
 
 	// Connect to DB $con is going to be used as a global variable!
 	$con = mysqli_connect($servername, $username, $password, $dbName);
