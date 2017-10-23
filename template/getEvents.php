@@ -9,7 +9,7 @@
     $loggedIn = ($_GET["loggedIn"] == 1 ? true : false);
 
     // Fetch courses from database
-    $sql = "SELECT * FROM Course WHERE venue_id LIKE '" . $loc . "' AND category_id LIKE '" . $course . "' AND start_date LIKE '" . $date . "'";
+    $sql = "SELECT * FROM Course WHERE venue_id LIKE '" . $loc . "' AND category_id LIKE '" . $course . "' AND start_date LIKE '" . $date . "' ORDER BY start_date ASC";
     $res = mysqli_query($con, $sql);
 
     // Display courses
