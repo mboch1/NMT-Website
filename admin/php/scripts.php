@@ -254,7 +254,7 @@ function addNewVenue(mysqli $con){
     $sql = "INSERT INTO Venue (city, address1, address2, postcode) VALUES ('$vn','$add1', '$add2', '$postcode')";
 
     if (mysqli_query($con, $sql)){
-      header("refresh:0, url=http://localhost/NMT-Website/admin/adminCourseAdd.php");
+      header("refresh:0, url=http://localhost/NMT-Website/admin/adminVenueAdd.php");
       exit;
     }
     else{
