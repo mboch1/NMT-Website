@@ -83,7 +83,7 @@
 								<?php
 
 									// Get venues from db
-									$sql = "SELECT * FROM Venue";
+									$sql = "SELECT * FROM Venue ORDER BY city ASC";
 									$res = mysqli_query($con, $sql);
 
 									// Loop through venues
@@ -104,7 +104,7 @@
 								<?php
 
 									// Get venues from db
-									$sql = "SELECT * FROM Category";
+									$sql = "SELECT * FROM Category ORDER BY title ASC";
 									$res = mysqli_query($con, $sql);
 
 									// Loop through venues
