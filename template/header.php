@@ -1,13 +1,7 @@
 <?php
 
 $uri = $_SERVER['REQUEST_URI'];
-$home = "";
-
-if (strpos($uri, "/admin/") !== false) {
-    $home = "../index.php";
-} else {
-    $home = "index.php";
-}
+$home = "index.php";
 
 echo '
 <!-- banner space -->
@@ -33,7 +27,7 @@ echo '
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                    <li class="nav-item active">
-                        <a class="nav-link" href="' . $home . '">Main Page <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="' . $home . '"><span class="glyphicon glyphicon-home"> Home</span></a>
                   </li>
                   <li class="nav-item">';
                         if(isset($_SESSION['username'])!=""){
@@ -78,12 +72,11 @@ echo '
                         }
                         echo '
                   </li>
-
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="courseDetails.php"><span class="glyphicon glyphicon-book">Course Details</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="contactForm.php"><span class="glyphicon glyphicon-envelope">Contact Us</span></a>
                   </li>
                 </ul>
               </div>
