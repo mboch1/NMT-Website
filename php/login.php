@@ -4,7 +4,7 @@
  * Date: 10/10/2017
  * Time: 13:58
  */
-	require_once __DIR__ . '/../../php/db.php';
+	require_once __DIR__ . '/../../db.php';
 	session_set_cookie_params(86400, "/");
 	session_start(); // Starting Session, cookie set to 1 day
 	$baseURL = $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
