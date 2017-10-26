@@ -31,18 +31,18 @@
                 $_SESSION['username'] = $username; // Start Session
                 $_SESSION['password'] = $password;
                 $_SESSION['isAdmin'] = 1;
-                header("refresh:0; url=http://" . $baseURL . "/../../adminIndex.php");
+                header("refresh:0; url=http://" . $baseURL . "/../../index.php");
             }
             else{
                 echo "Login not recognized.";
                 echo "Redirecting...";
-                header("refresh:6; url=http://" . $baseURL . "/../../adminLogin.php");
+                header("refresh:6; url=http://" . $baseURL . "/../../index.php");
             }
         }
         else{
             echo "Login/Password doesn't exist or unknown error has occured.";
             echo "Redirecting...";
-            header("refresh:6; url=http://" . $baseURL . "/../../adminLogin.php");
+            header("refresh:6; url=http://" . $baseURL . "/../../index.php");
         }
     }
 ?>
