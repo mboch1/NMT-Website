@@ -9,6 +9,7 @@ echo '
     <div class="row">
         <div class="col-2"></div>
         <div class="col">
+            <p style="text-align: center; background-color: yellow;">2017, This website was created for the Project Management course assignment purpose only, it is not an actual business offer.</p>
             <img style="margin-left: 15px; object-fit: contain" src="https://i.imgur.com/0ejY8kU.png"><br>
         </div>
         <div class="col-2"></div>
