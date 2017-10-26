@@ -5,7 +5,7 @@
  * Time: 13:58
  */
 	require_once('db.php');
-	session_set_cookie_params(86400);
+	session_set_cookie_params(86400, '/');
 	session_start(); // Starting Session, cookie set to 1 day
 
 	global $con;
