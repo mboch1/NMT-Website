@@ -79,6 +79,9 @@ echo '
                   <li class="nav-item">
                     <a class="nav-link" href="contactForm.php"><span class="glyphicon glyphicon-envelope">Contact Us</span></a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="venueDetails.php"><span class="glyphicon glyphicon-globe">Venues</span></a>
+                  </li>
                 </ul>
               </div>
             </nav>
