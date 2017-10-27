@@ -21,6 +21,6 @@
     $sql = "UPDATE Course SET bookings='bookings'+1 WHERE id='$course_id'";
     $updateData = mysqli_query($con, $sql);
 
-    print "Course booking accepted!<br>";
-    print "Redirecting...<br>";
+    // print "Course booking accepted!<br>";
+    // print "Redirecting...<br>";
     header("refresh:3, url=../index.php");
