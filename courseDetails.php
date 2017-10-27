@@ -43,23 +43,24 @@ session_start();
     <div class="row">
         <div class="col-2"></div>
         <div class="col">
-            Change Management:<br>
+            <h2>Course Details</h2>
+            <h3>Change Management:</h3>
             The Change Management course offers a structured method for ensuring changes are implemented efficiently and with ease. This course is aimed at project and team managers, however the lessons taught can be of value to anyone working in a team environment. The Change Management course teaches activities such as efficient expression of ideas, planning and assessing stakeholders and continues through the entire lifecycle of applying large changes to a project or team.
             <br>
             <br>
-            ITIL:<br>
+            <h3>ITIL:</h3>>
             The ITIL course is a brief overview of the five core volumes of the texts associated with the management methodology. Originally named as an acronym for Information Technology Infrastructure Library, the ITIL course is aimed not only at IT professionals, but also businesses and team members that want to better understand the IT services in their workplace. The course does not cover all aspects of the ITIL principles, however resources and links will be available for additional reading.
             <br>
             <br>
-            PRINCE2:<br>
+            <h3>PRINCE2:</h3>>
             The PRINCE2 course is an introductory look at project-management techniques implemented by the process-based methodology. An acronym for PRojects IN Controlled Environments, PRINCE2 is a standard of the UK Government and used internationally, in the private sector, to a lesser extent. Please note that this course is only an introduction to the PRINCE2 methodology, and does not come with any formal qualification level, however this course is an excellent initiation to this form of project management.
             <br>
             <br>
-            Project Management:<br>
+            <h3>Project Management:</h3>>
             The Project Management course is a high level, introductory class that briefly touches on various methods of project management. Many of the methods taught in this course are available as the subject of teaching in other courses offered by Napier Management Training. If you, or your team are looking for an introductory look at various management styles and techniques for improving the workplace, then this is the appropriate course.
             <br>
             <br>
-            Risk Management:<br>
+            <h3>Risk Management:</h3>>
             The Risk Management course offers skills and techniques for assessing the risks that may affect a project. Whether your team is about to start a project, or is already conducting one, this course can offer valuable information and improve the quality of the delivered product. Remember that the Risk Management course is not designed exclusively for groups already facing risks, but also aids the identification of potential risks and issues before they can occur, aiding their quick resolution.
             <br>
             <br>
