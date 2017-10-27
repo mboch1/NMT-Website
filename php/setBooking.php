@@ -11,6 +11,8 @@
     $course_id = $_GET['course_id'];
     $date_booked = date("Ymd");
     $user_id = $_SESSION['user_id'];
+    $error = false;
+    $errMsg = "";
 
 
     $createBooking = "INSERT INTO Booking (course_id, date_booked, user_id)
@@ -18,9 +20,17 @@
 
     $insertData = mysqli_query($con, $createBooking);
 
+    $temp = mysqli_error($con);
+    if ($temp) {$error = true;$errMsg += $temp;}
+
     $sql = "UPDATE Course SET bookings='bookings'+1 WHERE id='$course_id'";
     $updateData = mysqli_query($con, $sql);
 
-    print "Course booking accepted!<br>";
-    print "Redirecting...<br>";
-    header("refresh:3, url=../index.php");
+    $temp = mysqli_error($con);
+    if ($temp) {$error = true;$errMsg += $temp;}
+
+    if ($error) {
+        echo $errMsg;
+    }else {
+        echo "Success";
+    }

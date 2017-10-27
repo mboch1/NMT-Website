@@ -162,6 +162,30 @@
 			$("#filterSubmit").click(function() {
 				loadCourses();
 			});
+
+			$(document).on('click', ".book-button", function() {
+
+				var button = $(this);
+
+				button.attr("data-content", "Attempting to create booking...");
+				button.popover('show');
+
+				$.ajax({
+					url: "php/setBooking.php",
+					data: "course_id=" + button.attr("data-id")
+				}).done(function(data) {
+					if (data == "Success") {
+						button.attr("data-content", "Booking was successfully made.");
+					} else {
+						button.attr("data-content", "Booking was unsuccessful, please try again.");
+						console.log(data);
+					}
+					button.popover('show');
+				}).fail(function() {
+					console.log("ajax booking fail");
+				})
+
+			});
 	  	});
 
 		function loadCourses() {
