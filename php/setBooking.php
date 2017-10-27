@@ -18,9 +18,9 @@
 
     $insertData = mysqli_query($con, $createBooking);
 
-    $sql = "UPDATE Course SET bookings='bookings'+1 WHERE id='$courseID'";
+    $sql = "UPDATE Course SET bookings='bookings'+1 WHERE id='$course_id'";
     $updateData = mysqli_query($con, $sql);
 
-    // print "Course booking accepted!<br>";
-    // print "Redirecting...<br>";
-    header("refresh:3, url=http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] . "/../../index.php ");
+    print "Course booking accepted!<br>";
+    print "Redirecting...<br>";
+    header("refresh:3, url=../index.php");
