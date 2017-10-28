@@ -79,13 +79,13 @@ echo '
                         echo '
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="courseDetails.php"><span class="glyphicon glyphicon-book">Course Details</span></a>
+                    <a class="nav-link" href="courseDetails.php"><span class="glyphicon glyphicon-book"></span> Course Details</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="contactForm.php"><span class="glyphicon glyphicon-envelope">Contact Us</span></a>
+                    <a class="nav-link" href="contactForm.php"><span class="glyphicon glyphicon-envelope"></span> Contact Us</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="venueDetails.php"><span class="glyphicon glyphicon-globe">Venues</span></a>
+                    <a class="nav-link" href="venueDetails.php"><span class="glyphicon glyphicon-globe"></span> Venues</a>
                   </li>
                   ';
 echo '
