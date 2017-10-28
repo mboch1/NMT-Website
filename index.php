@@ -176,6 +176,8 @@
 				}).done(function(data) {
 					if (data == "Success") {
 						button.attr("data-content", "Booking was successfully made.");
+					} else if (data == "Overbooked") {
+						button.attr("data-content", "This course is fully booked.")
 					} else {
 						button.attr("data-content", "Booking was unsuccessful, please try again.");
 						console.log(data);

@@ -14,20 +14,27 @@
     $error = false;
     $errMsg = "";
 
+    $sql = "SELECT * FROM Course WHERE id='$course_id'";
+    $res = mysqli_query($con, $sql);
 
-    $createBooking = "INSERT INTO Booking (course_id, date_booked, user_id)
-		VALUES ('$course_id', '$date_booked', '$user_id')";
+    $row = mysqli_fetch_assoc($res);
+    if ($row["bookings"] <= 15) {
+        $createBooking = "INSERT INTO Booking (course_id, date_booked, user_id)
+    		VALUES ('$course_id', '$date_booked', '$user_id')";
 
-    $insertData = mysqli_query($con, $createBooking);
+        $insertData = mysqli_query($con, $createBooking);
 
-    $temp = mysqli_error($con);
-    if ($temp) {$error = true;$errMsg += $temp;}
+        $temp = mysqli_error($con);
+        if ($temp) {$error = true;$errMsg += $temp;}
 
-    $sql = "UPDATE Course SET bookings='bookings'+1 WHERE id='$course_id'";
-    $updateData = mysqli_query($con, $sql);
+        $sql = "UPDATE Course SET bookings='bookings'+1 WHERE id='$course_id'";
+        $updateData = mysqli_query($con, $sql);
 
-    $temp = mysqli_error($con);
-    if ($temp) {$error = true;$errMsg += $temp;}
+        $temp = mysqli_error($con);
+        if ($temp) {$error = true;$errMsg += $temp;}
+    } else {
+        $errMsg = "Overbooked";
+    }
 
     if ($error) {
         echo $errMsg;
