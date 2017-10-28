@@ -43,27 +43,20 @@ session_start();
     <div class="row">
         <div class="col-2"></div>
         <div class="col">
-            <h2>Course Details</h2>
-            <h3>Change Management:</h3>
-            The Change Management course offers a structured method for ensuring changes are implemented efficiently and with ease. This course is aimed at project and team managers, however the lessons taught can be of value to anyone working in a team environment. The Change Management course teaches activities such as efficient expression of ideas, planning and assessing stakeholders and continues through the entire lifecycle of applying large changes to a project or team.
-            <br>
-            <br>
-            <h3>ITIL:</h3>>
-            The ITIL course is a brief overview of the five core volumes of the texts associated with the management methodology. Originally named as an acronym for Information Technology Infrastructure Library, the ITIL course is aimed not only at IT professionals, but also businesses and team members that want to better understand the IT services in their workplace. The course does not cover all aspects of the ITIL principles, however resources and links will be available for additional reading.
-            <br>
-            <br>
-            <h3>PRINCE2:</h3>>
-            The PRINCE2 course is an introductory look at project-management techniques implemented by the process-based methodology. An acronym for PRojects IN Controlled Environments, PRINCE2 is a standard of the UK Government and used internationally, in the private sector, to a lesser extent. Please note that this course is only an introduction to the PRINCE2 methodology, and does not come with any formal qualification level, however this course is an excellent initiation to this form of project management.
-            <br>
-            <br>
-            <h3>Project Management:</h3>>
-            The Project Management course is a high level, introductory class that briefly touches on various methods of project management. Many of the methods taught in this course are available as the subject of teaching in other courses offered by Napier Management Training. If you, or your team are looking for an introductory look at various management styles and techniques for improving the workplace, then this is the appropriate course.
-            <br>
-            <br>
-            <h3>Risk Management:</h3>>
-            The Risk Management course offers skills and techniques for assessing the risks that may affect a project. Whether your team is about to start a project, or is already conducting one, this course can offer valuable information and improve the quality of the delivered product. Remember that the Risk Management course is not designed exclusively for groups already facing risks, but also aids the identification of potential risks and issues before they can occur, aiding their quick resolution.
-            <br>
-            <br>
+
+            <?php
+
+                $sql="SELECT * FROM Category ORDER BY title ASC";
+                $res = mysqli_query($con, $sql);
+
+                while($row = mysqli_fetch_assoc($res)) {
+                    echo "<h3>" . $row['title'] . ":</h3>
+                    " . $row['description'] . "
+                    <br>
+                    <br>";
+                }
+
+            ?>
         </div>
         <div class="col-2"></div>
     </div>
@@ -156,12 +149,34 @@ session_start();
 
         loadCourses();
 
-        $(".card-text").each(function() {
-            $clamp(this, {clamp: 3});
-        });
-
         $("#filterSubmit").click(function() {
             loadCourses();
+        });
+
+        $(document).on('click', ".book-button", function() {
+
+            var button = $(this);
+
+            button.attr("data-content", "Attempting to create booking...");
+            button.popover('show');
+
+            $.ajax({
+                url: "php/setBooking.php",
+                data: "course_id=" + button.attr("data-id")
+            }).done(function(data) {
+                if (data == "Success") {
+                    button.attr("data-content", "Booking was successfully made.");
+                } else if (data == "Overbooked") {
+                    button.attr("data-content", "This course is fully booked.")
+                } else {
+                    button.attr("data-content", "Booking was unsuccessful, please try again.");
+                    console.log(data);
+                }
+                button.popover('show');
+            }).fail(function() {
+                console.log("ajax booking fail");
+            })
+
         });
     });
 
@@ -177,20 +192,33 @@ session_start();
 
         <?php
 
-        if (isset($_SESSION['username']) != "") {
-            echo '$("#courseDisplay").load("template/getEvents.php?" + $.param({
-						loc: $("#city").val(),
-						course: $("#course").val(),
-						date: date,
-						loggedIn: 1}));';
-        } else {
-            echo '$("#courseDisplay").load("template/getEvents.php?" + $.param({
-						loc: $("#city").val(),
-						course: $("#course").val(),
-						date: date}));';
-        }
+            if (isset($_SESSION['username']) != "") {
+                echo '$("#courseDisplay").load("template/getEvents.php?" + $.param({
+                    loc: $("#city").val(),
+                    course: $("#course").val(),
+                    date: date,
+                    loggedIn: 1}), function() {
+                        clampCards();
+                    });';
+            } else {
+                echo '$("#courseDisplay").load("template/getEvents.php?" + $.param({
+                    loc: $("#city").val(),
+                    course: $("#course").val(),
+                    date: date}), function() {
+                        clampCards();
+                    });';
+            }
 
         ?>
+
+
+    }
+
+    function clampCards() {
+        var cards = $("#courseDisplay").find(".card-text");
+        $.each(cards, function() {
+            $clamp(this, {clamp: 5});
+        });
     }
 
 </script>
