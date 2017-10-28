@@ -50,7 +50,7 @@ session_start();
                 $res = mysqli_query($con, $sql);
 
                 while($row = mysqli_fetch_assoc($res)) {
-                    echo "<h3>" . $row['title'] . ":</h3>
+                    echo "<h3 id='" . $row["title"] . "'>" . $row['title'] . ":</h3>
                     " . $row['description'] . "
                     <br>
                     <br>";

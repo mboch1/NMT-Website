@@ -36,7 +36,7 @@
                 <img class="card-img-top" src="' . $row["imageName"] . '" alt="">
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="#">' . $row["title"] . '</a>
+                    <a href="courseDetails.php#' . $row["title"] . '">' . $row["title"] . '</a>
                   </h4>
                   <h5>Price: £' . $row["price"] . '</h5>
                   <h5>Start Date:' . $date_formated . '</h5>
