@@ -32,6 +32,37 @@
 
         $temp = mysqli_error($con);
         if ($temp) {$error = true;$errMsg += $temp;}
+
+        //email both user and admin about booking was made:
+        //user:
+        $sql = "SELECT Booking.user_id, Booking.course_id, Booking.date_booked, user.email FROM Booking INNER JOIN Users user ON Booking.user_id = user.id WHERE (Booking.course_id='$course_id' AND Booking.user_id='$user_id')";
+
+        $result = mysqli_query($con,$sql);
+        
+        while($row = mysqli_fetch_array($result)) {
+
+            $userEmail = $row['email'];
+            date_default_timezone_set('Europe/London');
+            $dateDB = $row['date_booked'];
+             
+            $dateBooked = date('j F Y', strtotime($dateDB));
+            $headers = "From: admin@email.com";
+
+            $msg = "Booking was made by the user: ".$userEmail." on ".$dateBooked.".";
+            $msg = wordwrap($msg,70);
+
+            mail($userEmail,"You've booked a course",$msg,$headers);
+            
+            //admin:
+            $adminEmail = "michalbochenek2@gmail.com";
+            $headers = "From: michalbochenek2@gmail.com";
+
+            $msg = "Booking was made by the user: ".$userEmail." on ".$dateBooked.".";
+            $msg = wordwrap($msg,70);
+
+            mail($adminEmail,"User booked a course",$msg,$headers);
+        }
+
     } else {
         $errMsg = "Overbooked";
         $error = true;
