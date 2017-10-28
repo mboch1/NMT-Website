@@ -45,6 +45,9 @@ echo '
                           if($_SESSION["isAdmin"]==0){
                             echo'<a class="dropdown-item" href="#">
                               <a class="btn btn-primary btn-md btn-block" href="viewBookings.php"><span class="glyphicon glyphicon-book"></span> View Bookings</a>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <a class="btn btn-primary btn-md btn-block" href="editUser.php"><span class="glyphicon glyphicon-cog"></span> User Settings</a>
                             </a>';
                           }
                           if ($_SESSION["isAdmin"]){
