@@ -130,6 +130,18 @@
             <div class="col-2"></div>
         </div>
     </div>
+
+	<div id="paymentModal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2>Booking Payment</h2>
+				<span class="close">&times;</span>
+			</div>
+			<div class="modal-body">
+				<?php include("template/creditCard.html") ?>
+			</div>
+		</div>
+	</div>
     <!--  end of middle section -->
 	<?php include("template/footer.php") ?>
     <!-- Bootstrap core JavaScript
@@ -140,7 +152,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+	<script src="jquery/creditCard.js"></script>
     <script type="text/javascript">
+
+		var currentlyBooking;
+		var modal;
 
 	    $(document).ready(function(){
 			var date_input=$('input[name="date"]'); //our date input has the name "date"
@@ -152,6 +168,7 @@
 				autoclose: true,
 			};
 			date_input.datepicker(options);
+			modal = document.getElementById('paymentModal');
 
 	  		loadCourses();
 
@@ -161,29 +178,77 @@
 
 			$(document).on('click', ".book-button", function() {
 
-				var button = $(this);
+				currentlyBooking = $(this);
+				currentlyBooking.attr("data-content", "Attempting to create booking...");
 
-				button.attr("data-content", "Attempting to create booking...");
-				button.popover('show');
+				$.ajax({
+					url: "php/checkBooking.php",
+					data: "course_id=" + currentlyBooking.attr("data-id")
+				}).done(function(data) {
+					if (data == "Success") {
+						modal.style.display = "block"
+					} else if (data == "Overbooked") {
+						currentlyBooking.attr("data-content", "This course is fully booked.")
+					} else {
+						currentlyBooking.attr("data-content", "Booking was unsuccessful, please try again.");
+						console.log(data);
+					}
+				}).fail(function() {
+					console.log("ajax check fail");
+				})
+
+				currentlyBooking.popover('show');
+				currentlyBooking.popover({
+					trigger: 'focus'
+				})
+
+			});
+
+			$(document).on("click", "#paySubmit", function() {
+
+				modal.style.display = "none";
+
+				currentlyBooking.attr("data-content", "Attempting to create booking...");
+				currentlyBooking.popover('show');
 
 				$.ajax({
 					url: "php/setBooking.php",
-					data: "course_id=" + button.attr("data-id")
+					data: "course_id=" + currentlyBooking.attr("data-id")
 				}).done(function(data) {
 					if (data == "Success") {
-						button.attr("data-content", "Booking was successfully made.");
+						currentlyBooking.attr("data-content", "Booking was successfully made.");
 					} else if (data == "Overbooked") {
-						button.attr("data-content", "This course is fully booked.")
+						currentlyBooking.attr("data-content", "This course is fully booked.")
 					} else {
-						button.attr("data-content", "Booking was unsuccessful, please try again.");
+						currentlyBooking.attr("data-content", "Booking was unsuccessful, please try again.");
 						console.log(data);
 					}
-					button.popover('show');
+					currentlyBooking.popover('show');
+					currentlyBooking.popover({
+						trigger: 'focus'
+					})
 				}).fail(function() {
 					console.log("ajax booking fail");
 				})
 
-			});
+			})
+
+			$(".close").on("click", function() {
+				$("#paymentModal").css("display", "none");
+			})
+
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+
+			$("body").on("click", function(e) {
+				if ($(e.target).data('toggle') !== 'popover'
+					&& $(e.target).parents('.popover.in').length === 0) {
+						$('[data-toggle="popover"]').popover('hide');
+					}
+			})
 	  	});
 
 		function loadCourses() {
