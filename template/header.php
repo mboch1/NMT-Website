@@ -96,6 +96,12 @@ echo '
                   <li class="nav-item">
                     <a class="nav-link" href="venueDetails.php"><span class="glyphicon glyphicon-globe"></span> Venues</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="aboutUs.php"><span class="glyphicon glyphicon-info-sign"></span> About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="files/registration.pdf"><span class="glyphicon glyphicon-file"></span> Offline Form</a>
+                  </li>
                   ';
 echo '
                 </ul>
