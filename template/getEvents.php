@@ -9,8 +9,13 @@
     $loggedIn = ($_GET["loggedIn"] == 1 ? true : false);
 
     // Fetch courses from database
-    $sql = "SELECT * FROM Course WHERE venue_id LIKE '" . $loc . "' AND category_id LIKE '" . $course . "' AND start_date LIKE '" . $date . "' ORDER BY start_date ASC";
+    $sql = "SELECT Course.*, Category.description caDescription, Category.defaultImage FROM Course INNER JOIN Category ON Category.id = Course.category_id WHERE venue_id LIKE '$loc' AND category_id LIKE '$course' AND start_date LIKE '$date' AND isActive=1 AND bookings<15 ORDER BY start_date ASC";
     $res = mysqli_query($con, $sql);
+
+    $temp = mysqli_error($con);
+    if ($temp) {
+        echo $temp;
+    }
 
     // Display courses
     while ($row = mysqli_fetch_assoc($res)) {
@@ -18,7 +23,11 @@
         $date_formated = date('d-m-Y', strtotime( $row['start_date'] ));
         // If course doesn't have an image, give it a placeholder
         if ($row["imageName"] == "") {
-            $row["imageName"] = "https://i.imgur.com/0ejY8kU.png";
+            $row["imageName"] = $row["defaultImage"];
+        }
+
+        if ($row["description"] == "") {
+            $row["description"] = $row["caDescription"];
         }
 
         // Display course

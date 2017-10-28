@@ -18,7 +18,7 @@
     $res = mysqli_query($con, $sql);
 
     $row = mysqli_fetch_assoc($res);
-    if ($row["bookings"] <= 15) {
+    if ($row["bookings"] < 15) {
         $createBooking = "INSERT INTO Booking (course_id, date_booked, user_id)
     		VALUES ('$course_id', '$date_booked', '$user_id')";
 
@@ -27,13 +27,14 @@
         $temp = mysqli_error($con);
         if ($temp) {$error = true;$errMsg += $temp;}
 
-        $sql = "UPDATE Course SET bookings='bookings'+1 WHERE id='$course_id'";
+        $sql = "UPDATE Course SET bookings=bookings+1 WHERE id='$course_id'";
         $updateData = mysqli_query($con, $sql);
 
         $temp = mysqli_error($con);
         if ($temp) {$error = true;$errMsg += $temp;}
     } else {
         $errMsg = "Overbooked";
+        $error = true;
     }
 
     if ($error) {

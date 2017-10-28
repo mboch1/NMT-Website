@@ -155,10 +155,6 @@
 
 	  		loadCourses();
 
-			$(".card-text").each(function() {
-				$clamp(this, {clamp: 3});
-			});
-
 			$("#filterSubmit").click(function() {
 				loadCourses();
 			});
@@ -207,15 +203,28 @@
 						loc: $("#city").val(),
 						course: $("#course").val(),
 						date: date,
-						loggedIn: 1}));';
+						loggedIn: 1}), function() {
+							clampCards();
+						});';
 				} else {
 					echo '$("#courseDisplay").load("template/getEvents.php?" + $.param({
 						loc: $("#city").val(),
 						course: $("#course").val(),
-						date: date}));';
+						date: date}), function() {
+							clampCards();
+						});';
 				}
 
-			 ?>
+			?>
+
+
+		}
+
+		function clampCards() {
+			var cards = $("#courseDisplay").find(".card-text");
+			$.each(cards, function() {
+				$clamp(this, {clamp: 5});
+			});
 		}
 
     </script>
