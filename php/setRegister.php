@@ -1,6 +1,6 @@
 <?php
-//created on 11/05/2016 last rev. 12/05/2016
-//This script places senior player data record into database
+//created on 17/10/2017 by MB
+
 	require_once ('db.php');
 	session_start();
 

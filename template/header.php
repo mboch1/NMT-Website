@@ -28,19 +28,22 @@ echo '
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                    <li class="nav-item active">
-                    <a class="nav-link" href="' . $home . '"><span class="glyphicon glyphicon-home"> Home</span></a>
+                    <a class="nav-link" href="' . $home . '"><span class="glyphicon glyphicon-home"></span> Home</a>
                   </li>
                   <li class="nav-item">';
                         if(isset($_SESSION['username'])!=""){
                         echo"
                          <li class='nav-item dropdown'>
-                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>"."<span class='glyphicon glyphicon-user'><b>Welcome: ".$_SESSION["username"]."</b></span>"."</a>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'><span class='glyphicon glyphicon-user'></span> Welcome: ".$_SESSION["username"]."</a>
                             <div class='dropdown-menu'>
                                 <a class='dropdown-item' href='#'>
                                 <form action='php/logout.php' method='post'>
-                                  <a class='btn btn-primary' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</a>
+                                  <button class='btn btn-primary' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</button>
                                 </form>
                                 </a>";
+                          echo'<a class="dropdown-item" href="#">
+                                  <a class="btn btn-primary" href="viewBookings.php"><span class="glyphicon glyphicon-book"></span> View Bookings</a>
+                                </a>';
                         if ($_SESSION["isAdmin"]){
                           echo '<a class="dropdown-item" href="#">
                                   <a class="btn btn-primary" href="admin/adminIndex.php"><span class="glyphicon glyphicon-pencil"></span> Admin Area</a>
