@@ -37,6 +37,9 @@
 					if ($row["isAdmin"]) {
 						$_SESSION["isAdmin"] = 1;
 					}
+          else{
+            $_SESSION["isAdmin"] = 0;
+          }
 					header("refresh:0; url=http://" . $baseURL . "/../../index.php");
                 } else {
                     echo "An unknown error has occurred while checking credentials, please contact administration.";

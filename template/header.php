@@ -2,7 +2,6 @@
 
 $uri = $_SERVER['REQUEST_URI'];
 $home = "index.php";
-session_start();
 
 echo '
 <!-- banner space -->
@@ -37,15 +36,20 @@ echo '
                          <li class='nav-item dropdown'>
                             <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>"."<span class='glyphicon glyphicon-user'><b>Welcome: ".$_SESSION["username"]."</b></span>"."</a>
                             <div class='dropdown-menu'>
-                              <a class='dropdown-item' href='#'>
+                                <a class='dropdown-item' href='#'>
                                 <form action='php/logout.php' method='post'>
-                                <label for='logoutBtn'>Safe logout</label>
-                                    <button id='logoutBtn' type='submit' class='btn btn-primary' name='logout'>Logout</button>
-                                </form></a>
-                            </div>
-                          </li>";
+                                  <a class='btn btn-primary' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</a>
+                                </form>
+                                </a>";
+                        if ($_SESSION["isAdmin"]){
+                          echo '<a class="dropdown-item" href="#">
+                                  <a class="btn btn-primary" href="admin/adminIndex.php"><span class="glyphicon glyphicon-pencil"></span> Admin Area</a>
+                                </a>';
                         }
-                        else{
+                        echo "
+                          </div>
+                        </li>";
+                        }else{
                         echo"
                         <li class='nav-item dropdown'>
                             <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>Register/Login</a>
@@ -84,9 +88,6 @@ echo '
                     <a class="nav-link" href="venueDetails.php"><span class="glyphicon glyphicon-globe">Venues</span></a>
                   </li>
                   ';
-                if ($_SESSION["isAdmin"]) {
-                    echo '<li class="nav-item"><a class="nav-link" href="admin/adminIndex.php"><span class="glyphicon glyphicon-pencil">Admin Area</span></li>';
-                }
 echo '
                 </ul>
               </div>
