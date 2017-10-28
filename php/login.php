@@ -34,7 +34,10 @@
                     $_SESSION['username'] = $username; // Start Session
                     $_SESSION['password'] = $password2;
                     $_SESSION['user_id'] = $row["id"];
-					header("refresh:1; url=http://" . $baseURL . "/../../index.php");
+					if ($row["isAdmin"]) {
+						$_SESSION["isAdmin"] = 1;
+					}
+					header("refresh:0; url=http://" . $baseURL . "/../../index.php");
                 } else {
                     echo "An unknown error has occurred while checking credentials, please contact administration.";
                     echo "Redirecting...";
