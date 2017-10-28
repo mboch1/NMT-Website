@@ -2,6 +2,7 @@
 
 $uri = $_SERVER['REQUEST_URI'];
 $home = "index.php";
+session_start();
 
 echo '
 <!-- banner space -->
@@ -82,6 +83,11 @@ echo '
                   <li class="nav-item">
                     <a class="nav-link" href="venueDetails.php"><span class="glyphicon glyphicon-globe">Venues</span></a>
                   </li>
+                  ';
+                if ($_SESSION["isAdmin"]) {
+                    echo '<li class="nav-item"><a class="nav-link" href="admin/adminIndex.php"><span class="glyphicon glyphicon-pencil">Admin Area</span></li>';
+                }
+echo '
                 </ul>
               </div>
             </nav>
