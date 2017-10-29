@@ -36,33 +36,40 @@ session_start();
 <body>
 <?php include("template/header.php");
 //<!-- middle section -->
+echo '<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col">';
+            $q = "SELECT * FROM Forum" ;
+            $r = mysqli_query( $con, $q ) ;
+            if ( mysqli_num_rows( $r ) > 0 ) {
+                echo '<table>' ;
+                while ( $row = mysqli_fetch_array( $r, MYSQLI_ASSOC ))
+                {
+                    $date = date('d-m-Y', strtotime($row['post_date']));
+                    echo '<tr><td><b>By</b> '. $row['poster'] . ' <b>on</b> '. $date.'</td></tr>
+                <tr><td>' . $row['message'] . '</td> </tr>';
+                }
+                echo '</table>' ;
+            }
 
-$q = "SELECT * FROM Forum" ;
-$r = mysqli_query( $con, $q ) ;
-if ( mysqli_num_rows( $r ) > 0 ) {
-    echo '<table>' ;
-    while ( $row = mysqli_fetch_array( $r, MYSQLI_ASSOC ))
-    {
-        $date = date('d-m-Y', strtotime($row['post_date']));
-        echo '<tr><td><b>By</b> '. $row['poster'] . ' <b>on</b> '. $date.'</td></tr>
-    <tr><td>' . $row['message'] . '</td> </tr>';
-    }
-    echo '</table>' ;
-}
+            if (isset($_SESSION['username']) != "") {
+              echo '<form method="post" action ="php/post.php">
+                        <div class="form-group">
+                         <label for="messageInput">Message:</label>
+                         <input type="text" class="form-control" name="message" id="message" placeholder="Hello World!" required>
+                         </div>
+                         <button type="submit" name="register"  class="btn btn-primary">Post</button>
+            		</form>';
 
-if (isset($_SESSION['username']) != "") {
-  echo '<form method="post" action ="php/post.php">
-            <div class="form-group">
-             <label for="messageInput">Message:</label>
-             <input type="text" class="form-control" name="message" id="message" placeholder="Hello World!" required>
-             </div>
-             <button type="submit" name="register"  class="btn btn-primary">Post</button>
-		</form>';
-
-}
-else{
-    echo'Please login to post message';
-}
+            }
+            else{
+                echo'Please login to post message';
+            }
+echo '      </div>
+        <div class="col-2"></div>
+    </div>
+</div>';
 
 ?>
 <!--  end of midle section -->
