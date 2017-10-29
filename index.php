@@ -130,6 +130,38 @@
             <div class="col-2"></div>
         </div>
     </div>
+
+	<div id="paymentModal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2>Booking Payment</h2>
+				<span class="close">&times;</span>
+			</div>
+			<div class="modal-body">
+				<?php include("template/creditCard.html") ?>
+				<div style="width: 100%; height: 20px; border-bottom: 1px solid black; text-align: center;">
+					<span style="font-size: 30px; background-color: #ffffff; padding: 0 10px;">
+						OR
+					</span>
+				</div>
+				<br>
+	            <br>
+	            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+	                <input type="hidden" name="cmd" value="_xclick">
+	                <input type="hidden" name="business" value="nmtcoursepayments@outlook.co.uk">
+	                <input type="hidden" name="lc" value="GB">
+	                <input type="hidden" name="item_name" value="NMT Course Payment">
+	                <input type="hidden" name="amount" value="0.01">
+	                <input type="hidden" name="currency_code" value="GBP">
+	                <input type="hidden" name="button_subtype" value="services">
+	                <input type="hidden" name="no_note" value="0">
+	                <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
+	                <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" style="margin: 0 auto; display: block" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+	                <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+	            </form>
+			</div>
+		</div>
+	</div>
     <!--  end of middle section -->
 	<?php include("template/footer.php") ?>
     <!-- Bootstrap core JavaScript
@@ -140,7 +172,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+	<script src="jquery/creditCard.js"></script>
     <script type="text/javascript">
+
+		var currentlyBooking;
+		var modal;
 
 	    $(document).ready(function(){
 			var date_input=$('input[name="date"]'); //our date input has the name "date"
@@ -152,6 +188,7 @@
 				autoclose: true,
 			};
 			date_input.datepicker(options);
+			modal = document.getElementById('paymentModal');
 
 	  		loadCourses();
 
@@ -161,29 +198,81 @@
 
 			$(document).on('click', ".book-button", function() {
 
-				var button = $(this);
+				currentlyBooking = $(this);
+				currentlyBooking.attr("data-content", "Attempting to create booking...");
 
-				button.attr("data-content", "Attempting to create booking...");
-				button.popover('show');
+				$.ajax({
+					url: "php/checkBooking.php",
+					data: "course_id=" + currentlyBooking.attr("data-id")
+				}).done(function(data) {
+					if (data == "Success") {
+
+						$('input[name="amount"]').val(currentlyBooking.attr("data-price"));
+
+						modal.style.display = "block"
+					} else if (data == "Overbooked") {
+						currentlyBooking.attr("data-content", "This course is fully booked.")
+						currentlyBooking.popover('show');
+					} else {
+						currentlyBooking.attr("data-content", "Booking was unsuccessful, please try again.");
+						currentlyBooking.popover('show');
+						console.log(data);
+					}
+				}).fail(function() {
+					console.log("ajax check fail");
+				})
+
+				currentlyBooking.popover({
+					trigger: 'focus'
+				})
+
+			});
+
+			$(document).on("click", "#paySubmit", function() {
+
+				modal.style.display = "none";
+
+				currentlyBooking.attr("data-content", "Attempting to create booking...");
+				currentlyBooking.popover('show');
 
 				$.ajax({
 					url: "php/setBooking.php",
-					data: "course_id=" + button.attr("data-id")
+					data: "course_id=" + currentlyBooking.attr("data-id")
 				}).done(function(data) {
 					if (data == "Success") {
-						button.attr("data-content", "Booking was successfully made.");
+						currentlyBooking.attr("data-content", "Booking was successfully made.");
 					} else if (data == "Overbooked") {
-						button.attr("data-content", "This course is fully booked.")
+						currentlyBooking.attr("data-content", "This course is fully booked.")
 					} else {
-						button.attr("data-content", "Booking was unsuccessful, please try again.");
+						currentlyBooking.attr("data-content", "Booking was unsuccessful, please try again.");
 						console.log(data);
 					}
-					button.popover('show');
+					currentlyBooking.popover('show');
+					currentlyBooking.popover({
+						trigger: 'focus'
+					})
 				}).fail(function() {
 					console.log("ajax booking fail");
 				})
 
-			});
+			})
+
+			$(".close").on("click", function() {
+				$("#paymentModal").css("display", "none");
+			})
+
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+
+			$("body").on("click", function(e) {
+				if ($(e.target).data('toggle') !== 'popover'
+					&& $(e.target).parents('.popover.in').length === 0) {
+						$('[data-toggle="popover"]').popover('hide');
+					}
+			})
 	  	});
 
 		function loadCourses() {
