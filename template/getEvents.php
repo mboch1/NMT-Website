@@ -45,7 +45,7 @@
                 <div class="card-footer">';
             if($loggedIn){
                 $display .= ' <div class="text-center">
-                        <a tabindex="0" role="button" class="btn btn-default book-button" data-toggle="popover" data-trigger="focus" data-id="' . $row["id"] . '" data-content="Attempting to book course...">Book Course</a>
+                        <a tabindex="0" role="button" class="btn btn-default book-button" data-toggle="popover" data-trigger="focus" data-id="' . $row["id"] . '" data-price="' . $row["price"] . '" data-content="Attempting to book course...">Book Course</a>
                     </div>';
             }
             else{

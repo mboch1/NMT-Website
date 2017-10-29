@@ -139,6 +139,26 @@
 			</div>
 			<div class="modal-body">
 				<?php include("template/creditCard.html") ?>
+				<div style="width: 100%; height: 20px; border-bottom: 1px solid black; text-align: center;">
+					<span style="font-size: 30px; background-color: #ffffff; padding: 0 10px;">
+						OR
+					</span>
+				</div>
+				<br>
+	            <br>
+	            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+	                <input type="hidden" name="cmd" value="_xclick">
+	                <input type="hidden" name="business" value="nmtcoursepayments@outlook.co.uk">
+	                <input type="hidden" name="lc" value="GB">
+	                <input type="hidden" name="item_name" value="NMT Course Payment">
+	                <input type="hidden" name="amount" value="0.01">
+	                <input type="hidden" name="currency_code" value="GBP">
+	                <input type="hidden" name="button_subtype" value="services">
+	                <input type="hidden" name="no_note" value="0">
+	                <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
+	                <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" style="margin: 0 auto; display: block" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+	                <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+	            </form>
 			</div>
 		</div>
 	</div>
@@ -186,18 +206,22 @@
 					data: "course_id=" + currentlyBooking.attr("data-id")
 				}).done(function(data) {
 					if (data == "Success") {
+
+						$('input[name="amount"]').val(currentlyBooking.attr("data-price"));
+
 						modal.style.display = "block"
 					} else if (data == "Overbooked") {
 						currentlyBooking.attr("data-content", "This course is fully booked.")
+						currentlyBooking.popover('show');
 					} else {
 						currentlyBooking.attr("data-content", "Booking was unsuccessful, please try again.");
+						currentlyBooking.popover('show');
 						console.log(data);
 					}
 				}).fail(function() {
 					console.log("ajax check fail");
 				})
 
-				currentlyBooking.popover('show');
 				currentlyBooking.popover({
 					trigger: 'focus'
 				})
