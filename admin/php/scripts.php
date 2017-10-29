@@ -71,6 +71,27 @@ function deleteCourse(mysqli $con, $id){
         }
     }
 }
+//ADD NEW COURSE TYPE
+function addNewCourseType(mysqli $con){
+  
+  if(isset($_POST['addCourseType'])){
+    $title = $_POST['Title'];
+    $description = $_POST['Description'];
+    $imageLink = $_POST['imgLink'];
+
+    $sql = "INSERT INTO Category (title, description, defaultImage) VALUES ('$title','$description', '$imageLink')";
+
+    if (mysqli_query($con, $sql)){
+      header("refresh:0, url=http://localhost/NMT-Website/admin/adminIndex.php");
+      exit;
+    }
+    else{
+      echo "Error updating record: " . mysqli_error($con);
+    }
+  }
+}
+
+
 
 //ADD NEW COURSE
 function addNewCourse(mysqli $con){
