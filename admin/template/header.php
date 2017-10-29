@@ -43,9 +43,7 @@ echo '
                             <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>"."<span class='glyphicon glyphicon-user'><b>Welcome: ".$_SESSION["username"]."</b></span>"."</a>
                             <div class='dropdown-menu'>
                                 <a class='dropdown-item' href='#'>
-                                  <form action='php/logout.php' method='post'>
-                                    <button class='btn btn-primary' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</button>
-                                  </form>
+                                  <a class='btn btn-default btn-block' type='submit' class='btn btn-primary' href='php/logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a>
                                 </a>
                             </div>
                           </li>";
@@ -55,13 +53,16 @@ echo '
                           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list-alt"></span> Courses</a>
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">
-                              <a href="adminCourseAdd.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span> Add Course</a>
+                              <a href="adminCourseAdd.php" class="btn btn-default btn-block"><span class="glyphicon glyphicon-chevron-right"></span> Add Course</a>
                             </a>
                             <a class="dropdown-item" href="#">
-                              <a href="adminCourseEdit.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span> Edit Course</a>
+                              <a href="adminAddNewCourseType.php" class="btn btn-default btn-block"><span class="glyphicon glyphicon-chevron-right"></span> Add Course Type</a>
                             </a>
                             <a class="dropdown-item" href="#">
-                              <a href="adminCourseDelete.php" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span> Delete Course</a>
+                              <a href="adminCourseEdit.php" class="btn btn-default btn-block"><span class="glyphicon glyphicon-chevron-right"></span> Edit Course</a>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <a href="adminCourseDelete.php" class="btn btn-default btn-block"><span class="glyphicon glyphicon-chevron-right"></span> Delete Course</a>
                             </a>
                           </div>
                       </li>
@@ -69,7 +70,7 @@ echo '
                           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-book"></span> Bookings</a>
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">
-                              <a href="adminBookingsView.php" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-right"></span> Edit Bookings</a>
+                              <a href="adminBookingsView.php" class="btn btn-default btn-block" role="button"><span class="glyphicon glyphicon-chevron-right"></span> Edit Bookings</a>
                             </a>
                           </div>
                       </li>
@@ -77,10 +78,10 @@ echo '
                           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-inbox"></span> Venues</a>
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">
-                              <a href="adminVenueAdd.php" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-right"></span> Add Venue</a>
+                              <a href="adminVenueAdd.php" class="btn btn-default btn-block" role="button"><span class="glyphicon glyphicon-chevron-right"></span> Add Venue</a>
                             </a>
                             <a class="dropdown-item" href="#">
-                              <a href="adminVenueEdit.php" class="btn btn-default" role="button"><span class="glyphicon glyphicon-chevron-right"></span> Edit Venue</a>
+                              <a href="adminVenueEdit.php" class="btn btn-default btn-block" role="button"><span class="glyphicon glyphicon-chevron-right"></span> Edit Venue</a>
                             </a>
                           </div>
                       </li>

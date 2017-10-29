@@ -16,10 +16,10 @@
     $message = wordwrap($message,70);
     $message = str_replace("\n.", "\n..", $message);
 
-    $adminEmail = "40270585@live.napier.ac.uk";
+    $adminEmail = "michalbochenek2@gmail.com";
 
     mail($adminEmail,$title,$message,$email);
-    echo 'message was sent!';
-    header("refresh:3, url=http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] . "/../../contactForm.php ");
+
+    header("refresh:0, url=http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] . "/../../contactForm.php ");
    }
 ?>
