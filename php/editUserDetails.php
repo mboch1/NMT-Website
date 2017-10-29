@@ -79,7 +79,7 @@ function updateUserDetails(mysqli $con){
     $sql = "UPDATE Users SET email='$email', password='$password', firstname='$firstname', surname='$surname', city='$city', address1='$address1', address2='$address2', postcode='$postcode', teleno='$teleno' WHERE id=$id";
 
     if (mysqli_query($con, $sql)) {
-      header("refresh:0, url=../index.php");
+      header("refresh:0, url=index.php");
       exit;
     }
     else{
