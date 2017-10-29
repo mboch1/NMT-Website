@@ -38,18 +38,7 @@ echo '
                             <div class='dropdown-menu'>
                                 <a class='dropdown-item' href='#'>
                                 <form action='php/logout.php' method='post'>
-<<<<<<< HEAD
-                                  <a class='btn btn-primary btn-block' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</a>
-                                </form>
-                                </a>";
-                        if ($_SESSION["isAdmin"]){
-                          echo '<a class="dropdown-item" href="#">
-                                  <a class="btn btn-primary btn-block" href="admin/adminIndex.php"><span class="glyphicon glyphicon-pencil"></span> Admin Area</a>
-                                </a>';
-                        }
-                        echo "
-=======
-                                  <button class='btn btn-primary btn-md btn-block' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</button>
+                                  <a class='btn btn-primary btn-md btn-block' type='submit' class='btn btn-primary' role='button' href='#'><span class='glyphicon glyphicon-log-out'></span>Logout</a>
                                 </form>
                                 </a>";
 
@@ -63,11 +52,10 @@ echo '
                           }
                           if ($_SESSION["isAdmin"]){
                             echo '<a class="dropdown-item" href="#">
-                                    <a class="btn btn-primary btn-md btn-block" href="admin/adminIndex.php"><span class="glyphicon glyphicon-pencil"></span> Admin Area</a>
+                                    <a class="btn btn-primary btn-md btn-block" href="admin/adminIndex.php"><span class="glyphicon glyphicon-pencil"></span>Admin Area</a>
                                   </a>';
                           }
                           echo "
->>>>>>> master
                           </div>
                         </li>";
                         }else{
