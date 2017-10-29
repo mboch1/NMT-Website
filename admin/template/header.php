@@ -44,7 +44,7 @@ echo '
                             <div class='dropdown-menu'>
                                 <a class='dropdown-item' href='#'>
                                   <form action='php/logout.php' method='post'>
-                                    <a class='btn btn-primary' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</a>
+                                    <button class='btn btn-primary' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</button>
                                   </form>
                                 </a>
                             </div>

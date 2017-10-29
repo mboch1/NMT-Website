@@ -28,16 +28,17 @@ echo '
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                    <li class="nav-item active">
-                    <a class="nav-link" href="' . $home . '"><span class="glyphicon glyphicon-home"> Home</span></a>
+                    <a class="nav-link" href="' . $home . '"><span class="glyphicon glyphicon-home"></span> Home</a>
                   </li>
                   <li class="nav-item">';
                         if(isset($_SESSION['username'])!=""){
-                        echo"
-                         <li class='nav-item dropdown'>
-                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>"."<span class='glyphicon glyphicon-user'><b>Welcome: ".$_SESSION["username"]."</b></span>"."</a>
+                          echo"
+                          <li class='nav-item dropdown'>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'><span class='glyphicon glyphicon-user'></span> Welcome: ".$_SESSION["username"]."</a>
                             <div class='dropdown-menu'>
                                 <a class='dropdown-item' href='#'>
                                 <form action='php/logout.php' method='post'>
+<<<<<<< HEAD
                                   <a class='btn btn-primary btn-block' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</a>
                                 </form>
                                 </a>";
@@ -47,6 +48,26 @@ echo '
                                 </a>';
                         }
                         echo "
+=======
+                                  <button class='btn btn-primary btn-md btn-block' type='submit' class='btn btn-primary' href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</button>
+                                </form>
+                                </a>";
+
+                          if($_SESSION["isAdmin"]==0){
+                            echo'<a class="dropdown-item" href="#">
+                              <a class="btn btn-primary btn-md btn-block" href="viewBookings.php"><span class="glyphicon glyphicon-book"></span> View Bookings</a>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <a class="btn btn-primary btn-md btn-block" href="editUser.php"><span class="glyphicon glyphicon-cog"></span> User Settings</a>
+                            </a>';
+                          }
+                          if ($_SESSION["isAdmin"]){
+                            echo '<a class="dropdown-item" href="#">
+                                    <a class="btn btn-primary btn-md btn-block" href="admin/adminIndex.php"><span class="glyphicon glyphicon-pencil"></span> Admin Area</a>
+                                  </a>';
+                          }
+                          echo "
+>>>>>>> master
                           </div>
                         </li>";
                         }else{
@@ -86,6 +107,15 @@ echo '
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="venueDetails.php"><span class="glyphicon glyphicon-globe"></span> Venues</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="aboutUs.php"><span class="glyphicon glyphicon-info-sign"></span> About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="forum.php"><span class="glyphicon glyphicon-pencil"></span> Forum</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="files/registration.pdf"><span class="glyphicon glyphicon-file"></span> Offline Form</a>
                   </li>
                   ';
 echo '
