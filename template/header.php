@@ -38,7 +38,7 @@ echo '
                             <div class='dropdown-menu'>
                                 <a class='dropdown-item' href='#'>
                                 <form action='php/logout.php' method='post'>
-                                  <a class='btn btn-primary btn-md btn-block' type='submit' class='btn btn-primary' role='button' href='#'><span class='glyphicon glyphicon-log-out'></span>Logout</a>
+                                  <a class='btn btn-primary btn-md btn-block' type='submit' class='btn btn-primary' role='button' href='php/logout.php'><span class='glyphicon glyphicon-log-out'></span>Logout</a>
                                 </form>
                                 </a>";
 
