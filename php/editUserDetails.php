@@ -13,8 +13,8 @@ function getUserDetails(mysqli $con, $username){
       $address1 = $row['address1'];
       $address2 = $row['address2'];
       $city = $row['city'];
-      $postcode = $row['postcode'];  
-      $teleno = $row['teleno'];   
+      $postcode = $row['postcode'];
+      $teleno = $row['teleno'];
 
       echo '<form class="form-horizontal" action="'.updateUserDetails($con).'" method="post">
               <div class="form-group filter-option">
@@ -47,7 +47,7 @@ function getUserDetails(mysqli $con, $username){
               <div class="form-group filter-option">
                 <label class="filter-label" for="city">City:</label>
                   <input type="text" class="form-control" id="city" name="City" value="'.$city.'">
-              </div>              
+              </div>
               <div class="form-group filter-option">
                 <label class="filter-label" for="postcode">Postcode:</label>
                   <input type="text" class="form-control" id="postcode" name="Postcode" value="'.$postcode.'"required>
@@ -73,13 +73,13 @@ function updateUserDetails(mysqli $con){
     $address1 = $_POST['Address1'];
     $address2 = $_POST['Address2'];
     $city = $_POST['City'];
-    $postcode = $_POST['Postcode'];  
-    $teleno = $_POST['Teleno']; 
+    $postcode = $_POST['Postcode'];
+    $teleno = $_POST['Teleno'];
 
     $sql = "UPDATE Users SET email='$email', password='$password', firstname='$firstname', surname='$surname', city='$city', address1='$address1', address2='$address2', postcode='$postcode', teleno='$teleno' WHERE id=$id";
 
     if (mysqli_query($con, $sql)) {
-      header("refresh:0, url=http://localhost/NMT-Website/editUser.php");
+      header("refresh:0, url=index.php");
       exit;
     }
     else{

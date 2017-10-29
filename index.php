@@ -299,7 +299,8 @@
 					echo '$("#courseDisplay").load("template/getEvents.php?" + $.param({
 						loc: $("#city").val(),
 						course: $("#course").val(),
-						date: date}), function() {
+						date: date,
+						loggedIn: 0}), function() {
 							clampCards();
 						});';
 				}

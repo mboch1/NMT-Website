@@ -5,9 +5,9 @@
  */
     require_once ('db.php');
     session_start();
-   
+
    if(isset($_POST['SendEmail'])){
-    
+
     $email = $_POST['emailUser'];
     $email = "From: ".$email;
     $title = $_POST['emailHeader'];
@@ -16,10 +16,10 @@
     $message = wordwrap($message,70);
     $message = str_replace("\n.", "\n..", $message);
 
-    $adminEmail = "michalbochenek2@gmail.com";
+    $adminEmail = "40270585@live.napier.ac.uk";
 
     mail($adminEmail,$title,$message,$email);
-
     header("refresh:0, url=http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] . "/../../contactForm.php ");
+    // echo 'message was sent!';
    }
 ?>
