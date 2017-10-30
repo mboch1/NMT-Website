@@ -78,8 +78,7 @@
                     </div>
                     <!-- Text input-->
                     <div class="form-group">
-                      <label class="control-label" for="courseImageName">Course Image URL:</label>
-                      <input id="courseImageName" value="'.$courseImageName.'" name="courseImageName" class="form-control input-md" type="text">
+                      <input id="courseImageName" value="'.$courseImageName.'" name="courseImageName" class="form-control input-md" type="hidden">
                     </div>
                     <!-- Textarea -->
                     <div class="form-group">
