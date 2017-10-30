@@ -44,7 +44,13 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col">
-                <h3>admin main page... put some data here</h3>
+                <div class="jumbotron">
+                    <div class="page-header">
+                        <h1>NMT Admin Panel</h1>
+                    </div>
+                    <p>Please use navigation bar above to access the panel functions.</p>
+                    <p>If you need assistance with the website features, please refer to the technical guide.</p>
+                </div>
             </div>
             <div class="col-2"></div>
         </div>
