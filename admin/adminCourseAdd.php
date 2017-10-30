@@ -75,8 +75,7 @@
                             <input data-provide="datepicker" class="datepicker" id="start_date" name="start_date" data-date-format="yyyy-mm-dd" required>
                           </div>
                           <div class="form-group">
-                            <label class="filter-label" for="imageFile">Image URL:</label>
-                            <input type="text" class="form-control" id="imageFile" name="imageFile">
+                            <input type="hidden" class="form-control" id="imageFile" name="imageFile">
                           </div>
                           <div class="form-group">
                             <label class="filter-label" for="price">Price:</label>
